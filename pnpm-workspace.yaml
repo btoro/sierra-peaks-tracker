@@ -1,0 +1,5 @@
+# pnpm 11+ build-script allow-list.
+# esbuild downloads a platform binary during install; this is the only
+# dependency in this project that runs install scripts.
+allowBuilds:
+  esbuild: true
