@@ -1,7 +1,7 @@
 {
   "manifest_version": 1,
-  "updated_at": "2026-08-22T07:10:00Z",
-  "notes": "Provenance for every vendored data source (frozen contract, docs/data-contract.md §5). Checksums are SHA-256 of the exact bytes committed under snapshots/ or data/. Peakbagger sources land in Pilot 04/05.",
+  "updated_at": "2026-08-22T13:30:00Z",
+  "notes": "Provenance for every vendored data source (frozen contract, docs/data-contract.md §5). Checksums are SHA-256 of the exact bytes committed under snapshots/ or data/.",
   "sources": {
     "sierraclub": {
       "sp-s-29-2025": {
@@ -43,17 +43,68 @@
     },
     "peakbagger": {
       "lid-5051": {
+        "publisher": "Peakbagger.com",
         "canonical_url": "https://www.peakbagger.com/list/list.aspx?lid=5051",
-        "status": "pending",
-        "expected_counts": {
-          "total": 247
+        "exact_snapshot_url": "https://www.peakbagger.com/list/list.aspx?lid=5051",
+        "status": "active",
+        "retrieved_at": "2026-08-22",
+        "retrieved_at_precision": "date (the operator recorded the retrieval date, not an exact time; no time is invented here)",
+        "retrieved_by": "btoro (manual, authorized browser save)",
+        "retrieval_method": "manual save of the live lid=5051 list page in a browser, then placed under snapshots/ (no automated fetch or scraping — docs/data-contract.md §5, §7)",
+        "files": {
+          "snapshots/peakbagger/lid-5051/2026-08-22/lid-5051.html": {
+            "sha256": "4e1f886f6a725c6d994e7e32611e61ea35a438a02bd65de0d6665c9527ede339",
+            "bytes": 190780,
+            "role": "authorized local HTML snapshot of the lid=5051 list page (247 peak rows, source order)"
+          }
         },
-        "note": "Lands in Pilot 04 with the user-saved local snapshot (manual save; no scraping). Exactly 247 active peaks; source order authoritative; never padded to 273."
+        "expected_counts": {
+          "total": 247,
+          "sections": 24
+        },
+        "normalized_output": {
+          "path": "data/peakbagger/lid-5051.json",
+          "parser": "src/data/peakbagger/pb.ts (scripts/peakbagger/import-pb.mjs)",
+          "parser_version": "1.0.0",
+          "note": "247 rows in lid=5051 source order. Raw fields preserved verbatim. The list page exposes no coordinates and no summit class, so the canonical record carries neither. Printed ranks use competition ranking (one elevation tie at rank 196); pb_order is the list key."
+        }
       },
       "cid-30050": {
+        "publisher": "Peakbagger.com",
         "canonical_url": "https://www.peakbagger.com/list/list.aspx?lid=5051&cid=30050",
-        "status": "pending",
-        "note": "Owner's public completion overlay. Lands in Pilot 05; only real, already-public ascent dates/statuses."
+        "exact_snapshot_url": "https://www.peakbagger.com/list/list.aspx?lid=5051&cid=30050",
+        "status": "active",
+        "retrieved_at": "2026-08-22",
+        "retrieved_at_precision": "date (the operator recorded the retrieval date, not an exact time; no time is invented here)",
+        "retrieved_by": "btoro (manual, authorized browser save)",
+        "retrieval_method": "manual save of the live cid=30050 completion-overlay page (owner's public profile) in a browser, then placed under snapshots/ (no automated fetch or scraping)",
+        "files": {
+          "snapshots/peakbagger/cid-30050/2026-08-22/cid-30050.html": {
+            "sha256": "c968ba4ec4c1e6b807d91dedc14f983da8c1c3467a4a3bc8b77701417ca79593",
+            "bytes": 200022,
+            "role": "authorized local HTML snapshot of the cid=30050 completion overlay (247 rows, same order as lid=5051, plus an Ascent Date column)"
+          }
+        },
+        "expected_counts": {
+          "total": 247,
+          "sections": 24,
+          "completions": 30
+        },
+        "normalized_output": {
+          "path": "data/peakbagger/cid-30050.json",
+          "parser": "src/data/peakbagger/pb.ts (scripts/peakbagger/import-pb.mjs)",
+          "parser_version": "1.0.0",
+          "note": "Owner's public completions only: one record per ascent link present in the snapshot (30 dated rows). Dates and day-suffix letters exactly as public; each record keeps raw pb_order/pb_id/ascent_id provenance and resolves to a stable spk- id via data/crosswalk.json."
+        }
+      },
+      "crosswalk": {
+        "status": "active",
+        "note": "Explicit 1:1 SPS↔Peakbagger mapping produced by the Peakbagger importer from the committed SPS normalized rows (data/sps/sp-s-29-2025.json) and the lid=5051 snapshot. 247 entries covering every active SPS row; suspended Pilot Knob (spk-1.1) maps to nothing. All joins go through this file (docs/data-contract.md §2).",
+        "normalized_output": {
+          "path": "data/crosswalk.json",
+          "parser": "src/data/peakbagger/pb.ts (scripts/peakbagger/import-pb.mjs)",
+          "parser_version": "1.0.0"
+        }
       }
     }
   }

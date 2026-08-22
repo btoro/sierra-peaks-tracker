@@ -1,0 +1,338 @@
+{
+  "source_id": "cid-30050",
+  "canonical_url": "https://www.peakbagger.com/list/list.aspx?lid=5051&cid=30050",
+  "parser_version": "1.0.0",
+  "note": "Owner's public Peakbagger completion overlay: only ascent links actually present in the authorized 2026-08-22 snapshot. Dates and day-suffix letters are exactly as public; each record keeps its raw pb_order/pb_id/ascent_id provenance and resolves to a stable spk- id via data/crosswalk.json.",
+  "completions": [
+    {
+      "sps_id": "spk-23.11",
+      "name": "Mount Tallac",
+      "date": "2019-11-16",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 225,
+        "pb_id": "13564",
+        "ascent_id": "1423638"
+      }
+    },
+    {
+      "sps_id": "spk-6.1",
+      "name": "Alta Peak",
+      "date": "2020-12-05",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 200,
+        "pb_id": "2772",
+        "ascent_id": "1552401"
+      }
+    },
+    {
+      "sps_id": "spk-21.8",
+      "name": "Mount Dana",
+      "date": "2021-07-04",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 99,
+        "pb_id": "2620",
+        "ascent_id": "1843066"
+      }
+    },
+    {
+      "sps_id": "spk-23.9",
+      "name": "Pyramid Peak",
+      "date": "2021-07-17",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 221,
+        "pb_id": "2569",
+        "ascent_id": "1808017"
+      }
+    },
+    {
+      "sps_id": "spk-4.7",
+      "name": "Mount Whitney",
+      "date": "2022-02-14",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 1,
+        "pb_id": "2829",
+        "ascent_id": "1857640"
+      }
+    },
+    {
+      "sps_id": "spk-23.7",
+      "name": "Round Top",
+      "date": "2022-04-02",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 215,
+        "pb_id": "2578",
+        "ascent_id": "1885586"
+      }
+    },
+    {
+      "sps_id": "spk-3.5",
+      "name": "Mount Langley",
+      "date": "2022-04-17",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 8,
+        "pb_id": "2845",
+        "ascent_id": "1896307"
+      }
+    },
+    {
+      "sps_id": "spk-1.2",
+      "name": "Owens Peak",
+      "date": "2022-04-18",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 239,
+        "pb_id": "2874",
+        "ascent_id": "1897105"
+      }
+    },
+    {
+      "sps_id": "spk-24.3",
+      "name": "Castle Peak",
+      "date": "2022-04-30",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 231,
+        "pb_id": "2551",
+        "ascent_id": "1907008"
+      }
+    },
+    {
+      "sps_id": "spk-20.7",
+      "name": "Clouds Rest",
+      "date": "2022-05-14",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 224,
+        "pb_id": "2609",
+        "ascent_id": "1917922"
+      }
+    },
+    {
+      "sps_id": "spk-21.7",
+      "name": "Mount Gibbs",
+      "date": "2022-06-08",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 127,
+        "pb_id": "2621",
+        "ascent_id": "1939662"
+      }
+    },
+    {
+      "sps_id": "spk-12.1",
+      "name": "Split Mountain",
+      "date": "2022-06-10",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 6,
+        "pb_id": "2738",
+        "ascent_id": "1939660"
+      }
+    },
+    {
+      "sps_id": "spk-23.2",
+      "name": "Leavitt Peak",
+      "date": "2022-07-23",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 193,
+        "pb_id": "2587",
+        "ascent_id": "1972517"
+      }
+    },
+    {
+      "sps_id": "spk-5.9",
+      "name": "Mount Williamson",
+      "date": "2022-07-25",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 2,
+        "pb_id": "2814",
+        "ascent_id": "1975481"
+      }
+    },
+    {
+      "sps_id": "spk-19.3",
+      "name": "Mount Ritter",
+      "date": "2022-08-06",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 89,
+        "pb_id": "2626",
+        "ascent_id": "1987901"
+      }
+    },
+    {
+      "sps_id": "spk-14.2",
+      "name": "Mount Gayley",
+      "date": "2022-08-27",
+      "day_suffix": "b",
+      "pb_ref": {
+        "pb_order": 56,
+        "pb_id": "2724",
+        "ascent_id": "2010025"
+      }
+    },
+    {
+      "sps_id": "spk-14.3",
+      "name": "Mount Sill",
+      "date": "2022-08-27",
+      "day_suffix": "a",
+      "pb_ref": {
+        "pb_order": 4,
+        "pb_id": "2726",
+        "ascent_id": "2010024"
+      }
+    },
+    {
+      "sps_id": "spk-5.3",
+      "name": "Mount Russell",
+      "date": "2022-10-08",
+      "day_suffix": "b",
+      "pb_ref": {
+        "pb_order": 5,
+        "pb_id": "2826",
+        "ascent_id": "2051648"
+      }
+    },
+    {
+      "sps_id": "spk-5.4",
+      "name": "Mount Carillon",
+      "date": "2022-10-08",
+      "day_suffix": "a",
+      "pb_ref": {
+        "pb_order": 50,
+        "pb_id": "2824",
+        "ascent_id": "2051647"
+      }
+    },
+    {
+      "sps_id": "spk-24.1",
+      "name": "Granite Chief",
+      "date": "2022-10-15",
+      "day_suffix": "b",
+      "pb_ref": {
+        "pb_order": 234,
+        "pb_id": "2562",
+        "ascent_id": "2057478"
+      }
+    },
+    {
+      "sps_id": "spk-24.2",
+      "name": "Tinker Knob",
+      "date": "2022-10-15",
+      "day_suffix": "a",
+      "pb_ref": {
+        "pb_order": 235,
+        "pb_id": "13565",
+        "ascent_id": "2057364"
+      }
+    },
+    {
+      "sps_id": "spk-23.6",
+      "name": "Mokelumne Peak",
+      "date": "2023-09-10",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 228,
+        "pb_id": "2581",
+        "ascent_id": "2306479"
+      }
+    },
+    {
+      "sps_id": "spk-14.4",
+      "name": "North Palisade",
+      "date": "2023-09-16",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 3,
+        "pb_id": "2727",
+        "ascent_id": "2312849"
+      }
+    },
+    {
+      "sps_id": "spk-17.11",
+      "name": "Mount Morgan",
+      "date": "2024-06-07",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 32,
+        "pb_id": "2662",
+        "ascent_id": "2532336"
+      }
+    },
+    {
+      "sps_id": "spk-5.8",
+      "name": "Mount Tyndall",
+      "date": "2025-10-05",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 10,
+        "pb_id": "2815",
+        "ascent_id": "3005816"
+      }
+    },
+    {
+      "sps_id": "spk-14.8",
+      "name": "Mount Goode",
+      "date": "2025-11-01",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 96,
+        "pb_id": "2701",
+        "ascent_id": "3031956"
+      }
+    },
+    {
+      "sps_id": "spk-22.2",
+      "name": "Mount Conness",
+      "date": "2026-06-14",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 138,
+        "pb_id": "2601",
+        "ascent_id": "3229093"
+      }
+    },
+    {
+      "sps_id": "spk-22.4",
+      "name": "Excelsior Mountain",
+      "date": "2026-08-05",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 148,
+        "pb_id": "2599",
+        "ascent_id": "3297202"
+      }
+    },
+    {
+      "sps_id": "spk-22.3",
+      "name": "North Peak",
+      "date": "2026-08-06",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 172,
+        "pb_id": "13557",
+        "ascent_id": "3298197"
+      }
+    },
+    {
+      "sps_id": "spk-14.7",
+      "name": "Mount Agassiz",
+      "date": "2026-08-08",
+      "day_suffix": null,
+      "pb_ref": {
+        "pb_order": 21,
+        "pb_id": "2721",
+        "ascent_id": "3300454"
+      }
+    }
+  ]
+}
