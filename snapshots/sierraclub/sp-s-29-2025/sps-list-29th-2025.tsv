@@ -1,0 +1,283 @@
+# sps-list-29th-2025.tsv
+# Sierra Club "Sierra Peaks & Sums" (SPS), 29th Edition, January 2025.
+# Vendored, authorized local extraction. The source PDF binary is NOT
+# committed (no redistribution of the copyrighted publication); its
+# sha256 + provenance live in data/manifest.json. Extracted by
+# scripts/vendor/extract_sps.py (one-time local tool, requires PyMuPDF).
+# Format (tab-delimited); lines starting with '#' and blank lines are ignored
+# by the importer:
+#   @AREA <area_no> <area_name>
+#   <area_no>.<seq> <name> <elevation_raw> <class_raw> <utm_or_-> <maps_or_-> <emblem> <mountaineer> <suspended>
+#   emblem/mountaineer/suspended are 1 or 0.
+@AREA	1	SOUTHERN SIERRA
+1.1	Pilot Knob (S)	6200+	2	-	Onyx	0	0	1
+1.2	Owens Peak	8453	2	-	Owens Peak	0	0	0
+1.3	Spanish Needle	7841	3	096589	Lamont Peak Ninemile Canyon (E)	0	0	0
+1.4	Lamont Peak	7429	2	-	Lamont Peak	0	0	0
+1.5	Sawtooth Peak (S)	8000+	2	-	Ninemile Canyon Lamont Peak (W)	0	0	0
+1.6	Rockhouse Peak	8360+	2	892735	Rockhouse Basin Sirretta Peak (W)	0	0	0
+1.7	Taylor Dome	8802	2s3	824686	Cannell Peak	0	0	0
+1.8	Sirretta Peak	9977	1	-	Sirretta Peak	0	0	0
+1.9	Crag Peak	9480+	3	-	Crag Peak Long Canyon (E)	0	0	0
+1.10	Smith Mtn	9533	2	-	Monache Mtn Crag Peak (S);W;SW	0	0	0
+@AREA	2	MINERAL KING AND KERN RIVER
+2.1	Kern Peak	11510	1	-	Kern Peak Casa Vieja Mdws (S)	0	0	0
+2.2	Angora Mtn	10198	2	-	Kern Lake Hockett Peak (S)	0	0	0
+2.3	Coyote Peaks	10892	2	-	Kern Lake Hockett Peak (S)	0	0	0
+2.4	North Maggie Mtn	10234	1	530157	Moses Mtn Camp Wishon (S)	0	0	0
+2.5	Moses Mtn	9331	3	-	Moses Mtn Camp Wishon (S)	0	0	0
+2.6	Homers Nose	9023	1	441278	Silver City Case Mtn (W);SW;S	0	0	0
+2.7	Vandever Mtn	11947	1	-	Mineral King	0	0	0
+2.8	Florence Peak	12432	2	-	Mineral King	0	0	0
+2.9	Sawtooth Peak (N)	12343	2	-	Mineral King	0	0	0
+2.10	Needham Mtn	12520+	2s3	-	Mineral King	0	0	0
+@AREA	3	OLANCHA TO LANGLEY AND WEST
+3.1	OLANCHA PEAK	12123	2	-	Olancha Haiwee P.(S);W;SW	1	0	0
+3.2	Cartago Peak	10480+	2s3	012203	Olancha	0	0	0
+3.3	Muah Mtn	11016	2	-	Bartlett Cirque Peak (W)	0	0	0
+3.4	Cirque Peak	12900	1	-	Cirque Peak	0	0	0
+3.5	Mt Langley	14026	1	-	Mt Langley^ Cirque Peak (S)	0	0	0
+3.6	Mt Guyot	12300	1	-	Mount Whitney^ Johnson Peak (S)	0	0	0
+3.7	Joe Devel Peak	13327	2	-	Mount Whitney^ Johnson Peak (S)	0	0	0
+3.8	Mt Pickering	13474	2	-	Mount Whitney^ Johnson Peak (S)	0	0	0
+3.9	Mt Chamberlin	13169	1	-	Mount Whitney^ Johnson Peak (S)	0	0	0
+3.10	Mt Newcomb	13422	2	-	Mount Whitney^ Johnson Peak (S)	0	0	0
+3.11	Mt Hitchcock	13186	1	-	Mount Whitney^ Johnson Peak (S)	0	0	0
+@AREA	4	CORCORAN TO WHITNEY
+4.1	Mt Corcoran	13714+	2	-	Mt Langley^ Mount Whitney (W)	0	0	0
+4.2	Mt LeConte	13930	3	880446	Mount Whitney^ Mt Langley^ (E)	0	1	0
+4.3	Mt Mallory	13845	2	-	Mount Whitney^ Mt Langley^ (E)	0	0	0
+4.4	Mt Irvine	13780+	2	-	Mount Whitney^ Mt Langley^ (E)	0	0	0
+4.5	Mt McAdie	13799	3	-	Mount Whitney^ Mt Langley^ (E)	0	1	0
+4.6	Mt Muir	14012	3	-	Mount Whitney^ Mt Langley^ (E)	0	0	0
+4.7	MT WHITNEY	14491	1	-	Mount Whitney^ Mt Langley^ (E)	1	0	0
+4.8	Thor Peak	12306	2	-	Mount Whitney^ Mt Langley^ (E)	0	0	0
+4.9	Lone Pine Peak	12943	2	-	Mt Langley^	0	0	0
+@AREA	5	WHITNEY TO WILLIAMSON
+5.1	Mt Young	13176	1	-	Mount Whitney^ Mt Langley^ (E)	0	0	0
+5.2	Mt Hale	13494	1	-	Mount Whitney^ Mt Langley^ (E)	0	0	0
+5.3	Mt Russell	14088	3	-	Mount Whitney^ Mt Langley^ (E)	0	1	0
+5.4	Mt Carillon	13517+	2	-	Mount Whitney^ Mt Langley^ (E)	0	0	0
+5.5	Tunnabora Peak	13563	2	-	Mount Whitney^ Mt Langley^ (E)	0	0	0
+5.6	Mt Barnard	13990	2	-	Mt Williamson^ Mount Whitney^(S)	0	0	0
+5.7	Trojan Peak	13947	2	-	Mt Williamson^	0	0	0
+5.8	Mt Tyndall	14019	2	-	Mt Williamson^	0	0	0
+5.9	MT WILLIAMSON	14370+	2	-	Mt Williamson^	1	0	0
+@AREA	6	KAWEAHS AND WEST
+6.1	Alta Peak	11204	1	-	Lodgepole	0	0	0
+6.2	Mt Silliman	11188	1	-	Mt Silliman	0	0	0
+6.3	Mt Eisen	12160+	2	-	Mineral King	0	0	0
+6.4	Lippincott Mtn	12265	2	-	Triple Divide Peak Mineral King(S)	0	0	0
+6.5	Eagle Scout Peak	12000+	2	-	Triple Divide Peak Mineral King(S)	0	0	0
+6.6	Mt Stewart	12200+	2	609481	Triple Divide Peak Lodgepole(W)	0	0	0
+6.7	Lion Rock	12360+	2	-	Triple Divide Peak Lodgepole(W)	0	0	0
+6.8	MT KAWEAH	13802	2	-	Mt Kaweah^ Triple Divide Pk(W)	1	0	0
+6.9	Red Kaweah	13720+	2s3	-	Triple Divide Peak Mineral King(S)	0	0	0
+6.10	Black Kaweah	13720+	3	-	Triple Divide Peak Mineral King(S)	0	1	0
+6.11	Picket Guard Peak	12303	2	-	Mt Kaweah^ Triple Divide Pk(W)	0	0	0
+6.12	Kern Point	12730+	2	-	Mt Kaweah^ Triple Divide Pk(W)	0	0	0
+@AREA	7	GREAT WESTERN DIVIDE
+7.1	Triple Divide Peak	12634	2	-	Triple Divide Peak Lodgepole (W)	0	1	0
+7.2	Glacier Ridge	12360+	2s4	606534	Triple Divide Peak Lodgepole (W)	0	0	0
+7.3	Whaleback	11717	3	632547	Sphinx Lakes Triple Divide Pk(S)	0	0	0
+7.4	Milestone Mtn	13638	3	-	Mt Brewer^ Mt Williamson^ (E)	0	1	0
+7.5	Midway Mtn	13665	2	-	Mt Brewer^ Mt Williamson^ (E)	0	0	0
+7.6	Table Mtn	13632	3	-	Mt Brewer^ Mt Williamson^ (E)	0	1	0
+7.7	Thunder Mtn	13517+	3s4	-	Mt Brewer^ Mt Williamson^ (E)	0	1	0
+7.8	South Guard	13232	2	-	Mt Brewer^ Sphinx Lakes (W)	0	0	0
+7.9	MT BREWER	13570	2	-	Mt Brewer^ Sphinx Lakes (W)	1	0	0
+7.10	North Guard	13327	3s4	-	Mt Brewer^ Sphinx Lakes (W)	0	0	0
+@AREA	8	KINGS KERN DIVIDE
+8.1	Mt Jordan	13320+	3s4	-	Mt Brewer^ Mt Williamson^(E)	0	0	0
+8.2	Mt Genevra	13054	2	-	Mt Brewer^ Mt Williamson^(E)	0	0	0
+8.3	Mt Ericsson	13583+	2	-	Mt Brewer^ Mt Williamson^(E)	0	1	0
+8.4	Mt Stanford (S)	13973	3	-	Mt Brewer^ Mt Williamson^(E)	0	0	0
+8.5	Deerhorn Mtn	13281	3	-	Mt Brewer^ Mt Williamson^(E)	0	1	0
+8.6	East Vidette	12356	2s3	-	Mt Brewer^ Mt Williamson^(E)	0	1	0
+8.7	West Vidette	12533+	2	-	Mt Brewer^ Mt Williamson^(E)	0	0	0
+8.8	Junction Peak	13845+	3	-	Mt Williamson^	0	1	0
+8.9	Mt Keith	13976	2	-	Mt Williamson^	0	0	0
+8.10	Mt Bradley	13264	2	-	Mt Williamson^	0	0	0
+8.11	Center Peak	12730+	2s4	-	Mt Williamson^	0	0	0
+8.12	Caltech Peak	13832	2	-	Mt Brewer^ Mt Williamson^(E)	0	0	0
+@AREA	9	KEARSARGE PASS VICINITY
+9.1	University Peak	13589	2	-	Mt Williamson^ Kearsarge Peak^(N)	0	1	0
+9.2	Independence Peak	11742	3	-	Kearsarge Peak^	0	0	0
+9.3	Kearsarge Peak	12618	1	-	Kearsarge Peak^	0	0	0
+9.4	Mt Gould	13005	1s3	-	Mt Clarence King^ Kearsarge Peak^ (E)	0	0	0
+9.5	Mt Rixford	12887	2	-	Mt Clarence King^ Kearsarge Peak^ (E)	0	0	0
+9.6	Mt Bago	11870	1	-	Mt Clarence King^ Kearsarge Peak^ (E)	0	0	0
+9.7	Mt Gardiner	12907	4	-	Mt Clarence King^ Kearsarge Peak^ (E)	0	1	0
+9.8	Mt Cotter	12713	2	-	Mt Clarence King^ Kearsarge Peak^ (E)	0	0	0
+9.9	MT CLARENCE KING	12907	4s5	-	Mt Clarence King^ Kearsarge Peak^ (E)	1	0	0
+9.10	Dragon Peak	12927+	3s4	-	Kearsarge Peak^ Mt Clarence King^W	0	0	0
+9.11	Black Mtn	13291	2	-	Mt Clarence King^ Kearsarge Peak^ (E)	0	0	0
+9.12	Diamond Peak	13127	2	-	Mt Clarence King^ Kearsarge Peak^ (E)	0	0	0
+@AREA	10	BAXTER PASS TO TABOOSE PASS
+10.1	Mt Baxter	13136	2	784802	Kearsarge Peak^	0	0	0
+10.2	Colosseum Mtn	12473	1	-	Aberdeen^	0	0	0
+10.3	Mt Perkins	12566	2	-	Mt Pinchot^ Aberdeen^(E)	0	0	0
+10.4	Mt Wynne	13179	2	-	Mt Pinchot^ Aberdeen^(E)	0	0	0
+10.5	Mt Pinchot	13494	2	-	Mt Pinchot^ Aberdeen^(E)	0	0	0
+10.6	Pyramid Peak (S)	12779	2	-	Mt Pinchot^ Aberdeen^(E)	0	0	0
+10.7	Arrow Peak	12959	2	-	Mt Pinchot^ Aberdeen^(E)	0	1	0
+10.8	Striped Mtn	13179	1	-	Mt Pinchot^ Aberdeen^(E)	0	0	0
+10.9	Goodale Mtn	12772	2s3	-	Mt Pinchot^ Aberdeen^(E)	0	0	0
+10.10	Cardinal Mtn	13396	2	-	Mt Pinchot^ Aberdeen^(E)	0	0	0
+@AREA	11	WESTERN MID-SIERRA
+11.1	Mt Ruskin	12920	3	-	Mt Pinchot^ Aberdeen^(E)	0	1	0
+11.2	Marion Peak	12719	2	-	Marion Peak The Sphinx(S)	0	0	0
+11.3	State Peak	12620	2	-	Marion Peak The Sphinx(S)	0	0	0
+11.4	Goat Mtn	12207	2	-	The Sphinx	0	0	0
+11.5	Kennedy Mtn	11433	1	-	Slide Bluffs Cedar Grove(S)	0	0	0
+11.6	Mt Harrington	11009	3	-	Cedar Grove	0	0	0
+11.7	Tehipite Dome	7708	2s3	-	Tehipite Dome Rough Spur(W)	0	1	0
+11.8	Spanish Mtn	10051	1	-	Rough Spur	0	0	0
+11.9	Three Sisters	10612	1	-	Dogtooth Peak Ward Mtn(E);SE	0	0	0
+@AREA	12	SOUTH PALISADES
+12.1	SPLIT MTN	14042+	2	-	Split Mtn^ Fish Springs (E)	1	0	0
+12.2	Mt Tinemaha	12520	2	-	Split Mtn^ Fish Springs (E)	0	0	0
+12.3	Mt Prater	13471	1	-	Split Mtn^ Fish Springs (E)	0	0	0
+12.4	Mt Bolton Brown	13491	2s3	-	Split Mtn^ Fish Springs (E)	0	0	0
+12.5	Birch Mtn	13602	2	-	Split Mtn^ Fish Springs (E)	0	0	0
+12.6	The Thumb	13356	2	-	Split Mtn^	0	0	0
+12.7	Disappointment Pk	13917	4	-	Split Mtn^	0	0	0
+12.8	Middle Palisade	14012	3	-	Split Mtn^	0	1	0
+12.9	Norman Clyde Peak	13855	4	-	Split Mtn^	0	1	0
+12.10	Palisade Crest	13553	4	-	Split Mtn^	0	0	0
+@AREA	13	MT GODDARD VICINITY
+13.1	Observation Peak	12362	2	-	North Palisade Mt Thompson (N)	0	0	0
+13.2	Giraud Peak	12608	2	-	North Palisade Mt Thompson (N)	0	0	0
+13.3	Devil’s Crag #1	12400+	4	567001	North Palisade Mt Thompson (N)	0	1	0
+13.4	Wheel Mtn	12774	3	-	Mt Goddard North Palisade (E);NE	0	0	0
+13.5	Mt McDuffie	13282	2	-	Mt Goddard Mt Darwin (N);NE	0	1	0
+13.6	Black Giant	13330	1	-	Mt Goddard Mt Darwin (N);NE	0	0	0
+13.7	Charybdis	13096	3	-	Mt Goddard Mt Darwin (N);NE	0	1	0
+13.8	Scylla	12956	2	-	Mt Goddard Mt Darwin (N);NE	0	0	0
+13.9	MT GODDARD	13568	2	-	Mt Goddard Mt Darwin (N);NE	1	0	0
+13.10	Mt Reinstein	12586	2	-	Mt Goddard Blackcap Mtn(W);NW	0	0	0
+13.11	Finger Peak	12404	2	-	Mt Goddard Blackcap Mtn(W);NW	0	0	0
+13.12	Tunemah Peak	11894	2	-	Slide Bluffs Tehipite Dome(W)	0	0	0
+@AREA	14	NORTH PALISADES
+14.1	Temple Crag	12976	3	-	Split Mtn^	0	0	0
+14.2	Mt Gayley	13510	3	-	Split Mtn^	0	0	0
+14.3	Mt Sill	14153	2	-	North Palisade Split Mtn^ (E)	0	1	0
+14.4	NORTH PALISADE	14242	4	-	North Palisade Split Mtn^ (E)	1	0	0
+14.5	Thunderbolt Peak	14003	4s5	-	North Palisade Split Mtn^ (E)	0	1	0
+14.6	Mt Winchell	13775	3	-	North Palisade Split Mtn^ (E)	0	0	0
+14.7	Mt Agassiz	13893	2	-	North Palisade Mt Thompson (N)	0	0	0
+14.8	Mt Goode	13085	2	-	North Palisade Mt Thompson (N)	0	0	0
+14.9	Cloudripper	13525	2	-	Mt Thompson	0	0	0
+14.10	Mt Johnson	12871	2	-	Mt Thompson	0	0	0
+14.11	Mt Gilbert	13106	2	-	Mt Thompson	0	0	0
+@AREA	15	EVOLUTION AREA
+15.1	Mt Thompson	13494	2	-	Mt Thompson	0	0	0
+15.2	Pt Powell	13360+	2	557115	Mt Thompson Mt Darwin (W)	0	0	0
+15.3	Mt Wallace	13377	2s4+	-	Mt Darwin Mt Thompson (E)	0	0	0
+15.4	Mt Haeckel	13418	3	-	Mt Darwin Mt Thompson (E)	0	0	0
+15.5	Mt Fiske	13503	2	-	Mt Darwin Mt Thompson (E)	0	0	0
+15.6	Mt Huxley	13086	3	-	Mt Darwin Mt Thompson (E)	0	0	0
+15.7	MT DARWIN	13831	3s4	-	Mt Darwin Mt Thompson (E)	1	0	0
+15.8	Mt Mendel	13710	3	-	Mt Darwin Mt Thompson (E)	0	0	0
+15.9	Mt Lamarck	13417	1	518176	Mt Darwin Mt Thompson (E)	0	0	0
+15.10	The Hermit	12328	2s5	-	Mt Darwin Mt Thompson (E)	0	1	0
+15.11	Mt McGee	12944	3	-	Mt Darwin Mt Henry (W)	0	0	0
+15.12	Emerald Peak	12546	2	-	Mt Henry Ward Mountain (W)	0	0	0
+15.13	Mt Henry	12196	2	-	Mt Henry Ward Mountain (W)	0	0	0
+@AREA	16	HUMPHREYS BASIN AND WEST
+16.1	Mt Goethe	13264	1	-	Mt Darwin Mt Thompson (E)	0	0	0
+16.2	Mt Emerson	13204	3	534229	Mt Darwin Mt Thompson (E)	0	0	0
+16.3	MT HUMPHREYS	13986	4	-	Mount Tom Mt Darwin (S)	1	0	0
+16.4	Basin Mtn	13181	2	531289	Mount Tom	0	0	0
+16.5	Four Gables	12720+	1	499299	Mount Tom	0	0	0
+16.6	Mt Tom	13652	2	-	Mount Tom	0	0	0
+16.7	Pilot Knob (N)	12245	2	-	Mt Hilgard Mount Tom (E)	0	0	0
+16.8	Gemini	12880+	2	389292	Mt Hilgard Mt Henry (S);SW	0	0	0
+16.9	Seven Gables	13080+	2	-	Mt Hilgard Mt Henry (S);SW	0	1	0
+16.10	Mt Senger	12286	2	-	Mt Hilgard Mt Henry( S);SW	0	0	0
+16.11	Mt Hooper	12349	2s4	-	Florence Lake Mt Hilgard (E);SE;S	0	0	0
+@AREA	17	BEAR CREEK SPIRE AREA
+17.1	Merriam Peak	13103	2	-	Mt Hilgard Mount Tom (E)	0	0	0
+17.2	Royce Peak	13280+	2	-	Mt Hilgard Mount Tom (E)	0	0	0
+17.3	Mt Julius Caesar	13200+	2	-	Mt Hilgard Mount Tom (E)	0	0	0
+17.4	Mt Hilgard	13361	2	-	Mt Hilgard Florence Lake (W)	0	0	0
+17.5	Recess Peak	12813	2	-	Mt Abbot Mt Hilgard (S);SW	0	0	0
+17.6	Mt Gabb	13680+	2	-	Mt Abbot Mt Hilgard (S);SW	0	0	0
+17.7	Bear Creek Spire	13720+	3s4	-	Mt Hilgard Mt Abbot (N)	0	1	0
+17.8	Mt Dade	13600+	2	-	Mt Abbot	0	0	0
+17.9	MT ABBOT	13704	3	-	Mt Abbot	1	0	0
+17.10	Mt Mills	13451	3	-	Mt Abbot	0	0	0
+17.11	Mt Morgan (S)	13748	2	-	Mt Morgan	0	0	0
+@AREA	18	MONO CREEK TO MAMMOTH
+18.1	Silver Peak	11878	2	-	Sharktooth Peak Graveyard Peak (E)	0	0	0
+18.2	Mt Izaak Walton	12077	2	-	Graveyard Peak	0	0	0
+18.3	Red and White Mtn	12816	2	-	Mt Abbot Comvict Lake^ (N)	0	0	0
+18.4	Red Slate Mtn	13123+	1	-	Convict Lake^ Mt Abbot (S)	0	1	0
+18.5	Mt Stanford (N)	12838	2	-	Mt Abbot Mt Morgan (E)	0	0	0
+18.6	Mt Morgan (N)	13002	2	-	Convict Lake^ Mt Abbot (S);SE	0	0	0
+18.7	Mt Baldwin	12615	2	-	Convict Lake^	0	0	0
+18.8	Mt Morrison	12277	2	-	Convict Lake^	0	1	0
+18.9	Bloody Mtn	12552	1	-	Bloody Mtn^	0	0	0
+@AREA	19	RITTER RANGE AND VICINITY
+19.1	Iron Mtn	11148	1	-	Cattle Mtn^ Mt Ritter^ (N)	0	0	0
+19.2	Clyde Minaret	12264	4	083702	Mt Ritter^ Mammoth Mtn (E)	0	1	0
+19.3	MT RITTER	13143	2	-	Mt Ritter^ Mammoth Mtn (E)	1	0	0
+19.4	Banner Peak	12936	2	-	Mt Ritter^ Mammoth Mtn (E)	0	0	0
+19.5	Mt Davis	12303	2	-	Mt Ritter^ Mammoth Mtn (E)	0	0	0
+19.6	Rodgers Peak	12978	2	-	Mt Lyell Mt Ritter^ (E)	0	0	0
+19.7	Electra Peak	12442	2	-	Mt Lyell Merced Peak (W)	0	0	0
+19.8	Foerster Peak	12057	2	-	Mt Lyell Merced Peak (W)	0	0	0
+19.9	San Joaquin Mtn	11598	1	-	Mammoth Mtn	0	0	0
+@AREA	20	CLARK RANGE AND VICINITY
+20.1	Merced Peak	11726	2	-	Merced Peak Half Dome (W)	0	0	0
+20.2	Red Peak	11699	2	-	Merced Peak Half Dome (W)	0	0	0
+20.3	Gray Peak	11573	2	-	Merced Peak Half Dome (W)	0	0	0
+20.4	Mt Clark	11522	3s4	-	Merced Peak Half Dome (W)	0	1	0
+20.5	Mt Starr King	9092	5	-	Half Dome	0	1	0
+20.6	Half Dome	8840+	3	-	Half Dome	0	0	0
+20.7	Clouds Rest	9926	1	-	Tenaya Lake	0	0	0
+@AREA	21	MT LYELL AND NORTH
+21.1	Cathedral Peak	10911	3s4	-	Tenaya Lake	0	1	0
+21.2	Vogelsang Peak	11493	2	-	Vogelsang Peak	0	0	0
+21.3	Mt Florence	12561	2	-	Mt Lyell Vogelsang Peak (N)	0	0	0
+21.4	Mt Maclure	12880+	3	-	Mt Lyell Vogelsang Peak (N)	0	0	0
+21.5	MT LYELL	13114	3	-	Mt Lyell Vogelsang Peak (N)	1	0	0
+21.6	Koip Peak	12962	1	-	Koip Peak Mount Dana (N); NW	0	0	0
+21.7	Mt Gibbs	12773	1	-	Mount Dana Tioga Pass (W)	0	0	0
+21.8	Mt Dana	13057	1	-	Mount Dana Tioga Pass (W)	0	0	0
+@AREA	22	TIOGA PASS TO BOND PASS
+22.1	Mt Warren	12327	1	-	Mount Dana	0	0	0
+22.2	Mt Conness	12590	2	-	Tioga Pass	0	0	0
+22.3	North Peak	12242	2	-	Tioga Pass	0	0	0
+22.4	Excelsior Mtn	12446	1	-	Dunderberg Peak	0	0	0
+22.5	Dunderberg Peak	12374	2	-	Dunderberg Peak	0	0	0
+22.6	Virginia Peak	12001	2	-	Dunderberg Peak MatterhornPk(W)N; NW	0	0	0
+22.7	Twin Peaks	12323	2	-	Dunderberg Peak MatterhornPk(W)N;NW	0	0	0
+22.8	Whorl Mtn	12033	3	-	Matterhorn Peak Dunderberg Pk(E);N;NE	0	1	0
+22.9	MATTERHORN PK	12279	2	-	Matterhorn Peak Dunderberg Pk(E);N;NE	1	0	0
+22.10	Pettit Peak	10788	2	-	Falls Ridge Matterhorn Peak (N)	0	0	0
+22.11	Volunteer Peak	10481	2	-	Matterhorn Peak Piute Mtn (W);N	0	0	0
+22.12	Piute Mtn	10541	2	-	Piute Mtn Matterhorn Pk (E); NE	0	0	0
+22.13	Tower Peak	11755	3	-	Tower Peak Pickel Meadow	0	1	0
+@AREA	23	BOND PASS TO LAKE TAHOE
+23.1	Black Hawk Mtn	10348	2	-	Emigrant Lake Sonora Pass	0	0	0
+23.2	Leavitt Peak	11569	1	-	Sonora Pass	0	0	0
+23.3	Stanislaus Peak	11233	1	-	Disaster Peak Sonora Pass (S)	0	0	0
+23.4	Disaster Peak	10047	2	-	Disaster Peak Dardanelles Cone (W)	0	0	0
+23.5	Highland Peak	10935	2	-	Ebbetts Pass Dardanelles Cone (S)	0	0	0
+23.6	Mokelumne Peak	9334	2	-	Mokelumne Peak Bear River Res (W)	0	0	0
+23.7	Round Top	10381	3	-	Carson Pass Caples Lake (W)	0	0	0
+23.8	Freel Peak	10881	1	-	Freel Peak	0	0	0
+23.9	Pyramid Peak (N)	9983	2	-	Pyramid Peak	0	0	0
+23.10	Dicks Peak	9974	2	-	Rockbound Valley Emerald Bay (E)	0	0	0
+23.11	Mt Tallac	9735	1	-	Emerald Bay	0	0	0
+@AREA	24	NORTHERN SIERRA
+24.1	Granite Chief	9006	1	-	Granite Chief Tahoe City (E)	0	0	0
+24.2	Tinker Knob	8949	1	-	Granite Chief Tahoe City (E)	0	0	0
+24.3	Castle Peak	9103	2s3	-	Norden	0	0	0
+24.4	Mt Rose	10776	1	-	Mt Rose (Nev)	0	0	0
+24.5	Mt Lola	9148	1	-	Independence Lake	0	0	0
+24.6	English Mtn	8373	2	-	English Mtn	0	0	0
+24.7	Sierra Buttes	8591	1	-	Sierra City	0	0	0
+24.8	Mt Elwell	7818	1	-	Gold Lake	0	0	0
+24.9	Adams Peak	8197	2	-	Constantia Frenchman Lake (W)	0	0	0

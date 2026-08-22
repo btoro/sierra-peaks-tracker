@@ -14,6 +14,9 @@
     "preview": "astro preview",
     "check": "astro check",
     "test": "node --test 'src/**/*.test.ts'",
+    "import:sps": "node scripts/sps/import-sps.mjs",
+    "import:sps:dry-run": "node scripts/sps/import-sps.mjs --dry-run",
+    "check:sps": "node scripts/sps/import-sps.mjs --check",
     "astro": "astro"
   },
   "dependencies": {

@@ -6,11 +6,12 @@ the **247 active Sierra peaks** against the canonical Peakbagger list
 (**SPS 29th Edition, January 2025**), with the owner's already-public
 Peakbagger completion overlay (`cid=30050`) layered on top.
 
-This repository is in **Pilot 02**: a clean, minimal bootstrap. The tracker
-UI, data files, and importers arrive in later milestones. The frozen data
-contract is in [`docs/data-contract.md`](docs/data-contract.md); placeholders
-for architecture, data refresh, silhouettes, and privacy/provenance live in
-`docs/`.
+This repository is in **Pilot 03**: the SPS source dataset is vendored,
+normalized, and CI-verified (see `data/`, `snapshots/`, `scripts/sps/`).
+The tracker UI, Peakbagger import, and crosswalk arrive in later milestones.
+The frozen data contract is in [`docs/data-contract.md`](docs/data-contract.md);
+`docs/` also carries placeholders for architecture, silhouettes, and
+privacy/provenance.
 
 ## Local development
 
@@ -68,20 +69,44 @@ What this site may publish, and what it never will:
 ```text
 /
 ├── public/            # static assets (favicons)
+├── data/
+│   ├── manifest.json  # provenance: URL/edition, retrieved_at, sha256, parser version, expected counts
+│   └── sps/
+│       └── sp-s-29-2025.json   # normalized SPS 29th Ed. dataset (248 rows: 247 active + 1 suspended)
+├── snapshots/
+│   └── sierraclub/sp-s-29-2025/
+│       └── sps-list-29th-2025.tsv   # vendored authorized extraction (TSV, 248 rows)
+├── scripts/
+│   ├── vendor/
+│   │   └── extract_sps.py   # one-time local tool (PyMuPDF) that produced the TSV; not in build/CI
+│   └── sps/
+│       └── import-sps.mjs   # deterministic importer/validator CLI (--dry-run / --check / import)
 ├── src/
-│   ├── constants.ts   # frozen dataset invariants (asserted in tests)
+│   ├── constants.ts         # frozen dataset invariants (asserted in tests)
 │   ├── constants.test.ts
+│   ├── data/sps/
+│   │   ├── schema.ts        # normalized SPS row/area types (frozen §2/§4)
+│   │   ├── sps.ts           # parse + hard-fail validation + deterministic JSON serialization
+│   │   └── sps.test.ts      # native node:test suite (happy path + every rejection class)
 │   └── pages/
 │       └── index.astro
 ├── docs/
 │   ├── architecture.md
-│   ├── data-contract.md   # FROZEN contract from Pilot 01 (verbatim)
-│   ├── data-refresh.md
+│   ├── data-contract.md     # FROZEN contract from Pilot 01 (verbatim)
+│   ├── data-refresh.md      # operational runbook (SPS section implemented; Peakbagger pending)
 │   ├── privacy-provenance.md
 │   └── silhouettes.md
 ├── astro.config.mjs   # static output, host-neutral
 ├── .github/workflows/ci.yml
 └── pnpm-lock.yaml     # committed; pnpm is the only supported package manager
+```
+
+Data pipeline commands (all offline; see `docs/data-refresh.md`):
+
+```sh
+pnpm import:sps:dry-run   # verify checksum + validate snapshot + print diff; writes nothing
+pnpm import:sps           # write the normalized dataset after a reviewed dry-run
+pnpm check:sps            # CI drift gate: committed data must reproduce byte-for-byte
 ```
 
 ## Data contract (summary)

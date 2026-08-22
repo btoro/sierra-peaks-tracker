@@ -1,0 +1,60 @@
+{
+  "manifest_version": 1,
+  "updated_at": "2026-08-22T07:10:00Z",
+  "notes": "Provenance for every vendored data source (frozen contract, docs/data-contract.md §5). Checksums are SHA-256 of the exact bytes committed under snapshots/ or data/. Peakbagger sources land in Pilot 04/05.",
+  "sources": {
+    "sierraclub": {
+      "sp-s-29-2025": {
+        "publisher": "Sierra Club",
+        "publication": "Sierra Peaks & Sums (SPS)",
+        "edition": "29th Edition",
+        "released": "January 2025",
+        "canonical_url": null,
+        "url_verbatim": null,
+        "url_note": "The contract requires the exact source URL recorded verbatim from the user's authorized copy. No URL was provided with the local PDF and the PDF embeds no link, so this field is intentionally null rather than guessed; it is authoritative once the user supplies it. Source: sierraclub.com SPS list, 29th Edition, January 2025. No automated fetch — docs/privacy-provenance.md.",
+        "retrieved_at": "2026-08-21T23:45:59Z",
+        "retrieved_by": "btoro (manual, user-provided local copy)",
+        "retrieval_method": "manual save of user's authorized local PDF copy",
+        "attribution": "Sierra Club, Sierra Peaks & Sums, 29th Edition, January 2025. Data fields extracted for a personal tracker; the copyrighted PDF itself is NOT redistributed in this repository.",
+        "files": {
+          "snapshots/sierraclub/sp-s-29-2025/sps-list-29th-2025.tsv": {
+            "sha256": "42977ed7ed908025db9471488f114fa993cd13389697cd8ee7871b44dfdb7ddd",
+            "role": "vendored TSV extraction of the full SPS list (248 rows incl. suspended)",
+            "source_pdf_sha256": "f07de8729000d45ed9e8e53a4686e9498822e65cf518e024ae2448e5038c2437",
+            "source_pdf_bytes": 284163,
+            "extracted_at": "2026-08-22T01:03:12Z",
+            "extractor": "scripts/vendor/extract_sps.py (one-time local tool, PyMuPDF 1.26)",
+            "verification": "re-extraction from the authorized PDF on 2026-08-22 reproduced the committed TSV byte-for-byte"
+          }
+        },
+        "expected_counts": {
+          "total": 248,
+          "active": 247,
+          "suspended": 1,
+          "sections": 24
+        },
+        "normalized_output": {
+          "path": "data/sps/sp-s-29-2025.json",
+          "parser": "src/data/sps/sps.ts (import-sps.mjs)",
+          "parser_version": "1.0.0",
+          "note": "248 normalized rows: 247 active + 1 suspended (Pilot Knob, spk-1.1.1). The suspended row is retained in source data and EXCLUDED from the active app dataset."
+        }
+      }
+    },
+    "peakbagger": {
+      "lid-5051": {
+        "canonical_url": "https://www.peakbagger.com/list/list.aspx?lid=5051",
+        "status": "pending",
+        "expected_counts": {
+          "total": 247
+        },
+        "note": "Lands in Pilot 04 with the user-saved local snapshot (manual save; no scraping). Exactly 247 active peaks; source order authoritative; never padded to 273."
+      },
+      "cid-30050": {
+        "canonical_url": "https://www.peakbagger.com/list/list.aspx?lid=5051&cid=30050",
+        "status": "pending",
+        "note": "Owner's public completion overlay. Lands in Pilot 05; only real, already-public ascent dates/statuses."
+      }
+    }
+  }
+}
