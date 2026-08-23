@@ -223,19 +223,19 @@
       "svg": {
         "N": {
           "path": "public/silhouettes/spk-4.7/N.svg",
-          "sha256": "02e2c5f740df4235ae41b2f1738683fb5feee997d76dff8cd9a622d91bd563b8"
+          "sha256": "658946f56a167df7cd69b12f399d3a6f56ece14df7b3cb97da57533977522e8c"
         },
         "E": {
           "path": "public/silhouettes/spk-4.7/E.svg",
-          "sha256": "1e51bad338c913fd482db925f872770eabab71b807bd0d49b33e337894664120"
+          "sha256": "cb4835c46d9ebaaa0400470320c4237aaf1f60c601dcf5fe619a8835f9bbaba3"
         },
         "S": {
           "path": "public/silhouettes/spk-4.7/S.svg",
-          "sha256": "d61a5f093be70fa74fcac483154b1214bb9c530f2fea635a2535db8084665719"
+          "sha256": "b6bade098f03ba7c8bcfd816992a39134dd89685f51af6865ef972c756847746"
         },
         "W": {
           "path": "public/silhouettes/spk-4.7/W.svg",
-          "sha256": "fe2d979bd3e3779cef83a08b37001105c0d56e5914597329a4fe5b174435aad4"
+          "sha256": "137eb0f7863c6dda6b52d4f1e8797b7f4dce26f98e4420b8e4e2d674e7d493fd"
         }
       },
       "elevations": {
@@ -263,19 +263,19 @@
       "svg": {
         "N": {
           "path": "public/silhouettes/spk-5.9/N.svg",
-          "sha256": "461c61f7063718bb960716ae1433dd3bff9c9665a8621c87084afdedddd0cc5c"
+          "sha256": "c0e8c118595f46c4cab18c7f34dfd4841e041ec5a7e55013fe2ed34a71e26d9c"
         },
         "E": {
           "path": "public/silhouettes/spk-5.9/E.svg",
-          "sha256": "c9c489abc78c75e5203c9c1b425ef42f1b786bd3c3f70624997a55c6a0fa9aff"
+          "sha256": "33f493fd0f79101790a39eab4848b413a6e574d01b272098dffdc2c118688f99"
         },
         "S": {
           "path": "public/silhouettes/spk-5.9/S.svg",
-          "sha256": "74d012ed4e88da47d674d4673b66864d75e11af79cf0735cc20806ba1bbef97b"
+          "sha256": "a6e467946c04ead1d13ca509ca737206ea8877a1e6d8b2d6006214c3fa9b9f55"
         },
         "W": {
           "path": "public/silhouettes/spk-5.9/W.svg",
-          "sha256": "2c5e9db5a44ada59ad5a35763ff588bf398c133b36822d7f47172e48aa7c36e4"
+          "sha256": "f76c6055623e4278b117c0dc445ae11b99bd02c99ef80249cf51c913f815e8c1"
         }
       },
       "elevations": {
@@ -303,19 +303,19 @@
       "svg": {
         "N": {
           "path": "public/silhouettes/spk-6.8/N.svg",
-          "sha256": "679891263fe182977504b578f7c5fa65a7a978ba84e52f7ab33cc0d0d2d8c95b"
+          "sha256": "97cc4012434ade8bba2c8f251487f50686bb77d9ecd58f24eb1eb9ab9286f8a7"
         },
         "E": {
           "path": "public/silhouettes/spk-6.8/E.svg",
-          "sha256": "cef43c6f92ee0d977e13a6e243c75afbd86d9bd7fb310dcb7a86714794110065"
+          "sha256": "7bbdb960335514cdb9530f1b6b9e7856bf307fe9ae2dcc77c6c4c740d5b1b65f"
         },
         "S": {
           "path": "public/silhouettes/spk-6.8/S.svg",
-          "sha256": "e5ca39fd5f34165a5186bfbd88f26973a16ad7afab119086b4cca9b5fcaf94fd"
+          "sha256": "e23552b1858e77638a13e601ff70fb4ad45c9a87d4613bdeceb9ae860cf9fb8f"
         },
         "W": {
           "path": "public/silhouettes/spk-6.8/W.svg",
-          "sha256": "b41eab2d8469d53b6e7d77b861f7a98b4884d972ca641ab5f7bdcd2fc91efc31"
+          "sha256": "afb86a1ea78f339cf95ab95a113920c5aaaad8e6e7c3f4d9a3fa65511573591c"
         }
       },
       "elevations": {
