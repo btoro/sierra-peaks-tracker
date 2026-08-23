@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# raw 3DEP DEM tile cache (large binaries; only compact manifests + generated
+# SVGs are committed — see docs/silhouettes.md and data/manifest.json)
+data/terrain/
