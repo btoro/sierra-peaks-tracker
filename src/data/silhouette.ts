@@ -61,6 +61,16 @@ export const CARDINALS: readonly CardinalDirection[] = ['N', 'E', 'S', 'W'];
  * The visible skyline is the pointwise max of the column/row profile: a nearer
  * cell that is taller than every farther cell in the same bin hides the ridge
  * behind it, so the silhouette shows only what is actually visible.
+ *
+ * Pilot 10 decision (Pilot 09 review, defect 1): this per-bin max is
+ * commutative, so N ≡ S and E ≡ W for a given crop. This is INTENTIONAL, not
+ * a defect: the asset is a "what the peak looks like" ridge profile, not a
+ * directional photograph. An order-dependent occlusion walk (nearest cell
+ * wins, farther peaks never peek) would make N ≠ S by construction but would
+ * hide real ridgelines and misrepresent the terrain. All four canonical
+ * N/E/S/W assets are still emitted (N/S and E/W pairs are byte-identical by
+ * design) so the UI can expose a selector; the per-peak preferred tile
+ * direction is recorded separately in `data/silhouettes/preferred.json`.
  */
 
 export interface TerrainGrid {
