@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
 
 import {
   readTerrain,
@@ -67,7 +69,7 @@ test('readTerrain rejects empty/short buffers and bad dimensions', () => {
 // Orientation
 // ---------------------------------------------------------------------------
 
-test('orientation: a western spike shows in E/W views but is flattened in N/S max', () => {
+test('orientation: a western spike shows in E/W views; N/S max is uniform', () => {
   // 5 cols x 3 rows. Only col 0 is elevated (a tall western ridge).
   const g = grid(5, 3, (r, c) => (c === 0 ? 3000 : 1000));
   // E/W: bins = rows. Row maxima = 3000 for every row (the spike occupies each row).
@@ -107,24 +109,65 @@ test('orientation: bin count matches the sampled axis (width for N/S, height for
 // ---------------------------------------------------------------------------
 
 test('occlusion: a nearer, taller cell hides a farther, shorter cell in the same sight line', () => {
-  // Look EAST from the west. Col 0 (nearest) = 5000, col 4 (farthest) = 6000.
-  // The 6000 is taller than 5000, so it should still show.
-  const g = grid(5, 1, (r, c) => (c === 0 ? 5000 : c === 4 ? 6000 : 1000));
-  const e = projectView(g, 'E');
-  assert.equal(e[0], 6000, 'farther-but-taller peak remains visible');
-  // Now make the nearer cell TALLER: it must occlude the 6000 behind it.
+  // Look EAST from the west. Col 0 (nearest) = 7000, col 4 (farthest) = 6000.
+  // The nearer 7000 occludes the 6000 behind it.
   const g2 = grid(5, 1, (r, c) => (c === 0 ? 7000 : c === 4 ? 6000 : 1000));
   assert.equal(projectView(g2, 'E')[0], 7000, 'nearer taller peak occludes the ridge behind it');
+  // And a farther peak that is tall enough to survive the distance decay still
+  // shows (covered by the "nearer-weighted max" test below).
 });
 
-test('occlusion: the silhouette is the pointwise column/row max (nearer cannot lower the skyline)', () => {
-  // For a pure max projection, reordering the sight line must not change the
-  // result — the skyline depends only on the set of elevations in each bin.
-  const a = grid(4, 2, (r, c) => (r === 0 ? 2000 : 8000)); // top row 2000, bottom 8000
-  const b = grid(4, 2, (r, c) => (r === 0 ? 8000 : 2000)); // swapped
-  // N looks from the south: nearest row = highest index. But max is order-independent.
-  assert.deepEqual(projectView(a, 'N'), projectView(b, 'N'));
-  assert.deepEqual(projectView(a, 'S'), projectView(b, 'S'));
+test('occlusion: nearer-weighted max — a nearer ridge can hide a farther one that is not tall enough to exceed it after decay', () => {
+  // Look EAST from the west (5 cols, 1 row). Col 0 = 5000 (nearest),
+  // col 4 = 6000 (farthest). 6000 * 0.8^4 = 6000 * 0.4096 = 2457.6.
+  // 5000 * 0.8^0 = 5000 > 2457.6, so the nearer 5000 occludes the 6000.
+  const g = grid(5, 1, (r, c) => (c === 0 ? 5000 : c === 4 ? 6000 : 1000));
+  assert.equal(projectView(g, 'E')[0], 5000, 'nearer ridge occludes a not-tall-enough farther peak');
+
+  // Now make the far peak tall enough to exceed the decayed nearer one:
+  // 12000 * 0.8^4 = 4915.2 > 5000? No. 13000 * 0.8^4 = 5324.8 > 5000. Yes.
+  const g2 = grid(5, 1, (r, c) => (c === 0 ? 5000 : c === 4 ? 13000 : 1000));
+  assert.equal(projectView(g2, 'E')[0], 13000, 'a sufficiently tall farther peak still shows through');
+});
+
+test('occlusion: N and S are order-dependent (nearer-weighted max is not commutative)', () => {
+  // 4 cols x 2 rows. Row 0 (north) = 2000, row 1 (south) = 8000.
+  // N looks from the south: nearest row = 1 (8000), then row 0 (2000).
+  // apparent: 8000*1=8000 vs 2000*0.8=1600. Winner: 8000.
+  // S looks from the north: nearest row = 0 (2000), then row 1 (8000).
+  // apparent: 2000*1=2000 vs 8000*0.8=6400. Winner: 8000.
+  // Both report 8000, but for different reasons (different winners).
+  // To show N≠S we need a case where the decayed winner differs:
+  // Row 0 = 5000, row 1 = 4000.
+  // N (from south): 4000*1=4000 vs 5000*0.8=4000. Tie -> 4000 (first seen, i=0).
+  // S (from north): 5000*1=5000 vs 4000*0.8=3200. Winner: 5000.
+  const g = grid(4, 2, (r, c) => (r === 0 ? 5000 : 4000));
+  const n = projectView(g, 'N');
+  const s = projectView(g, 'S');
+  assert.equal(n[0], 4000, 'N: nearer (south) 4000 wins the tie at i=0');
+  assert.equal(s[0], 5000, 'S: nearer (north) 5000 wins outright');
+  assert.notDeepEqual(n, s, 'N and S must differ under order-dependent projection');
+});
+
+test('occlusion: E and W are order-dependent on real terrain', () => {
+  // Synthetic terrain with a clear asymmetry: a tall cell in col 0 and a
+  // moderately tall cell in col 4, with lower cells between.
+  // 6 cols x 2 rows.
+  //   col:  0     1     2     3     4     5
+  // row0: 7000  1000  1000  1000  5000  1000
+  // row1: 1000  1000  1000  1000  6000  1000
+  const g = grid(6, 2, (r, c) =>
+    c === 0 && r === 0 ? 7000 :
+    c === 4 && r === 0 ? 5000 :
+    c === 4 && r === 1 ? 6000 : 1000
+  );
+  const e = projectView(g, 'E'); // observer west, walks col 0→5
+  const w = projectView(g, 'W'); // observer east, walks col 5→0
+  // E, row 0: 7000 (i=0) vs 5000*0.8^4=2048 → 7000 wins.
+  // W, row 0: 1000(i=0) vs 5000*0.8^1=4000 vs 7000*0.8^4=1433.6 → 5000 wins.
+  assert.equal(e[0], 7000, 'E: western 7000 occludes the 5000 behind it');
+  assert.equal(w[0], 5000, 'W: the 5000 is nearer to the east observer than the 7000');
+  assert.notDeepEqual(e, w, 'E and W must differ under order-dependent projection');
 });
 
 // ---------------------------------------------------------------------------
@@ -281,4 +324,56 @@ test('renderSilhouettes: rejects an empty direction list and bad smoothing windo
   const g = grid(4, 4, () => 1000);
   assert.throws(() => renderSilhouettes(g, { directions: [] }), /at least one direction/);
   assert.throws(() => renderSilhouettes(g, { smoothingWindow: 0 }), /smoothingWindow/);
+});
+
+// ---------------------------------------------------------------------------
+// Manifest elevation contract (Pilot 10)
+// ---------------------------------------------------------------------------
+
+/**
+ * Recompute the manifest elevation contract for a committed .bin sample:
+ * min_m / max_m must equal the actual min/max of the whole sample grid,
+ * matching what generate-silhouettes.mjs writes to data/silhouettes/manifest.json.
+ */
+function sampleElevations(bytes: Uint8Array, meta: { width: number; height: number }): { min_m: number; max_m: number } {
+  const buf = new Float32Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 4);
+  const n = meta.width * meta.height;
+  let mn = Infinity, mx = -Infinity;
+  for (let i = 0; i < n; i++) {
+    const v = buf[i];
+    if (v < mn) mn = v;
+    if (v > mx) mx = v;
+  }
+  return { min_m: mn, max_m: mx };
+}
+
+test('manifest contract: elevations equal the committed .bin sample min/max for every pilot peak', () => {
+  // Read every committed sample and assert the manifest elevations match the
+  // actual min/max of the .bin sample grid. The generator emits elevations
+  // from this same rule, so any future drift fails here.
+  const root = path.resolve(process.cwd(), 'data', 'silhouettes');
+  const ids = fs.readdirSync(root, { withFileTypes: true })
+    .filter((e) => e.isDirectory())
+    .map((e) => e.name)
+    .sort();
+  assert.ok(ids.length > 0, 'expected at least one committed sample');
+
+  const manifest = JSON.parse(fs.readFileSync(path.join(root, 'manifest.json'), 'utf8')) as {
+    peaks: { peak_id: string; elevations: { min_m: number; max_m: number } }[];
+  };
+  const manifestMap = new Map(manifest.peaks.map((p) => [p.peak_id, p.elevations]));
+
+  for (const id of ids) {
+    const meta = JSON.parse(fs.readFileSync(path.join(root, id, `${id}.json`), 'utf8')) as {
+      width: number; height: number;
+    };
+    const bytes = fs.readFileSync(path.join(root, id, `${id}.bin`));
+    const { min_m, max_m } = sampleElevations(bytes, meta);
+    const recorded = manifestMap.get(id);
+    assert.ok(recorded, `${id}: missing from manifest`);
+    assert.ok(Number.isFinite(recorded.min_m), `${id}: manifest min_m not finite`);
+    assert.ok(Number.isFinite(recorded.max_m), `${id}: manifest max_m not finite`);
+    assert.ok(Math.abs(recorded.min_m - min_m) < 0.01, `${id}: min_m mismatch: manifest=${recorded.min_m} actual=${min_m}`);
+    assert.ok(Math.abs(recorded.max_m - max_m) < 0.01, `${id}: max_m mismatch: manifest=${recorded.max_m} actual=${max_m}`);
+  }
 });
