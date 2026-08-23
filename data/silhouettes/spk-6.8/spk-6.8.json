@@ -1,0 +1,28 @@
+{
+  "peak_id": "spk-6.8",
+  "width": 64,
+  "height": 64,
+  "nodata": -9999,
+  "sample_sha256": "b4a22b83cd007a217048735fa6eb3b103a40c141fed6b9a8d4dd98a09ead84ca",
+  "source": "USGS 3DEP (OpenTopoMap hillshade tile, 3DEP-derived relief)",
+  "source_sha256": "8c4361b932fcfa2643208d0edcfd8261cb69a7ccb4f9cb01afa5cc22ce72f3e8",
+  "tile": {
+    "provider": "OpenTopoMap",
+    "z": 13,
+    "x": 1399,
+    "y": 3202,
+    "zoom_arcsec": "1/3"
+  },
+  "tile_bbox": null,
+  "crop_bbox": {
+    "center_lat": 36.526108,
+    "center_lon": -118.478516
+  },
+  "observer_lat": 36.526108,
+  "observer_lon": -118.478516,
+  "observer_elevation": null,
+  "retrieved_at": "2026-08-23T00:00:00Z",
+  "retrieval_method": "manual OpenTopoMap 3DEP hillshade tile download (public USGS 3DEP relief, ODbL coordinates)",
+  "coordinate_source": "OpenStreetMap Nominatim (ODbL)",
+  "license": "USGS 3DEP relief (public domain) via OpenTopoMap (CC-BY-SA); OSM coordinates ODbL"
+}
