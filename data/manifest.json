@@ -1,1 +1,125 @@
-placeholder
+{
+  "manifest_version": 1,
+  "updated_at": "2026-08-22T13:30:00Z",
+  "notes": "Provenance for every vendored data source (frozen contract, docs/data-contract.md §5). Checksums are SHA-256 of the exact bytes committed under snapshots/ or data/.",
+  "sources": {
+    "sierraclub": {
+      "sp-s-29-2025": {
+        "publisher": "Sierra Club",
+        "publication": "Sierra Peaks & Sums (SPS)",
+        "edition": "29th Edition",
+        "released": "January 2025",
+        "canonical_url": null,
+        "url_verbatim": null,
+        "url_note": "The contract requires the exact source URL recorded verbatim from the user's authorized copy. No URL was provided with the local PDF and the PDF embeds no link, so this field is intentionally null rather than guessed; it is authoritative once the user supplies it. Source: sierraclub.com SPS list, 29th Edition, January 2025. No automated fetch — docs/privacy-provenance.md.",
+        "retrieved_at": "2026-08-21T23:45:59Z",
+        "retrieved_by": "btoro (manual, user-provided local copy)",
+        "retrieval_method": "manual save of user's authorized local PDF copy",
+        "attribution": "Sierra Club, Sierra Peaks & Sums, 29th Edition, January 2025. Data fields extracted for a personal tracker; the copyrighted PDF itself is NOT redistributed in this repository.",
+        "files": {
+          "snapshots/sierraclub/sp-s-29-2025/sps-list-29th-2025.tsv": {
+            "sha256": "42977ed7ed908025db9471488f114fa993cd13389697cd8ee7871b44dfdb7ddd",
+            "role": "vendored TSV extraction of the full SPS list (248 rows incl. suspended)",
+            "source_pdf_sha256": "f07de8729000d45ed9e8e53a4686e9498822e65cf518e024ae2448e5038c2437",
+            "source_pdf_bytes": 284163,
+            "extracted_at": "2026-08-22T01:03:12Z",
+            "extractor": "scripts/vendor/extract_sps.py (one-time local tool, PyMuPDF 1.26)",
+            "verification": "re-extraction from the authorized PDF on 2026-08-22 reproduced the committed TSV byte-for-byte"
+          }
+        },
+        "expected_counts": {
+          "total": 248,
+          "active": 247,
+          "suspended": 1,
+          "sections": 24
+        },
+        "normalized_output": {
+          "path": "data/sps/sp-s-29-2025.json",
+          "parser": "src/data/sps/sps.ts (import-sps.mjs)",
+          "parser_version": "1.0.0",
+          "note": "248 normalized rows: 247 active + 1 suspended (Pilot Knob, spk-1.1.1). The suspended row is retained in source data and EXCLUDED from the active app dataset."
+        }
+      }
+    },
+    "peakbagger": {
+      "lid-5051": {
+        "publisher": "Peakbagger.com",
+        "canonical_url": "https://www.peakbagger.com/list/list.aspx?lid=5051",
+        "exact_snapshot_url": "https://www.peakbagger.com/list/list.aspx?lid=5051",
+        "status": "active",
+        "retrieved_at": "2026-08-22",
+        "retrieved_at_precision": "date (the operator recorded the retrieval date, not an exact time; no time is invented here)",
+        "retrieved_by": "btoro (manual, authorized browser save)",
+        "retrieval_method": "manual save of the live lid=5051 list page in a browser, then placed under snapshots/ (no automated fetch or scraping — docs/data-contract.md §5, §7)",
+        "files": {
+          "snapshots/peakbagger/lid-5051/2026-08-22/lid-5051.html": {
+            "sha256": "4e1f886f6a725c6d994e7e32611e61ea35a438a02bd65de0d6665c9527ede339",
+            "bytes": 190780,
+            "role": "authorized local HTML snapshot of the lid=5051 list page (247 peak rows, source order)"
+          }
+        },
+        "expected_counts": {
+          "total": 247,
+          "sections": 24
+        },
+        "normalized_output": {
+          "path": "data/peakbagger/lid-5051.json",
+          "parser": "src/data/peakbagger/pb.ts (scripts/peakbagger/import-pb.mjs)",
+          "parser_version": "1.0.0",
+          "note": "247 rows in lid=5051 source order. Raw fields preserved verbatim. The list page exposes no coordinates and no summit class, so the canonical record carries neither. Printed ranks use competition ranking (one elevation tie at rank 196); pb_order is the list key."
+        }
+      },
+      "cid-30050": {
+        "publisher": "Peakbagger.com",
+        "canonical_url": "https://www.peakbagger.com/list/list.aspx?lid=5051&cid=30050",
+        "exact_snapshot_url": "https://www.peakbagger.com/list/list.aspx?lid=5051&cid=30050",
+        "status": "active",
+        "retrieved_at": "2026-08-22",
+        "retrieved_at_precision": "date (the operator recorded the retrieval date, not an exact time; no time is invented here)",
+        "retrieved_by": "btoro (manual, authorized browser save)",
+        "retrieval_method": "manual save of the live cid=30050 completion-overlay page (owner's public profile) in a browser, then placed under snapshots/ (no automated fetch or scraping)",
+        "files": {
+          "snapshots/peakbagger/cid-30050/2026-08-22/cid-30050.html": {
+            "sha256": "c968ba4ec4c1e6b807d91dedc14f983da8c1c3467a4a3bc8b77701417ca79593",
+            "bytes": 200022,
+            "role": "authorized local HTML snapshot of the cid=30050 completion overlay (247 rows, same order as lid=5051, plus an Ascent Date column)"
+          }
+        },
+        "expected_counts": {
+          "total": 247,
+          "sections": 24,
+          "completions": 30
+        },
+        "normalized_output": {
+          "path": "data/peakbagger/cid-30050.json",
+          "parser": "src/data/peakbagger/pb.ts (scripts/peakbagger/import-pb.mjs)",
+          "parser_version": "1.0.0",
+          "note": "Owner's public completions only: one record per ascent link present in the snapshot (30 dated rows). Dates and day-suffix letters exactly as public; each record keeps raw pb_order/pb_id/ascent_id provenance and resolves to a stable spk- id via data/crosswalk.json."
+        }
+      },
+      "crosswalk": {
+        "status": "active",
+        "note": "Explicit 1:1 SPS↔Peakbagger mapping produced by the Peakbagger importer from the committed SPS normalized rows (data/sps/sp-s-29-2025.json) and the lid=5051 snapshot. 247 entries covering every active SPS row; suspended Pilot Knob (spk-1.1) maps to nothing. All joins go through this file (docs/data-contract.md §2).",
+        "normalized_output": {
+          "path": "data/crosswalk.json",
+          "parser": "src/data/peakbagger/pb.ts (scripts/peakbagger/import-pb.mjs)",
+          "parser_version": "1.0.0"
+        }
+      },
+      "reconciled": {
+        "status": "active",
+        "note": "Authoritative canonical active dataset (Pilot 05): exactly 247 peaks, each carrying both SPS and Peakbagger orderings, joined only through data/crosswalk.json. Suspended Pilot Knob (spk-1.1) is retained in the SPS source and excluded here. 30 completions carry a public ascent from cid=30050. Generated by scripts/reconcile/reconcile.mjs; determinism gate via pnpm check:reconcile; report at docs/reconciliation-report.md.",
+        "normalized_output": {
+          "path": "data/reconciled.json",
+          "parser": "src/data/reconcile.ts (scripts/reconcile/reconcile.mjs)",
+          "parser_version": "1.0.0",
+          "report": "docs/reconciliation-report.md"
+        },
+        "expected_counts": {
+          "canonical_active": 247,
+          "completions": 30
+        }
+      }
+    }
+  }
+}
