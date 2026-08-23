@@ -115,12 +115,23 @@ The validator is a technical gate only; it does not check source provenance
 
 ## 7. Peak coordinate gap (v1)
 
-The SPS 29th Edition exposes UTM coordinates for only ~19 of 248 rows.
-Until a complete coordinate source is vendored, silhouette crops are
-centered on available peak locations; peaks without coordinates use a
-default crop offset and are flagged in `meta.json` with
-`observer_lat: null` / `observer_lon: null`. This is a documented v1 data
-gap, not a bug.
+The SPS 29th Edition exposes UTM coordinates for only a small subset of
+peaks (19 of 248 rows carry a non-empty `utm_raw`).  The full Peakbagger
+lid=5051 snapshot does not expose coordinates in its table, so the
+canonical dataset carries no per-peak lat/lon.
+
+Pilot 08 bridges this gap for its 8 pilot peaks by geocoding each peak
+through OpenStreetMap Nominatim (ODbL attribution) and recording the
+resolved coordinates in the per-peak sidecar JSON
+(`data/silhouettes/<spk-id>/<spk-id>.json`).  These coordinates are
+authoritative for the pilot only; a full 247-peak coordinate source
+(e.g. Peakbagger's own peak data, or a curated lat/lon table) is a
+future milestone.
+
+The silhouette generator (`generate-silhouettes.mjs`) does **not** depend
+on coordinates — it consumes the committed `.bin` crops directly.
+Coordinates are used only at acquisition time to position the crop
+window over the peak.
 
 ## 8. CI
 
