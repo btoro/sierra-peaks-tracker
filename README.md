@@ -6,9 +6,12 @@ the **247 active Sierra peaks** against the canonical Peakbagger list
 (**SPS 29th Edition, January 2025**), with the owner's already-public
 Peakbagger completion overlay (`cid=30050`) layered on top.
 
-This repository is in **Pilot 03**: the SPS source dataset is vendored,
-normalized, and CI-verified (see `data/`, `snapshots/`, `scripts/sps/`).
-The tracker UI, Peakbagger import, and crosswalk arrive in later milestones.
+This repository is in **Pilot 05**: the SPS source dataset, the Peakbagger
+list + completion overlays, the explicit SPS↔Peakbagger crosswalk, and the
+reconciled canonical 247-peak active dataset are all committed, tested, and
+CI-verified (see `data/`, `snapshots/`, `scripts/`,
+`docs/reconciliation-report.md`).
+The tracker UI arrives in later milestones.
 The frozen data contract is in [`docs/data-contract.md`](docs/data-contract.md);
 `docs/` also carries placeholders for architecture, silhouettes, and
 privacy/provenance.
@@ -24,6 +27,9 @@ pnpm install        # install dependencies (lockfile is committed)
 pnpm dev            # local dev server at http://localhost:4321
 pnpm check          # astro check (TypeScript + Astro diagnostics)
 pnpm test           # native node:test suite (src/**/*.test.ts)
+pnpm check:sps      # SPS drift gate (reproduce data/sps from the vendored TSV)
+pnpm check:peakbagger  # Peakbagger drift gate (reproduce lid/crosswalk/cid data)
+pnpm check:reconcile   # canonical reconciliation drift gate (data/reconciled.json + report)
 pnpm build          # production build to ./dist
 pnpm preview        # serve the built site locally
 ```
@@ -71,16 +77,26 @@ What this site may publish, and what it never will:
 ├── public/            # static assets (favicons)
 ├── data/
 │   ├── manifest.json  # provenance: URL/edition, retrieved_at, sha256, parser version, expected counts
-│   └── sps/
-│       └── sp-s-29-2025.json   # normalized SPS 29th Ed. dataset (248 rows: 247 active + 1 suspended)
+│   ├── sps/
+│   │   └── sp-s-29-2025.json   # normalized SPS 29th Ed. dataset (248 rows: 247 active + 1 suspended)
+│   ├── peakbagger/
+│   │   ├── lid-5051.json       # 247 active peaks, lid=5051 source order
+│   │   └── cid-30050.json      # 30 public completions, resolved to spk- ids
+│   ├── crosswalk.json          # explicit 1:1 SPS↔Peakbagger mapping (247 entries)
+│   └── reconciled.json         # canonical active dataset: 247 peaks, both orderings + completions
 ├── snapshots/
-│   └── sierraclub/sp-s-29-2025/
-│       └── sps-list-29th-2025.tsv   # vendored authorized extraction (TSV, 248 rows)
+│   ├── sierraclub/sp-s-29-2025/
+│   │   └── sps-list-29th-2025.tsv   # vendored authorized extraction (TSV, 248 rows)
+│   └── peakbagger/{lid-5051,cid-30050}/2026-08-22/  # authorized local HTML snapshots
 ├── scripts/
 │   ├── vendor/
 │   │   └── extract_sps.py   # one-time local tool (PyMuPDF) that produced the TSV; not in build/CI
-│   └── sps/
-│       └── import-sps.mjs   # deterministic importer/validator CLI (--dry-run / --check / import)
+│   ├── sps/
+│   │   └── import-sps.mjs   # deterministic importer/validator CLI (--dry-run / --check / import)
+│   ├── peakbagger/
+│   │   └── import-pb.mjs    # Peakbagger importer CLI (--dry-run / --check / import)
+│   └── reconcile/
+│       └── reconcile.mjs    # canonical reconciliation CLI (--dry-run / --check / import)
 ├── src/
 │   ├── constants.ts         # frozen dataset invariants (asserted in tests)
 │   ├── constants.test.ts
@@ -88,12 +104,20 @@ What this site may publish, and what it never will:
 │   │   ├── schema.ts        # normalized SPS row/area types (frozen §2/§4)
 │   │   ├── sps.ts           # parse + hard-fail validation + deterministic JSON serialization
 │   │   └── sps.test.ts      # native node:test suite (happy path + every rejection class)
+│   ├── data/peakbagger/
+│   │   ├── schema.ts        # Peakbagger row/crosswalk/completion types (frozen §2/§5)
+│   │   ├── pb.ts            # parse + crosswalk build + completion resolution + serialization
+│   │   └── pb.test.ts       # native node:test suite (happy path + every rejection class)
+│   ├── data/
+│   │   ├── reconcile.ts     # canonical dataset reconciliation (247 active peaks)
+│   │   └── reconcile.test.ts # reconciliation tests (counts, collisions, rejections, determinism)
 │   └── pages/
 │       └── index.astro
 ├── docs/
 │   ├── architecture.md
 │   ├── data-contract.md     # FROZEN contract from Pilot 01 (verbatim)
-│   ├── data-refresh.md      # operational runbook (SPS section implemented; Peakbagger pending)
+│   ├── data-refresh.md      # operational runbook (SPS + Peakbagger + reconciliation implemented)
+│   ├── reconciliation-report.md  # machine-generated per-peak reconciliation report (Pilot 05)
 │   ├── privacy-provenance.md
 │   └── silhouettes.md
 ├── astro.config.mjs   # static output, host-neutral
