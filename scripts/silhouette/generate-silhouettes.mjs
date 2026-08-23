@@ -44,6 +44,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '.
 const SAMPLES_DIR = path.join(ROOT, 'data', 'silhouettes');
 const OUT_DIR = path.join(ROOT, 'public', 'silhouettes');
 const MANIFEST_REL = 'data/silhouettes/manifest.json';
+const PREFERRED_REL = 'data/silhouettes/preferred.json';
 
 function fail(msg) {
   console.error(`[silhouette-gen] ERROR: ${msg}`);
@@ -107,7 +108,32 @@ function buildGrid(peakId, bytes, meta) {
   });
 }
 
-/** Generate all four SVGs for a single peak. Returns { svgTexts, result }. */
+/**
+ * Pilot 10 — load the curated preferred tile direction per peak from
+ * data/silhouettes/preferred.json. Returns a map { peakId -> direction }.
+ * Fails hard if the file is missing or any value is not a cardinal.
+ */
+function loadPreferred(peakIds) {
+  const p = path.join(SAMPLES_DIR, 'preferred.json');
+  if (!existsSync(p)) fail(`missing preferred direction file: ${p}`);
+  let doc;
+  try {
+    doc = JSON.parse(readFileSync(p, 'utf8'));
+  } catch (e) {
+    fail(`invalid JSON in ${p}: ${e.message}`);
+  }
+  const map = {};
+  for (const id of peakIds) {
+    const v = doc.peak_id_map ? doc.peak_id_map[id] : doc[id];
+    if (!['N', 'E', 'S', 'W'].includes(v)) {
+      fail(`preferred.json: ${id} has non-cardinal preferred direction "${v}"`);
+    }
+    map[id] = v;
+  }
+  return map;
+}
+
+/** Generate all four SVGs for a single peak. Returns { meta, result, svgTexts }. */
 function generatePeak(peakId) {
   const meta = loadMeta(peakId);
   if (!meta) {

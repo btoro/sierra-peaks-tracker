@@ -77,6 +77,12 @@ export const CARDINALS: readonly CardinalDirection[] = ['N', 'E', 'S', 'W'];
  * profile. A nearer, tall ridge can now occlude a farther peak; a distant
  * peak still shows when it rises high enough that its decayed apparent
  * elevation exceeds every nearer cell.
+ *
+ * Pilot 10 addendum (Pilot 09 review, recommendation 5): the per-peak
+ * preferred tile direction is recorded separately in
+ * `data/silhouettes/preferred.json`. All four canonical N/E/S/W assets
+ * remain emitted and exposed; the preferred file only names which one the
+ * independent review judged most readable per peak.
  */
 
 export interface TerrainGrid {
@@ -219,6 +225,7 @@ export function readTerrain(
   },
 ): TerrainGrid {
   const buf = bytes instanceof ArrayBuffer ? bytes : bytes.buffer;
+  const byteOffset = bytes instanceof ArrayBuffer ? 0 : bytes.byteOffset;
   const byteLength = bytes instanceof ArrayBuffer ? bytes.byteLength : bytes.byteLength;
   const required = meta.width * meta.height * 4;
   if (meta.width < 1 || meta.height < 1) {
@@ -229,7 +236,7 @@ export function readTerrain(
       `readTerrain: buffer ${byteLength} bytes < required ${required} for ${meta.width}x${meta.height}`,
     );
   }
-  const data = new Float32Array(buf, 0, meta.width * meta.height);
+  const data = new Float32Array(buf, byteOffset, meta.width * meta.height);
   return {
     width: meta.width,
     height: meta.height,

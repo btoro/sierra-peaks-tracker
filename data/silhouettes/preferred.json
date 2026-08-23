@@ -1,0 +1,15 @@
+{
+  "note": "Pilot 10 — curated preferred tile direction per pilot peak. Recorded SEPARATELY from the four canonical N/E/S/W assets (all four remain committed and exposed); this file only names which direction is the most readable per peak. Source: Pilot 09 independent silhouette review (docs/pilot-09-silhouette-review.md, 2026-08-23), recommendation 5. Not engine output: do not regenerate by hand; the generator embeds it into the manifest and fails if a direction is missing or non-cardinal.",
+  "source": "docs/pilot-09-silhouette-review.md",
+  "recorded_at": "2026-08-23",
+  "peak_id_map": {
+    "spk-1.8": "E",
+    "spk-18.6": "E",
+    "spk-2.1": "N",
+    "spk-21.1": "N",
+    "spk-23.9": "N",
+    "spk-4.7": "N",
+    "spk-5.9": "E",
+    "spk-6.8": "E"
+  }
+}
