@@ -10,6 +10,10 @@ import {
   slugify,
   classLabel,
   COMPASS_VIEWS,
+  silhouettesById,
+  PILOT_SILHOUETTE_IDS,
+  hasSilhouette,
+  silhouetteManifestDoc,
 } from './tracker.ts';
 
 test('canonical dataset holds exactly 247 active peaks (never padded to 273)', () => {
@@ -105,5 +109,40 @@ test('compass views are N/E/S/W placeholders with no invented geometry', () => {
     assert.ok(v.label.length > 0);
     // No fabricated coordinates/angles: description is honest placeholder text.
     assert.ok(v.description.includes('no view geometry'));
+  }
+});
+
+// ---- Pilot 11: silhouette integration tests ----
+
+test('silhouettesById contains exactly the 8 pilot peaks', () => {
+  assert.equal(PILOT_SILHOUETTE_IDS.length, 8);
+  assert.equal(silhouettesById.size, 8);
+  for (const id of PILOT_SILHOUETTE_IDS) {
+    assert.ok(hasSilhouette(id), `expected silhouette for ${id}`);
+  }
+});
+
+test('non-pilot peaks never have silhouettes (frozen §6)', () => {
+  const pilotSet = new Set(PILOT_SILHOUETTE_IDS);
+  for (const p of peaks) {
+    if (!pilotSet.has(p.sps_id)) {
+      assert.ok(!hasSilhouette(p.sps_id), `unexpected silhouette for ${p.sps_id}`);
+    }
+  }
+});
+
+test('every silhouette peak has a preferred direction that is cardinal', () => {
+  for (const [id, entry] of silhouettesById) {
+    assert.ok(['N', 'E', 'S', 'W'].includes(entry.preferred), `non-cardinal preferred for ${id}`);
+    for (const dir of ['N', 'E', 'S', 'W'] as const) {
+      assert.ok(entry.svg[dir].startsWith('public/silhouettes/'), `bad svg path for ${id} ${dir}`);
+    }
+  }
+});
+
+test('manifest entries all reference peaks that exist in the canonical 247', () => {
+  const ids = new Set(peaks.map(p => p.sps_id));
+  for (const entry of silhouetteManifestDoc.peaks) {
+    assert.ok(ids.has(entry.peak_id), `manifest peak ${entry.peak_id} not in canonical dataset`);
   }
 });

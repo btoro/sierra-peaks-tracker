@@ -37,6 +37,36 @@ pnpm preview        # serve the built site locally
 All commands run from the repository root. The test suite uses Node's built-in
 `node:test` runner — no extra test framework is required.
 
+## Verification
+
+Run all gates from the repository root:
+
+```sh
+# Install dependencies (lockfile is committed; pnpm is the only supported PM)
+pnpm install --frozen-lockfile
+
+# Type-check + Astro diagnostics
+pnpm check
+
+# Unit tests (native node:test runner)
+pnpm test
+
+# Data drift gates — committed data must reproduce byte-for-byte from source snapshots
+pnpm check:sps
+pnpm check:peakbagger
+pnpm check:reconcile
+
+# Silhouette gates — committed SVGs must reproduce from committed DEM crops
+pnpm check:silhouettes
+pnpm validate:silhouettes
+
+# Production build (249 pages: 1 board + 1 peak list + 247 detail pages)
+pnpm build
+```
+
+All commands must exit 0 for the build to be considered healthy. CI runs the
+full suite on every push to `main` and on every pull request.
+
 ## Hosting (host-neutral static)
 
 `pnpm build` emits a plain static site in `./dist` (Astro `output: 'static'`,
@@ -169,9 +199,9 @@ Short summary:
 
 ## CI
 
-GitHub Actions (`.github/workflows/ci.yml`) runs on every push and pull
-request to `main`: `pnpm install` → `pnpm check` → `pnpm test` →
-`pnpm build`, on a Node 22 matrix, using the committed pnpm lockfile.
+GitHub Actions (`.github/workflows/ci.yml`) runs on every push to `main` and on every pull request:
+`pnpm install` → `pnpm check` → `pnpm test` → all drift gates → `pnpm build`,
+on a Node 22 runner, using the committed pnpm lockfile.
 
 ## Silhouettes
 

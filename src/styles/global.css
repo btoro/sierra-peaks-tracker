@@ -665,6 +665,12 @@ a:hover {
   color: var(--accent);
 }
 
+.view-preferred {
+  font-size: 0.65rem;
+  color: var(--accent);
+  line-height: 1;
+}
+
 .view-option input:focus-visible + .view-label {
   outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
@@ -688,6 +694,32 @@ a:hover {
   font-size: 0.85rem;
   color: var(--ink);
   margin: 0 0 6px;
+}
+
+/* terrain silhouette rendered inside a view panel */
+.view-panel .silhouette {
+  margin: 0 0 10px;
+  border: 1px solid var(--panel-line-soft);
+  border-radius: 4px;
+  background: #0a0d12;
+  overflow: hidden;
+}
+.view-panel .silhouette img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 1;
+}
+.view-panel .silhouette-note {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+}
+.view-panel .silhouette-note em {
+  color: var(--accent);
+  font-style: normal;
 }
 
 /* ---------- footer ---------- */

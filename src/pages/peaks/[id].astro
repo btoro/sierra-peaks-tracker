@@ -1,21 +1,24 @@
 ---
 /**
- * Pilot 06 — peak detail page.
+ * Pilot 06 + Pilot 11 — peak detail page.
  *
  * Renders one peak's facts (SPS name/class/elevation, Peakbagger
  * name/range/elevation, SPS id, document position), its completion
  * status from the public cid=30050 overlay, and the N/E/S/W view selector.
  *
  * No-JS behaviour (baseline): the selected compass view (from ?view=,
- * defaulting to North) renders its panel statically. The four radios are
- * a native form that reloads with ?view=N|E|S|W when JS is off.
+ * defaulting to the peak's preferred direction when it has silhouette
+ * assets, otherwise North) renders its panel statically. The four radios
+ * are a native form that reloads with ?view=N|E|S|W when JS is off.
  *
  * JS behaviour (progressive): an inline script intercepts the radio form
- * and updates the view panel in place without a reload.
+ * and swaps the view panel in place without a reload.
  *
- * No view geometry is published in the current dataset, so each panel
- * shows an honest placeholder (frozen §6 / silhouettes.md: no fake
- * silhouettes or ridges).
+ * Silhouette integration (Pilot 11): the 8 pilot peaks with committed
+ * terrain-derived assets show the real SVG for the selected cardinal
+ * direction, keyed by canonical spk id; the remaining 239 peaks show an
+ * honest neutral placeholder (frozen §6 / silhouettes.md: no fake ridge
+ * lines or silhouettes).
  */
 import Layout from '../../layouts/Layout.astro';
 import {
@@ -24,8 +27,9 @@ import {
   classLabel,
   COMPASS_VIEWS,
   summary,
+  silhouettesById,
 } from '../../data/tracker.ts';
-import type { DisplayPeak } from '../../data/tracker.ts';
+import type { Cardinal } from '../../data/tracker.ts';
 
 const display = toDisplayPeaks();
 
@@ -40,9 +44,12 @@ const peak = peaks.find((p) => p.sps_id === id);
 const dp = display.find((d) => d.sps_id === id);
 if (!peak || !dp) throw new Error(`unknown peak id: ${id}`);
 
+const silhouette = silhouettesById.get(id);
 const viewParam = Astro.url.searchParams.get('view')?.toUpperCase();
-const viewKey: 'N' | 'E' | 'S' | 'W' =
-  ['N', 'E', 'S', 'W'].includes(viewParam ?? '') ? (viewParam as 'N' | 'E' | 'S' | 'W') : 'N';
+const viewKey: Cardinal =
+  ['N', 'E', 'S', 'W'].includes(viewParam ?? '')
+    ? (viewParam as Cardinal)
+    : (silhouette?.preferred ?? 'N');
 const activeView = COMPASS_VIEWS.find((v) => v.key === viewKey)!;
 
 const done = peak.completion !== null;
@@ -118,9 +125,9 @@ const completionSuffix = done && peak.completion!.day_suffix ? peak.completion!.
   <div class="compass">
     <h2>Peak views</h2>
     <p class="compass-note">
-      Pick a facing direction. The current dataset carries no per-face view
-      geometry, so each panel is an honest placeholder until a licensed
-      geometry source is added.
+      {silhouette
+        ? 'Pick a facing direction. Silhouettes are terrain-derived from USGS 3DEP data.'
+        : 'Pick a facing direction. The current dataset carries no per-face view geometry for this peak, so each panel is an honest placeholder until a licensed geometry source is added.'}
     </p>
 
     <form
@@ -143,6 +150,9 @@ const completionSuffix = done && peak.completion!.day_suffix ? peak.completion!.
           <label class="view-label" for={`view-${v.key}`}>
             <span class="view-letter" aria-hidden="true">{v.key}</span>
             <span class="view-name">{v.label}</span>
+            {silhouette && v.key === silhouette.preferred ? (
+              <span class="view-preferred" aria-label="preferred view">★</span>
+            ) : null}
           </label>
         </div>
       ))}
@@ -155,40 +165,61 @@ const completionSuffix = done && peak.completion!.day_suffix ? peak.completion!.
       aria-live="polite"
       data-view={activeView.key}
     >
-      <p class="view-panel-title" id="view-panel-title">{activeView.label}</p>
-      <p id="view-panel-desc">{activeView.description}</p>
+      {silhouette ? (
+        <figure class="silhouette">
+          <img
+            src={`/silhouettes/${id}/${viewKey}.svg`}
+            alt={`Terrain-derived silhouette of ${dp.sps_name} viewed from the ${activeView.label.toLowerCase()}`}
+            loading="lazy"
+          />
+          <figcaption class="silhouette-note">
+            Terrain-derived (USGS 3DEP) · {viewKey} view
+            {viewKey === silhouette.preferred ? ' · <em>preferred</em>' : ''}
+          </figcaption>
+        </figure>
+      ) : (
+        <p id="view-panel-desc">
+          {activeView.description}
+        </p>
+      )}
     </div>
   </div>
 
-  <script>
+  <script define:vars={{ silhouetteSvg: silhouette ? silhouette.svg : null, silhouettePreferred: silhouette ? silhouette.preferred : null, peakName: dp.sps_name }}>
     // Progressive enhancement: switch compass views without a reload.
     // Without JS the radios submit the native GET form (?view=N|E|S|W).
     (() => {
       const form = document.getElementById('view-form');
       const panel = document.getElementById('view-panel');
-      const title = document.getElementById('view-panel-title');
-      const desc = document.getElementById('view-panel-desc');
-      if (!form || !panel || !title || !desc || !(form instanceof HTMLFormElement)) return;
+      if (!form || !panel || !(form instanceof HTMLFormElement)) return;
 
-      const views: Record<string, { label: string }> = {
-        N: { label: 'North view' },
-        E: { label: 'East view' },
-        S: { label: 'South view' },
-        W: { label: 'West view' },
-      };
+      const views = { N: 'North view', E: 'East view', S: 'South view', W: 'West view' };
       const note =
         'Placeholder orientation — no view geometry is published for this ' +
         'peak in the current dataset. A real per-face view (angle, approach ' +
         'notes, or terrain profile) will appear here when a licensed geometry ' +
         'source is added; nothing is invented in the meantime.';
 
+      function renderPanel(key) {
+        if (!views[key]) return;
+        panel.dataset.view = key;
+        if (silhouetteSvg && silhouetteSvg[key]) {
+          panel.innerHTML =
+            '<figure class="silhouette">' +
+            '<img src="' + silhouetteSvg[key] + '" alt="Terrain-derived silhouette of ' + peakName + ' viewed from the ' + views[key].toLowerCase() + '" loading="lazy">' +
+            '<figcaption class="silhouette-note">Terrain-derived (USGS 3DEP) · ' + key + ' view' +
+            (key === silhouettePreferred ? ' · <em>preferred</em>' : '') + '</figcaption>' +
+            '</figure>';
+        } else {
+          panel.innerHTML = '<p id="view-panel-desc">' + note + '</p>';
+        }
+      }
+
       form.addEventListener('submit', (e) => {
         e.preventDefault();
         const v = new FormData(form).get('view');
         if (!v || typeof v !== 'string' || !views[v]) return;
-        panel.dataset.view = v;
-        title.textContent = views[v].label;
-        desc.textContent = note;
+        renderPanel(v);
         // update URL without reload for shareability
         const url = new URL(window.location.href);
         url.searchParams.set('view', v);
