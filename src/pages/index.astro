@@ -1,27 +1,24 @@
 ---
-const title = 'Sierra Peaks Tracker';
+/**
+ * Pilot 06 — board page (the main split-flap departure board).
+ *
+ * Server-rendered baseline: progress summary (in Layout), filter bar, and all
+ * 247 split-flap tiles grouped by SPS area. Works fully with JavaScript
+ * disabled. The optional client script enhances search/filtering live.
+ */
+import Layout from '../layouts/Layout.astro';
+import Board from '../components/Board.astro';
+
+const q = Astro.url.searchParams.get('q') ?? '';
+const sectionRaw = Astro.url.searchParams.get('section');
+const section = sectionRaw && Number(sectionRaw) >= 1 && Number(sectionRaw) <= 24 ? Number(sectionRaw) : undefined;
+const statusRaw = Astro.url.searchParams.get('status') ?? 'all';
+const status: 'all' | 'done' | 'todo' = ['all', 'done', 'todo'].includes(statusRaw) ? (statusRaw as 'all' | 'done' | 'todo') : 'all';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<meta
-			name="description"
-			content="A host-neutral static site tracking the 247 active Sierra peaks against the SPS 29th Edition and Peakbagger lid=5051."
-		/>
-		<title>{title}</title>
-	</head>
-	<body>
-		<main>
-			<h1>Sierra Peaks Tracker</h1>
-			<p>
-				This is a placeholder page. The tracker UI ships in a later milestone;
-				see <code>docs/architecture.md</code>.
-			</p>
-		</main>
-	</body>
-</html>
+<Layout
+  title="Sierra Peaks Tracker — 247 Peak Split-Flap Board"
+  description="Dark split-flap departure-board view of the 247 active Sierra peaks (SPS 29th Edition × Peakbagger lid=5051) with the owner's public completion overlay. Search, filter by area, and follow your progress."
+>
+  <Board q={q} section={section} status={status} />
+</Layout>

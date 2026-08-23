@@ -1,0 +1,51 @@
+---
+/**
+ * Pilot 06 — PeakCard: one peak rendered as a split-flap "departure board" tile.
+ *
+ * The tile is an <a> element (keyboard-focusable, screen-reader friendly).
+ * The visible text is the SPS name (the source of truth for display); the
+ * Peakbagger spelling is exposed in an aria-label so both spellings are
+ * reachable. Completion state changes the flap color and shows the public
+ * completion date in the foot (real data only — no invented dates).
+ *
+ * No JS required: the tile links to /peaks/{sps_id}/.
+ */
+import type { DisplayPeak } from '../data/tracker.ts';
+import { classLabel } from '../data/tracker.ts';
+
+interface Props {
+  peak: DisplayPeak;
+}
+
+const { peak } = Astro.props;
+
+const foot = peak.done
+  ? peak.completionDaySuffix
+    ? `${peak.completionDate} ${peak.completionDaySuffix}`
+    : peak.completionDate ?? ''
+  : `—${peak.sps_elevation_raw}`;
+const ariaName = peak.done
+  ? `${peak.sps_name}, class ${classLabel(peak.sps_class_raw)}, elevation ${peak.sps_elevation_raw} feet, completed ${peak.completionDate}${peak.completionDaySuffix ? ` day ${peak.completionDaySuffix}` : ''}`
+  : `${peak.sps_name}, class ${classLabel(peak.sps_class_raw)}, elevation ${peak.sps_elevation_raw} feet, not completed`;
+---
+
+<a
+  class={`flap${peak.done ? ' is-done' : ''}`}
+  id={peak.sps_id}
+  href={`/peaks/${peak.sps_id}/`}
+  data-sps-id={peak.sps_id}
+  data-slug={peak.slug}
+  data-section={peak.section}
+  data-done={peak.done ? '1' : '0'}
+  data-search={`${peak.sps_name} ${peak.pb_name} ${peak.area} ${peak.sps_id} ${peak.pb_range}`.toLowerCase()}
+  aria-label={ariaName}
+>
+  <span class="flap-inner">
+    <span class="flap-top">
+      <span class="flap-num" aria-hidden="true">{peak.displayOrder}</span>
+      <span class="flap-class" aria-hidden="true">{classLabel(peak.sps_class_raw)}</span>
+    </span>
+    <span class="flap-name">{peak.sps_name}</span>
+    <span class="flap-foot" aria-hidden="true">{foot}</span>
+  </span>
+</a>

@@ -1,0 +1,47 @@
+---
+/**
+ * Pilot 06 — simple peak index (accessible, no-JS baseline for the detail
+ * view). The split-flap board at `/` is the primary experience; this page
+ * is a plain alphabetical list of every active peak linking to its detail
+ * page, so all 247 detail pages are reachable from a single static list even
+ * without the board.
+ */
+import Layout from '../../layouts/Layout.astro';
+import type { DisplayPeak } from '../../data/tracker.ts';
+import { toDisplayPeaks, summary } from '../../data/tracker.ts';
+
+const allPeaks: DisplayPeak[] = toDisplayPeaks();
+const peaks = allPeaks.slice().sort((a: DisplayPeak, b: DisplayPeak) =>
+  a.sps_name.localeCompare(b.sps_name),
+);
+---
+
+<Layout
+  title="Peak list — Sierra Peaks Tracker"
+  description="Alphabetical list of the 247 active Sierra peaks (SPS 29th Edition × Peakbagger lid=5051), each linking to its detail page."
+>
+  <h2 class="list-title">
+    All {summary.total} peaks, alphabetical
+  </h2>
+  <ol class="peak-list" aria-label="Alphabetical list of peaks">
+    {peaks.map((p) => (
+      <li>
+        <a class="peak-list-link" href={`/peaks/${p.sps_id}/`}>
+          <span class="peak-list-name">{p.sps_name}</span>
+          <span class="peak-list-meta" aria-hidden="true">
+            {p.sps_elevation_raw} ft · class {p.sps_class_raw}
+          </span>
+          {p.done ? (
+            <span class="peak-list-done" aria-label={`completed ${p.completionDate}`}>
+              ✓ {p.completionDate}
+            </span>
+          ) : (
+            <span class="peak-list-remaining" aria-label="not completed">
+              —
+            </span>
+          )}
+        </a>
+      </li>
+    ))}
+  </ol>
+</Layout>
