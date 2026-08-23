@@ -40,6 +40,12 @@ jobs:
       - name: Test (node:test)
         run: pnpm test
 
+      - name: Reproduce normalized SPS data (deterministic drift gate)
+        run: pnpm check:sps
+
+      - name: Reproduce normalized Peakbagger data (deterministic drift gate)
+        run: pnpm check:peakbagger
+
       - name: Build static site
         run: pnpm build
 
