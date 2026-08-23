@@ -6,14 +6,15 @@ the **247 active Sierra peaks** against the canonical Peakbagger list
 (**SPS 29th Edition, January 2025**), with the owner's already-public
 Peakbagger completion overlay (`cid=30050`) layered on top.
 
-This repository is in **Pilot 05**: the SPS source dataset, the Peakbagger
-list + completion overlays, the explicit SPS↔Peakbagger crosswalk, and the
-reconciled canonical 247-peak active dataset are all committed, tested, and
-CI-verified (see `data/`, `snapshots/`, `scripts/`,
-`docs/reconciliation-report.md`).
+This repository is in **Pilot 07**: the SPS source dataset, the Peakbagger
+list + completion overlays, the explicit SPS↔Peakbagger crosswalk, the
+reconciled canonical 247-peak active dataset, and the deterministic 3DEP
+terrain-silhouette engine are all committed, tested, and CI-verified (see
+`data/`, `snapshots/`, `scripts/`, `docs/reconciliation-report.md`,
+`docs/silhouettes.md`).
 The tracker UI arrives in later milestones.
 The frozen data contract is in [`docs/data-contract.md`](docs/data-contract.md);
-`docs/` also carries placeholders for architecture, silhouettes, and
+`docs/` also carries placeholders for architecture and
 privacy/provenance.
 
 ## Local development
@@ -30,6 +31,7 @@ pnpm test           # native node:test suite (src/**/*.test.ts)
 pnpm check:sps      # SPS drift gate (reproduce data/sps from the vendored TSV)
 pnpm check:peakbagger  # Peakbagger drift gate (reproduce lid/crosswalk/cid data)
 pnpm check:reconcile   # canonical reconciliation drift gate (data/reconciled.json + report)
+pnpm check:silhouettes # silhouette drift gate (reproduce committed SVGs from DEM crops)
 pnpm build          # production build to ./dist
 pnpm preview        # serve the built site locally
 ```
@@ -74,7 +76,7 @@ What this site may publish, and what it never will:
 
 ```text
 /
-├── public/            # static assets (favicons)
+├── public/            # static assets (favicons; generated silhouettes land here)
 ├── data/
 │   ├── manifest.json  # provenance: URL/edition, retrieved_at, sha256, parser version, expected counts
 │   ├── sps/
@@ -83,7 +85,8 @@ What this site may publish, and what it never will:
 │   │   ├── lid-5051.json       # 247 active peaks, lid=5051 source order
 │   │   └── cid-30050.json      # 30 public completions, resolved to spk- ids
 │   ├── crosswalk.json          # explicit 1:1 SPS↔Peakbagger mapping (247 entries)
-│   └── reconciled.json         # canonical active dataset: 247 peaks, both orderings + completions
+│   ├── reconciled.json         # canonical active dataset: 247 peaks, both orderings + completions
+│   └── silhouettes/            # compact DEM crops + per-peak meta + manifest.json (committed)
 ├── snapshots/
 │   ├── sierraclub/sp-s-29-2025/
 │   │   └── sps-list-29th-2025.tsv   # vendored authorized extraction (TSV, 248 rows)
@@ -95,8 +98,12 @@ What this site may publish, and what it never will:
 │   │   └── import-sps.mjs   # deterministic importer/validator CLI (--dry-run / --check / import)
 │   ├── peakbagger/
 │   │   └── import-pb.mjs    # Peakbagger importer CLI (--dry-run / --check / import)
-│   └── reconcile/
-│       └── reconcile.mjs    # canonical reconciliation CLI (--dry-run / --check / import)
+│   ├── reconcile/
+│   │   └── reconcile.mjs    # canonical reconciliation CLI (--dry-run / --check / import)
+│   └── silhouette/
+│       ├── generate-silhouettes.mjs  # 3DEP silhouette generator CLI (--dry-run / --check / generate)
+│       ├── validate-silhouettes.mjs  # SVG asset validator (malformed/blank/duplicate/out-of-viewbox)
+│       └── verify-silhouette.mjs     # standalone test runner for the silhouette engine (no node:test)
 ├── src/
 │   ├── constants.ts         # frozen dataset invariants (asserted in tests)
 │   ├── constants.test.ts
@@ -110,7 +117,9 @@ What this site may publish, and what it never will:
 │   │   └── pb.test.ts       # native node:test suite (happy path + every rejection class)
 │   ├── data/
 │   │   ├── reconcile.ts     # canonical dataset reconciliation (247 active peaks)
-│   │   └── reconcile.test.ts # reconciliation tests (counts, collisions, rejections, determinism)
+│   │   ├── reconcile.test.ts # reconciliation tests (counts, collisions, rejections, determinism)
+│   │   ├── silhouette.ts    # deterministic 3DEP silhouette engine (projection, skyline, closed SVG paths)
+│   │   └── silhouette.test.ts # silhouette engine tests (synthetic DEMs: orientation, occlusion, flat/empty, clipping, determinism)
 │   └── pages/
 │       └── index.astro
 ├── docs/
@@ -118,8 +127,8 @@ What this site may publish, and what it never will:
 │   ├── data-contract.md     # FROZEN contract from Pilot 01 (verbatim)
 │   ├── data-refresh.md      # operational runbook (SPS + Peakbagger + reconciliation implemented)
 │   ├── reconciliation-report.md  # machine-generated per-peak reconciliation report (Pilot 05)
-│   ├── privacy-provenance.md
-│   └── silhouettes.md
+│   ├── silhouettes.md       # 3DEP silhouette pipeline: engine, data layout, CI gates, provenance
+│   └── privacy-provenance.md
 ├── astro.config.mjs   # static output, host-neutral
 ├── .github/workflows/ci.yml
 └── pnpm-lock.yaml     # committed; pnpm is the only supported package manager
@@ -153,3 +162,11 @@ Short summary:
 GitHub Actions (`.github/workflows/ci.yml`) runs on every push and pull
 request to `main`: `pnpm install` → `pnpm check` → `pnpm test` →
 `pnpm build`, on a Node 22 matrix, using the committed pnpm lockfile.
+
+## Silhouettes
+
+Mountain silhouettes are static SVG files generated deterministically from
+USGS 3DEP terrain data — see [`docs/silhouettes.md`](docs/silhouettes.md)
+for the pipeline, data layout, and provenance rules. The design mock's
+fake ridge lines are visual direction only and are never used as
+geometry.
