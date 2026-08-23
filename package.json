@@ -23,6 +23,10 @@
     "import:reconcile": "node scripts/reconcile/reconcile.mjs",
     "import:reconcile:dry-run": "node scripts/reconcile/reconcile.mjs --dry-run",
     "check:reconcile": "node scripts/reconcile/reconcile.mjs --check",
+    "generate:silhouettes": "node scripts/silhouette/generate-silhouettes.mjs",
+    "generate:silhouettes:dry-run": "node scripts/silhouette/generate-silhouettes.mjs --dry-run",
+    "check:silhouettes": "node scripts/silhouette/generate-silhouettes.mjs --check",
+    "validate:silhouettes": "node scripts/silhouette/validate-silhouettes.mjs",
     "astro": "astro"
   },
   "dependencies": {
