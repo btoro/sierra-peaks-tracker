@@ -23,24 +23,24 @@
       "svg": {
         "N": {
           "path": "public/silhouettes/spk-1.8/N.svg",
-          "sha256": "23adb4ba03219c62f2ebea41079ec28b025507d466bc6d9add63ff90f45b605b"
+          "sha256": "4064db0495c47d8b7837ccd15c281169e3c7a2c0a697fc8232d9a543b7c22d8d"
         },
         "E": {
           "path": "public/silhouettes/spk-1.8/E.svg",
-          "sha256": "e382031e598a2982fa95d0da70a631a744a741437be3a881b363e5916c95383d"
+          "sha256": "be60db5459d6be4dae698264af258e3d153be7c28380fcf50b7a7f29e7bfd291"
         },
         "S": {
           "path": "public/silhouettes/spk-1.8/S.svg",
-          "sha256": "af20398b5a149a3da2140e863bdb6d21dd57f2bc25457524d59b3c79f4d751c2"
+          "sha256": "afecda130d629c2fc735e5ec82ad30bbe9c9dc258545a0877d15da1720a4a375"
         },
         "W": {
           "path": "public/silhouettes/spk-1.8/W.svg",
-          "sha256": "c4c7812666c6b8fd83d7a1e67828046f52d61c76053feef823aed4a5e49c7299"
+          "sha256": "750cc1b1b9351cef18ef2a3b716ab69c22feb682b92389824e03e340ede312d8"
         }
       },
       "elevations": {
-        "min_m": 7.714648413125024e+31,
-        "max_m": 1.931157685616568e+37
+        "min_m": 917.6470336914062,
+        "max_m": 2000
       }
     },
     {
@@ -63,24 +63,24 @@
       "svg": {
         "N": {
           "path": "public/silhouettes/spk-18.6/N.svg",
-          "sha256": "8a95bd275a0b9c06d685853cb7952624959bf2973cffaaecde8c3b7ada724f10"
+          "sha256": "8ecfb8ee819905bf0a56a9f972bb6e3e2729dfe01d84da85c5a58ba5f46656c7"
         },
         "E": {
           "path": "public/silhouettes/spk-18.6/E.svg",
-          "sha256": "36f2c161ff35a8aef5b6d8a5228f1a2dcb171d1f31bf1c128ee355ac12e265b6"
+          "sha256": "ee99b72825845321966d89e19e7b7dfb924a8e855519937cab6e0fb165a7a94e"
         },
         "S": {
           "path": "public/silhouettes/spk-18.6/S.svg",
-          "sha256": "4f5bdef3c4574f6df3c906bbfeecf192a1e48b908746da1afeb5698b116e5d11"
+          "sha256": "191d5882743b2241959e90195a1d9d66fcf25630b6c9fc3bfa12d2d7886be9a1"
         },
         "W": {
           "path": "public/silhouettes/spk-18.6/W.svg",
-          "sha256": "5ed7814a12c517ca437c4ab842b9d48d9793d3a86c512218f1a516496fa376d7"
+          "sha256": "163bd7347d18d0a144e7c2889e06ca6a61cff3432fa78e1b08a804a71aedaf47"
         }
       },
       "elevations": {
-        "min_m": 7.714648413125024e+31,
-        "max_m": 1.931157685616568e+37
+        "min_m": 854.9019775390625,
+        "max_m": 2000
       }
     },
     {
@@ -103,23 +103,23 @@
       "svg": {
         "N": {
           "path": "public/silhouettes/spk-2.1/N.svg",
-          "sha256": "272365c2ded78d6304e6e5aab8a27221854d3ee1eca6dd3d6ba49356d3660de0"
+          "sha256": "e322896eceda45a319d5ba327748858de23f404cd9e7e4244263920130e082be"
         },
         "E": {
           "path": "public/silhouettes/spk-2.1/E.svg",
-          "sha256": "d6ebe939a5c41bf2329c7afe0ec54b1a8c8d17ea3d4a87f70752fec945bdf2a4"
+          "sha256": "1b4b470dfb0a22ead1b0c29e8870f7656cd04e515538146f448e78f6ce4be096"
         },
         "S": {
           "path": "public/silhouettes/spk-2.1/S.svg",
-          "sha256": "2b4936f395437c1fb9989cc13308fbc25db80f7f987ac265f756761d72883a87"
+          "sha256": "8b18a131551c4db6ece4b2251be2506ed829c9c9dd40f5a6251e25e8790943b8"
         },
         "W": {
           "path": "public/silhouettes/spk-2.1/W.svg",
-          "sha256": "8ed361a5d3d84ed76cb2bccb20ac178e08eb02648af5cf10a90b0c89ec5a0d1d"
+          "sha256": "f3aa57bddee9ac19fd35880fb8f196ad8ee615d41ef5a83f3ffaaefc2018b11c"
         }
       },
       "elevations": {
-        "min_m": 1113.73,
+        "min_m": 611.7647094726562,
         "max_m": 2000
       }
     },
@@ -143,24 +143,24 @@
       "svg": {
         "N": {
           "path": "public/silhouettes/spk-21.1/N.svg",
-          "sha256": "367bfc7a24fb01254d9cb739a749a32bf37c1bc38d9de755ee5a97f9639c5feb"
+          "sha256": "ae72ebf7e39e47773cb4387d1e48cf1caf49c20d82ccdb3e30845f49e6dc7796"
         },
         "E": {
           "path": "public/silhouettes/spk-21.1/E.svg",
-          "sha256": "3c4eff76e989f60e1172544c3a13176a4791991692006149e1fb716b8fbc17ad"
+          "sha256": "1607d890d32c43ef8c6d21cf7df6a1100c0c1ebd994843c91b14dfea9a0dcab8"
         },
         "S": {
           "path": "public/silhouettes/spk-21.1/S.svg",
-          "sha256": "c9a5e7096604aacc40e481da7e218978ae4b1e643b4bb1eb350a0e7a7f7d70f3"
+          "sha256": "3ef77790ee910a0af715a6a1061db9a47cfa537f164df3dce55351e787ac837d"
         },
         "W": {
           "path": "public/silhouettes/spk-21.1/W.svg",
-          "sha256": "866fd90f8ace74af46d605ff525af39ebc0f383c8e22c5d300dd542889229413"
+          "sha256": "eb0128dbf117b23ad9ef67c557ee262161c229fe2f0e117582173508daf59320"
         }
       },
       "elevations": {
-        "min_m": 1113.73,
-        "max_m": 2000
+        "min_m": 854.9019775390625,
+        "max_m": 1984.313720703125
       }
     },
     {
@@ -183,23 +183,23 @@
       "svg": {
         "N": {
           "path": "public/silhouettes/spk-23.9/N.svg",
-          "sha256": "98d4d6247f6f0d5f8244ba4e090c3e3a897791fdd9b81283b85e267fc99c8119"
+          "sha256": "c9958336449cb4fe5be51974d3470217c389de196962e416a19a873f51b160c1"
         },
         "E": {
           "path": "public/silhouettes/spk-23.9/E.svg",
-          "sha256": "e06f72d58c02425f1cc8719adb35442bf2e7872d2eb0974d896ace56bd26d83a"
+          "sha256": "a5abbf6842a3d140aad03b69d0c5b53c95a6cd457bd63efc96e813d94dc3ac93"
         },
         "S": {
           "path": "public/silhouettes/spk-23.9/S.svg",
-          "sha256": "03256a4df00f6d44a56490bc11bffb449e2f31bdcda2ac1e05856f57958be72c"
+          "sha256": "a91797c687d07fb9f83ed28625beb9ad52ce8f1d629e321aec706920af64127b"
         },
         "W": {
           "path": "public/silhouettes/spk-23.9/W.svg",
-          "sha256": "8671e1c8828843ad638179f0568b0a539b914efce3e0fe059354e0b910af87b0"
+          "sha256": "a24c0f40891e2087cd4ba5edc880014fdf187832568a633206b56afdecb2980d"
         }
       },
       "elevations": {
-        "min_m": 1113.73,
+        "min_m": 925.4901733398438,
         "max_m": 2000
       }
     },
@@ -223,24 +223,24 @@
       "svg": {
         "N": {
           "path": "public/silhouettes/spk-4.7/N.svg",
-          "sha256": "95ccc35a2852efe5b640562da7903c3cf296e3eec5bc705f555260690b7d3f94"
+          "sha256": "658946f56a167df7cd69b12f399d3a6f56ece14df7b3cb97da57533977522e8c"
         },
         "E": {
           "path": "public/silhouettes/spk-4.7/E.svg",
-          "sha256": "514f0f5fabe294e47643b5ca1c37e54fe591fee2c07da268916441b82bf74915"
+          "sha256": "cb4835c46d9ebaaa0400470320c4237aaf1f60c601dcf5fe619a8835f9bbaba3"
         },
         "S": {
           "path": "public/silhouettes/spk-4.7/S.svg",
-          "sha256": "f4937ef801e016362ef8fc7dc0331de85d48b042236e5d30d290df867346ed7f"
+          "sha256": "b6bade098f03ba7c8bcfd816992a39134dd89685f51af6865ef972c756847746"
         },
         "W": {
           "path": "public/silhouettes/spk-4.7/W.svg",
-          "sha256": "1ac4ae450d570e5b84905a1e31d676eaf5aedf8603b046db3fb61aa400fa5d67"
+          "sha256": "137eb0f7863c6dda6b52d4f1e8797b7f4dce26f98e4420b8e4e2d674e7d493fd"
         }
       },
       "elevations": {
-        "min_m": 1113.73,
-        "max_m": 2000
+        "min_m": 156.8627471923828,
+        "max_m": 1819.60791015625
       }
     },
     {
@@ -263,23 +263,23 @@
       "svg": {
         "N": {
           "path": "public/silhouettes/spk-5.9/N.svg",
-          "sha256": "f41ab1a0ccaf829b6b70cb83b953c57b65dadf958400a74d7c1aae159bd645ef"
+          "sha256": "c0e8c118595f46c4cab18c7f34dfd4841e041ec5a7e55013fe2ed34a71e26d9c"
         },
         "E": {
           "path": "public/silhouettes/spk-5.9/E.svg",
-          "sha256": "023ab0f05e648660b2d4cc894d94f06328ceaa1ac899c012b92327225bc8cdd2"
+          "sha256": "33f493fd0f79101790a39eab4848b413a6e574d01b272098dffdc2c118688f99"
         },
         "S": {
           "path": "public/silhouettes/spk-5.9/S.svg",
-          "sha256": "e63b46f17099a281735cc5ea99b7227abb62c1b807dffb9773d95669192d286b"
+          "sha256": "a6e467946c04ead1d13ca509ca737206ea8877a1e6d8b2d6006214c3fa9b9f55"
         },
         "W": {
           "path": "public/silhouettes/spk-5.9/W.svg",
-          "sha256": "1191d08b05832021ba9cc7572b864fdec9e7a14e41df7012abcb4727e60eeff1"
+          "sha256": "f76c6055623e4278b117c0dc445ae11b99bd02c99ef80249cf51c913f815e8c1"
         }
       },
       "elevations": {
-        "min_m": 1694.12,
+        "min_m": 556.86279296875,
         "max_m": 2000
       }
     },
@@ -303,23 +303,23 @@
       "svg": {
         "N": {
           "path": "public/silhouettes/spk-6.8/N.svg",
-          "sha256": "29de80f065c5ca103ab06a05fe99355a313664835bb7ea5563b42cd891de379f"
+          "sha256": "97cc4012434ade8bba2c8f251487f50686bb77d9ecd58f24eb1eb9ab9286f8a7"
         },
         "E": {
           "path": "public/silhouettes/spk-6.8/E.svg",
-          "sha256": "b1c9dbf1919147d572e1a70a6bca8c3b448e7e40d339d5f73b3071859bc8ce34"
+          "sha256": "7bbdb960335514cdb9530f1b6b9e7856bf307fe9ae2dcc77c6c4c740d5b1b65f"
         },
         "S": {
           "path": "public/silhouettes/spk-6.8/S.svg",
-          "sha256": "f9543011fbb78e606712663ef1e30c374518dea1c82401a49c48d33a5e2647bb"
+          "sha256": "e23552b1858e77638a13e601ff70fb4ad45c9a87d4613bdeceb9ae860cf9fb8f"
         },
         "W": {
           "path": "public/silhouettes/spk-6.8/W.svg",
-          "sha256": "7a0e458da6d08c3dc1e1e2a926ebcf5863e450061e4731f3954338b90d08fc25"
+          "sha256": "afb86a1ea78f339cf95ab95a113920c5aaaad8e6e7c3f4d9a3fa65511573591c"
         }
       },
       "elevations": {
-        "min_m": 1694.12,
+        "min_m": 792.1568603515625,
         "max_m": 2000
       }
     }

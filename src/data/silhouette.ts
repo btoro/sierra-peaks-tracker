@@ -11,11 +11,15 @@
  *   1. readTerrain   — decode a compact little-endian float32 terrain sample
  *                      (a rectangular DEM crop, row-major) into a typed grid.
  *   2. projectView   — for each cardinal direction, walk the grid column/row
- *                      nearest the observer and keep the MAXIMUM elevation per
- *                      horizontal bin. This is the "visible skyline" — nearer
- *                      peaks that stand higher occlude the ridgeline behind
- *                      them. Pure local projected coordinates; no external
- *                      runtime references.
+ *                      sight lines from the observer outward and keep the
+ *                      NEARER-WEIGHTED maximum elevation per horizontal bin.
+ *                      Apparent elevation decays with sight distance
+ *                      (SIGHT_DECAY per step), so a nearer ridge can occlude a
+ *                      farther one even when the farther cell is taller. The
+ *                      walk is order-dependent (observer-near first), so N/S
+ *                      and E/W skylines are genuinely distinct views. Pure
+ *                      local projected coordinates; no external runtime
+ *                      references.
  *   3. normalize     — rescale elevations into SVG units. Normalization is
  *                      pinned to the sample's own min/max so the geometry is
  *                      a deterministic function of the terrain alone.
@@ -38,6 +42,14 @@ export const VIEWBOX_HEIGHT = 400;
 /** Baseline the skyline sits on (SVG y grows downward, so this is near the
  *  bottom of the viewbox, leaving a small margin above for the ridge). */
 export const BASELINE_Y = 360;
+/**
+ * Per-step sight-line falloff factor for the nearer-weighted occlusion
+ * projection (see `projectView`). Each step of distance from the observer
+ * multiplies a cell's apparent elevation by this factor, so a nearer ridge
+ * can occlude a farther one even when the farther cell is taller. The factor
+ * is a fixed, versioned engine constant: deterministic, terrain-independent.
+ */
+export const SIGHT_DECAY = 0.8;
 /** Vertical margin reserved above the ridge (viewbox top). */
 export const TOP_MARGIN_Y = 30;
 /** Elevation coordinate rounding precision (fixed => stable bytes). */
@@ -49,18 +61,22 @@ export const CARDINALS: readonly CardinalDirection[] = ['N', 'E', 'S', 'W'];
 /**
  * Observer direction -> the terrain axis the silhouette samples.
  *
- * - 'N': observer looks NORTH. The skyline is the max of every cell in each
- *   east-west bin, walking the rows that stand closest to the observer
- *   (rows with the largest row index are nearest; nearer, taller cells
- *   occlude the farther ones).
+ * - 'N': observer looks NORTH. The skyline is a nearer-weighted maximum over
+ *   each east-west bin, walking the rows that stand closest to the observer
+ *   first (rows with the largest row index are nearest).
  * - 'S': the mirror of 'N' (smallest row index nearest).
- * - 'E': the max of every cell in each north-south bin, walking the columns
- *   nearest the observer (largest column index nearest).
- * - 'W': the mirror of 'E' (smallest column index nearest).
+ * - 'E': the nearer-weighted maximum of each north-south bin, walking the
+ *   columns nearest the observer first (smallest column index nearest).
+ * - 'W': the mirror of 'E' (largest column index nearest).
  *
- * The visible skyline is the pointwise max of the column/row profile: a nearer
- * cell that is taller than every farther cell in the same bin hides the ridge
- * behind it, so the silhouette shows only what is actually visible.
+ * Occlusion model (nearer-weighted): the visible skyline is the pointwise max
+ * of `elevation * SIGHT_DECAY^distance` along each sight line, where distance
+ * is the cell's step index from the observer. Because the weighting decays
+ * with distance, the walk is order-dependent: N/S and E/W pairs are no longer
+ * commutative, so each cardinal direction yields its own terrain-derived
+ * profile. A nearer, tall ridge can now occlude a farther peak; a distant
+ * peak still shows when it rises high enough that its decayed apparent
+ * elevation exceeds every nearer cell.
  */
 
 export interface TerrainGrid {
@@ -231,9 +247,18 @@ function isValid(cell: number, nodata: number): boolean {
 
 /**
  * Walk the grid for a cardinal direction and return the visible skyline as
- * raw elevation samples (metres), one per horizontal bin. Nearer cells that
- * are taller occlude farther ones, so each bin reports the MAX elevation that
- * stands along the sight line from the observer.
+ * raw elevation samples (metres), one per horizontal bin. The projection is
+ * order-dependent (near-to-far) using a nearer-weighted max:
+ *
+ *   apparent(cell, i) = elevation * SIGHT_DECAY^i   (i = step from observer)
+ *
+ * where i = 0 is the observer-nearest cell along that sight line. Each bin
+ * reports the maximum apparent elevation converted back to metres
+ * (apparent / decay^i), so the reported value is still a true elevation but
+ * the *winner* is biased toward nearer cells. This makes N ≠ S and E ≠ W on
+ * real terrain while remaining a deterministic, terrain-derived function.
+ *
+ * Nodata cells are skipped (they never occlude).
  */
 export function projectView(grid: TerrainGrid, direction: CardinalDirection): number[] {
   const { width, height, data, nodata } = grid;
@@ -244,32 +269,42 @@ export function projectView(grid: TerrainGrid, direction: CardinalDirection): nu
     // 'N': observer to the south looking north => southern rows (high index)
     // are nearest. 'S': northern rows (low index) nearest.
     for (let col = 0; col < width; col += 1) {
-      let max = -Infinity;
-      // Walk the sight line. 'N' walks upward (row height-1 → 0),
-      // 'S' walks downward (row 0 → height-1).
-      for (let i = 0; i < height; i += 1) {
+      let bestApparent = -Infinity;
+      let bestElev = NaN;
+      let bestDist = 0;
+      for (let i = 0; i < height; i++) {
         const row = direction === 'N' ? height - 1 - i : i;
         const cell = data[row * width + col];
         if (!isValid(cell, nodata)) continue;
-        if (cell > max) max = cell;
+        const apparent = cell * Math.pow(SIGHT_DECAY, i);
+        if (apparent > bestApparent) {
+          bestApparent = apparent;
+          bestElev = cell;
+          bestDist = i;
+        }
       }
-      out.push(Number.isFinite(max) ? max : NaN);
+      out.push(Number.isFinite(bestApparent) ? bestElev : NaN);
     }
   } else {
     // North-south bins: bin index = row. Sight line runs east-west.
     // 'E': observer to the west looking east => western columns (low index)
     // are nearest. 'W': eastern columns (high index) nearest.
     for (let row = 0; row < height; row += 1) {
-      let max = -Infinity;
-      // Walk the sight line. 'E' walks rightward (col 0 → width-1),
-      // 'W' walks leftward (col width-1 → 0).
-      for (let i = 0; i < width; i += 1) {
+      let bestApparent = -Infinity;
+      let bestElev = NaN;
+      let bestDist = 0;
+      for (let i = 0; i < width; i++) {
         const col = direction === 'E' ? i : width - 1 - i;
         const cell = data[row * width + col];
         if (!isValid(cell, nodata)) continue;
-        if (cell > max) max = cell;
+        const apparent = cell * Math.pow(SIGHT_DECAY, i);
+        if (apparent > bestApparent) {
+          bestApparent = apparent;
+          bestElev = cell;
+          bestDist = i;
+        }
       }
-      out.push(Number.isFinite(max) ? max : NaN);
+      out.push(Number.isFinite(bestApparent) ? bestElev : NaN);
     }
   }
   return out;

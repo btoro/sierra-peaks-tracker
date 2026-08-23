@@ -64,16 +64,31 @@ const tests = [
     assert.equal(projectView(g, 'W').length, 4);
   }],
   ['occlusion: nearer taller hides farther shorter', () => {
-    const g = grid(5, 1, (r, c) => (c === 0 ? 5000 : c === 4 ? 6000 : 1000));
-    assert.equal(projectView(g, 'E')[0], 6000);
     const g2 = grid(5, 1, (r, c) => (c === 0 ? 7000 : c === 4 ? 6000 : 1000));
     assert.equal(projectView(g2, 'E')[0], 7000);
   }],
-  ['occlusion: pointwise max is order-independent', () => {
-    const a = grid(4, 2, (r, c) => (r === 0 ? 2000 : 8000));
-    const b = grid(4, 2, (r, c) => (r === 0 ? 8000 : 2000));
-    assert.deepEqual(projectView(a, 'N'), projectView(b, 'N'));
-    assert.deepEqual(projectView(a, 'S'), projectView(b, 'S'));
+  ['occlusion: nearer-weighted max — near ridge hides a not-tall-enough far peak', () => {
+    // 5000 near vs 6000 far: 6000*0.8^4=2457.6 < 5000 -> near wins
+    const g = grid(5, 1, (r, c) => (c === 0 ? 5000 : c === 4 ? 6000 : 1000));
+    assert.equal(projectView(g, 'E')[0], 5000);
+    // 13000 far: 13000*0.8^4=5324.8 > 5000 -> far still shows
+    const g2 = grid(5, 1, (r, c) => (c === 0 ? 5000 : c === 4 ? 13000 : 1000));
+    assert.equal(projectView(g2, 'E')[0], 13000);
+  }],
+  ['occlusion: N/S order-dependent (not commutative)', () => {
+    const g = grid(4, 2, (r, c) => (r === 0 ? 5000 : 4000));
+    assert.equal(projectView(g, 'N')[0], 4000);
+    assert.equal(projectView(g, 'S')[0], 5000);
+    assert.notDeepEqual(projectView(g, 'N'), projectView(g, 'S'));
+  }],
+  ['occlusion: E/W order-dependent on asymmetric terrain', () => {
+    const g = grid(6, 2, (r, c) =>
+      (c === 0 && r === 0 ? 7000 : c === 4 && r === 0 ? 5000 : c === 4 && r === 1 ? 6000 : 1000));
+    const e = projectView(g, 'E');
+    const w = projectView(g, 'W');
+    assert.equal(e[0], 7000);
+    assert.equal(w[0], 5000);
+    assert.notDeepEqual(e, w);
   }],
   ['flat terrain: all points on baseline, closed path', () => {
     const g = grid(8, 8, () => 1500);

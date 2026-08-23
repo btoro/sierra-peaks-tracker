@@ -126,7 +126,21 @@ function generatePeak(peakId) {
 
 function buildManifest(peakIds, peakData) {
   const entries = peakIds.map((id) => {
-    const { meta, result } = peakData[id];
+    const { meta, result, svgTexts } = peakData[id];
+    // Per-peak elevation range: the actual min/max of the entire committed
+    // .bin sample (all 4096 float32 cells), per the acceptance contract.
+    // Read directly from the committed bytes so the manifest can only ever
+    // reflect what is actually on disk.
+    const binPath = path.join(SAMPLES_DIR, id, `${id}.bin`);
+    const binBytes = readFileSync(binPath);
+    const f32 = new Float32Array(binBytes.buffer, binBytes.byteOffset, binBytes.byteLength / 4);
+    let mn = Infinity, mx = -Infinity;
+    for (let i = 0; i < f32.length; i++) {
+      const v = f32[i];
+      if (v < mn) mn = v;
+      if (v > mx) mx = v;
+    }
+    const elevations = { min_m: mn, max_m: mx };
     const svgs = {};
     for (const d of result.directions) {
       svgs[d.direction] = {
@@ -152,10 +166,7 @@ function buildManifest(peakIds, peakData) {
       },
       renderer_version: RENDERER_VERSION,
       svg: svgs,
-      elevations: {
-        min_m: Math.min(...result.directions.map((d) => d.minElevation)),
-        max_m: Math.max(...result.directions.map((d) => d.maxElevation)),
-      },
+      elevations,
     };
   });
 
