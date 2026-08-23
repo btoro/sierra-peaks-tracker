@@ -173,8 +173,10 @@ const completionSuffix = done && peak.completion!.day_suffix ? peak.completion!.
             loading="lazy"
           />
           <figcaption class="silhouette-note">
-            Terrain-derived (USGS 3DEP) · {viewKey} view
-            {viewKey === silhouette.preferred ? ' · <em>preferred</em>' : ''}
+            {<>
+              Terrain-derived (USGS 3DEP) · {viewKey} view
+              {viewKey === silhouette.preferred ? <> · <em>preferred</em></> : null}
+            </>}
           </figcaption>
         </figure>
       ) : (
