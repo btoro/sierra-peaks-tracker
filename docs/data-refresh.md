@@ -76,15 +76,72 @@ Validation is also asserted by the native test suite
 rows, non-contiguous ordering, out-of-place suspended flags, and fixture
 drift (Pilot Knob, Mount Emerson) are all covered as rejection tests.
 
-## Peakbagger refresh — pending (Pilots 04–05)
+## Peakbagger refresh — implemented (Pilot 04)
 
-- `lid=5051` (list) and `cid=30050` (public completion overlay) land as
-  user-saved local snapshots under `snapshots/peakbagger/...` with the same
-  manifest/dry-run/CI-reproduction treatment (see `data/manifest.json`
-  `sources.peakbagger`, status `pending`).
-- The explicit SPS↔Peakbagger crosswalk (`data/crosswalk.json`) and the
-  canonical 247-record dataset are Pilot 05 deliverables; all joins go
-  through it — name-only joins remain prohibited.
+**Status note (Pilot 04):** the `check:peakbagger` step is defined and
+exercised locally, but wiring the SPS/PB/reconciliation drift gates into
+`.github/workflows/ci.yml` is deferred: the available GitHub credential
+lacks the `workflow` scope, which GitHub requires to update a workflow file.
+As soon as a credential with that scope (or direct workflow editing) is
+available, add these steps after `pnpm test`:
+
+```yaml
+- name: Reproduce normalized SPS data (deterministic drift gate)
+  run: pnpm check:sps
+- name: Reproduce normalized Peakbagger data (deterministic drift gate)
+  run: pnpm check:peakbagger
+- name: Reproduce canonical reconciliation (deterministic drift gate)
+  run: pnpm check:reconcile
+```
+
+Inputs and outputs:
+
+| Path | Role |
+| --- | --- |
+| `snapshots/peakbagger/lid-5051/2026-08-22/lid-5051.html` | Authorized local HTML snapshot of the lid=5051 list (247 rows, source order) |
+| `snapshots/peakbagger/cid-30050/2026-08-22/cid-30050.html` | Authorized local HTML snapshot of the cid=30050 completion overlay (30 dated rows) |
+| `data/manifest.json` → `sources.peakbagger["lid-5051"]`, `sources.peakbagger["cid-30050"]`, `sources.peakbagger.crosswalk` | Provenance: URL, retrieval date, sha256, parser version, expected counts |
+| `src/data/peakbagger/pb.ts` + `src/data/peakbagger/schema.ts` | Deterministic parser/validator (parser v1.0.0), hard-fails on any contract violation |
+| `scripts/peakbagger/import-pb.mjs` | CLI: `--dry-run` (verify + print diffs, write nothing), `--check` (CI drift gate), or import |
+| `data/peakbagger/lid-5051.json` | 247 rows in lid=5051 source order |
+| `data/crosswalk.json` | Explicit 1:1 SPS↔Peakbagger crosswalk (247 entries) |
+| `data/peakbagger/cid-30050.json` | Real public completions only (30 dated rows, resolved to `spk-` ids via crosswalk) |
+
+Workflow:
+
+1. The user saves the authorized local snapshot into `snapshots/peakbagger/...`.
+2. `pnpm import:peakbagger:dry-run` — verifies manifest checksums, parses +
+   hard-validates both snapshots, builds the crosswalk and completion
+   resolution, and prints the full diff of what would change. Nothing is
+   written.
+3. A human reviews the diff. On approval, `pnpm import:peakbagger` writes the
+   normalized data plus the manifest; one reviewable commit lands snapshot
+   changes + normalized data + manifest together.
+4. CI runs `pnpm check:peakbagger` and fails the build if any committed
+   Peakbagger data file cannot be reproduced byte-for-byte from the committed
+   snapshots.
+
+Validation is also asserted by the native test suite
+(`src/data/peakbagger/pb.test.ts`): count drift, duplicate ids, malformed
+cells, crosswalk non-bijectivity, overlay drift, unknown/suspended completion
+references, prototype-date leakage, and byte-for-byte serialization
+reproducibility are all covered.
+
+## Canonical reconciliation — implemented (Pilot 05)
+
+| Path | Role |
+| --- | --- |
+| `data/sps/sp-s-29-2025.json`, `data/peakbagger/lid-5051.json`, `data/peakbagger/cid-30050.json`, `data/crosswalk.json` | The four committed normalized inputs |
+| `src/data/reconcile.ts` + `src/data/reconcile.test.ts` | Pure reconciliation engine + rejection test suite |
+| `scripts/reconcile/reconcile.mjs` | CLI: `--dry-run` / `--check` (CI drift gate) / import |
+| `data/reconciled.json` | Authoritative canonical active dataset: exactly 247 peaks, each carrying both SPS and Peakbagger orderings plus the owner's public completion when present |
+| `docs/reconciliation-report.md` | Machine-generated per-peak reconciliation report (247 rows + collision families) |
+
+`pnpm import:reconcile` reconciles the four committed sources against the
+frozen contract and writes `data/reconciled.json` plus the report. It hard-
+fails on duplicates, missing canonical rows, unknown completion references,
+and sample/mock dates. CI runs `pnpm check:reconcile` to verify byte-for-byte
+reproduction; any drift fails the build.
 
 ## Snapshot acceptance checklist (human, before committing)
 

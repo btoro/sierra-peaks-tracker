@@ -20,6 +20,9 @@
     "import:peakbagger": "node scripts/peakbagger/import-pb.mjs",
     "import:peakbagger:dry-run": "node scripts/peakbagger/import-pb.mjs --dry-run",
     "check:peakbagger": "node scripts/peakbagger/import-pb.mjs --check",
+    "import:reconcile": "node scripts/reconcile/reconcile.mjs",
+    "import:reconcile:dry-run": "node scripts/reconcile/reconcile.mjs --dry-run",
+    "check:reconcile": "node scripts/reconcile/reconcile.mjs --check",
     "astro": "astro"
   },
   "dependencies": {
