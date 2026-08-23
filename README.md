@@ -6,15 +6,13 @@ the **247 active Sierra peaks** against the canonical Peakbagger list
 (**SPS 29th Edition, January 2025**), with the owner's already-public
 Peakbagger completion overlay (`cid=30050`) layered on top.
 
-This repository is in **Pilot 05**: the SPS source dataset, the Peakbagger
-list + completion overlays, the explicit SPS↔Peakbagger crosswalk, and the
-reconciled canonical 247-peak active dataset are all committed, tested, and
-CI-verified (see `data/`, `snapshots/`, `scripts/`,
-`docs/reconciliation-report.md`).
-The tracker UI arrives in later milestones.
+This repository is in **Pilot 06**: the SPS source dataset, the Peakbagger
+list + completion overlays, the explicit SPS↔Peakbagger crosswalk, the
+reconciled canonical 247-peak active dataset, and the dark split-flap
+departure-board UI are all committed, tested, and CI-verified (see `data/`,
+`snapshots/`, `scripts/`, `src/`, `docs/reconciliation-report.md`).
 The frozen data contract is in [`docs/data-contract.md`](docs/data-contract.md);
-`docs/` also carries placeholders for architecture, silhouettes, and
-privacy/provenance.
+`docs/` also carries architecture, silhouettes, and privacy/provenance notes.
 
 ## Local development
 
@@ -110,11 +108,23 @@ What this site may publish, and what it never will:
 │   │   └── pb.test.ts       # native node:test suite (happy path + every rejection class)
 │   ├── data/
 │   │   ├── reconcile.ts     # canonical dataset reconciliation (247 active peaks)
-│   │   └── reconcile.test.ts # reconciliation tests (counts, collisions, rejections, determinism)
-│   └── pages/
-│       └── index.astro
+│   │   ├── reconcile.test.ts # reconciliation tests (counts, collisions, rejections, determinism)
+│   │   ├── tracker.ts       # UI data layer: loads reconciled.json, derives summary/groups/filters
+│   │   └── tracker.test.ts  # UI data-layer tests (invariants, groups, filters, slugs, views)
+│   ├── layouts/
+│   │   └── Layout.astro     # shared layout: head, skip link, header + progress summary, footer
+│   ├── components/
+│   │   ├── Board.astro      # filter bar + 24 SPS sections of split-flap tiles
+│   │   └── PeakCard.astro   # one split-flap tile (link to detail page)
+│   ├── pages/
+│   │   ├── index.astro      # the 247-peak board; server-side filter application
+│   │   └── peaks/[id].astro # per-peak detail page; N/E/S/W view selector
+│   └── styles/
+│       └── global.css       # dark split-flap theme, responsive, reduced-motion
+├── public/
+│   └── client/board.js      # client-side live filter (progressive enhancement)
 ├── docs/
-│   ├── architecture.md
+│   ├── architecture.md      # data pipeline + UI layer documentation (Pilot 06)
 │   ├── data-contract.md     # FROZEN contract from Pilot 01 (verbatim)
 │   ├── data-refresh.md      # operational runbook (SPS + Peakbagger + reconciliation implemented)
 │   ├── reconciliation-report.md  # machine-generated per-peak reconciliation report (Pilot 05)

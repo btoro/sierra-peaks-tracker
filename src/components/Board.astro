@@ -1,0 +1,122 @@
+---
+/**
+ * Pilot 06 — the board: every active peak as a split-flap tile, grouped by
+ * SPS area in document order.
+ *
+ * No-JS behaviour (the baseline): all 24 sections render with all tiles,
+ * each tile a link to its detail page. The filter bar is a native GET form,
+ * so it also works without JS by reloading with query params.
+ *
+ * JS behaviour (progressive): the client script in src/client/board.js
+ * intercepts the form and filters the already-rendered DOM live (no reload).
+ */
+import {
+  groups,
+  toDisplayPeaks,
+  summary,
+  applyFilters,
+} from '../data/tracker.ts';
+import PeakCard from './PeakCard.astro';
+
+interface Props {
+  /** Query params from the URL (server-side applied). */
+  q?: string;
+  section?: number;
+  status?: 'all' | 'done' | 'todo';
+}
+
+const { q = '', section = undefined, status = 'all' } = Astro.props;
+
+// Server-side filter: identical logic to the client, so no-JS and JS states
+// always agree.
+const display = applyFilters(toDisplayPeaks(), {
+  query: q,
+  section: section ?? null,
+  status,
+});
+---
+
+<div class="filter-bar-wrap">
+  <form class="filter-bar" id="filter-form" method="get" action="/">
+    <label class="filter-label" for="filter-q">Search</label>
+    <input
+      id="filter-q"
+      type="search"
+      name="q"
+      placeholder="Peak name, range, SPS id…"
+      value={q}
+      autocomplete="off"
+      aria-label="Search peaks by name, range, or SPS id"
+    />
+
+    <label class="filter-label" for="filter-section">Area</label>
+    <select id="filter-section" name="section" aria-label="Filter by SPS area">
+      <option value="">All areas</option>
+      {groups.map((g) => (
+        <option value={g.section} selected={section === g.section}>
+          {g.section}. {g.area}
+        </option>
+      ))}
+    </select>
+
+    <label class="filter-label" for="filter-status">Status</label>
+    <select id="filter-status" name="status" aria-label="Filter by completion status">
+      <option value="all" selected={status === 'all'}>All</option>
+      <option value="done" selected={status === 'done'}>Completed</option>
+      <option value="todo" selected={status === 'todo'}>Remaining</option>
+    </select>
+
+    <button type="submit" class="filter-btn">Filter</button>
+    {(q || section != null || status !== 'all') ? (
+      <a class="filter-clear" href="/">Clear</a>
+    ) : null}
+  </form>
+  <p class="filter-result" id="filter-result" aria-live="polite">
+    Showing {display.length} of {summary.total} peaks
+    {display.length !== summary.total ? ' (filtered)' : ''}
+  </p>
+</div>
+
+<section class="board" id="board" aria-label="Peak board">
+  {groups.map((g) => {
+    const sectionPeaks = display.filter((p) => p.section === g.section);
+    const hidden = sectionPeaks.length === 0;
+    return (
+      <div
+        class="board-section"
+        data-section={g.section}
+        aria-labelledby={`section-${g.section}-title`}
+        hidden={hidden ? true : undefined}
+      >
+        <div class="section-head">
+          <span class="section-num" aria-hidden="true">§{String(g.section).padStart(2, '0')}</span>
+          <h2
+            id={`section-${g.section}-title`}
+            class="section-name"
+            aria-label={`${g.area}, section ${g.section}`}
+          >
+            {g.area}
+          </h2>
+          <span
+            class="section-count"
+            aria-label={`${sectionPeaks.length} of ${g.peaks.length} peaks shown in ${g.area}`}
+          >
+            {sectionPeaks.length}/{g.peaks.length}
+          </span>
+        </div>
+        <div class="flap-grid" role="list">
+          {sectionPeaks.map((p) => (
+            <PeakCard peak={p} />
+          ))}
+        </div>
+      </div>
+    );
+  })}
+  {display.length === 0 ? (
+    <div class="board-empty is-visible" role="status">
+      No peaks match the current filter.
+    </div>
+  ) : null}
+</section>
+
+<script src="/client/board.js" type="module" is:inline />
