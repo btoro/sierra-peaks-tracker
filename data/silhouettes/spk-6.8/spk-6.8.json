@@ -1,28 +1,36 @@
 {
   "peak_id": "spk-6.8",
+  "gaz_id": 254846,
+  "gaz_name": "Mount Kaweah",
   "width": 64,
   "height": 64,
-  "nodata": -9999,
-  "sample_sha256": "b4a22b83cd007a217048735fa6eb3b103a40c141fed6b9a8d4dd98a09ead84ca",
-  "source": "USGS 3DEP (OpenTopoMap hillshade tile, 3DEP-derived relief)",
-  "source_sha256": "8c4361b932fcfa2643208d0edcfd8261cb69a7ccb4f9cb01afa5cc22ce72f3e8",
-  "tile": {
-    "provider": "OpenTopoMap",
-    "z": 13,
-    "x": 1399,
-    "y": 3202,
-    "zoom_arcsec": "1/3"
+  "nodata": -9999.0,
+  "sample_sha256": "85efb72089d349ec539d29488744c1a6888bb1b78b2ce7ce7841a08a7f55ee3e",
+  "source": "USGS 3DEP 1/3 arc-second (official ImageServer, F32)",
+  "source_product": {
+    "service": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer",
+    "raster_id": 27788,
+    "resolution_arcsec": 1,
+    "acquisition_date": "8/5/2022"
   },
-  "tile_bbox": null,
-  "crop_bbox": {
-    "center_lat": 36.526108,
-    "center_lon": -118.478516
+  "source_sha256": "62759f9c381d2929b379ec7951c348236366448369992d8e90fb53d3d1adf897",
+  "source_path": "data/terrain/3dep-40d61e66a0e6c198.tiff",
+  "crs": "EPSG:4326 (WGS84)",
+  "bounds_wgs84": {
+    "top": 37.0,
+    "left": -118.5,
+    "bottom": 36.5,
+    "right": -118.0
   },
-  "observer_lat": 36.526108,
-  "observer_lon": -118.478516,
-  "observer_elevation": null,
-  "retrieved_at": "2026-08-23T00:00:00Z",
-  "retrieval_method": "manual OpenTopoMap 3DEP hillshade tile download (public USGS 3DEP relief, ODbL coordinates)",
-  "coordinate_source": "OpenStreetMap Nominatim (ODbL)",
-  "license": "USGS 3DEP relief (public domain) via OpenTopoMap (CC-BY-SA); OSM coordinates ODbL"
+  "cell_size_arcsec": 0.3333333333333333,
+  "observer_lat": 36.52601461323106,
+  "observer_lon": -118.4785650752989,
+  "epqs_elevation_m": 4199.458984375,
+  "crop_min_m": 1576.501953125,
+  "crop_max_m": 2823.91162109375,
+  "crop_nodata_count": 0,
+  "retrieved_at": "2026-08-23T15:45:45Z",
+  "retrieval_method": "USGS 3DEP ImageServer exportImage (PNG32, F32, WGS84)",
+  "coordinate_source": "USGS National Map Gazetteer gaz_id=254846",
+  "license": "USGS 3DEP (public domain)"
 }

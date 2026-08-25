@@ -1,28 +1,36 @@
 {
   "peak_id": "spk-2.1",
+  "gaz_id": 244274,
+  "gaz_name": "Kern Peak",
   "width": 64,
   "height": 64,
-  "nodata": -9999,
-  "sample_sha256": "c0fc758abc94e188037924605f0a27b41911d985053b5514f5350f0f3652f425",
-  "source": "USGS 3DEP (OpenTopoMap hillshade tile, 3DEP-derived relief)",
-  "source_sha256": "99f7a97cdd7c47c8aa14511b3279c3bf7762309eca0fe029d873b67c48d1ca05",
-  "tile": {
-    "provider": "OpenTopoMap",
-    "z": 13,
-    "x": 1404,
-    "y": 3208,
-    "zoom_arcsec": "1/3"
+  "nodata": -9999.0,
+  "sample_sha256": "522884a3b7c8873cec6f8d22fc992f3005592aeab7bd41387a58155953bdf686",
+  "source": "USGS 3DEP 1/3 arc-second (official ImageServer, F32)",
+  "source_product": {
+    "service": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer",
+    "raster_id": 106445,
+    "resolution_arcsec": 1,
+    "acquisition_date": "8/5/2022"
   },
-  "tile_bbox": null,
-  "crop_bbox": {
-    "center_lat": 36.3084512,
-    "center_lon": -118.287779
+  "source_sha256": "44cf958ea8aece1fd3a91f5d98ade24bb8e36c25cc8a7da0183a55ad4fec61b4",
+  "source_path": "data/terrain/3dep-5b71c0feed6fdc82.tiff",
+  "crs": "EPSG:4326 (WGS84)",
+  "bounds_wgs84": {
+    "top": 36.5,
+    "left": -118.5,
+    "bottom": 36.0,
+    "right": -118.0
   },
-  "observer_lat": 36.3084512,
-  "observer_lon": -118.287779,
-  "observer_elevation": null,
-  "retrieved_at": "2026-08-23T00:00:00Z",
-  "retrieval_method": "manual OpenTopoMap 3DEP hillshade tile download (public USGS 3DEP relief, ODbL coordinates)",
-  "coordinate_source": "OpenStreetMap Nominatim (ODbL)",
-  "license": "USGS 3DEP relief (public domain) via OpenTopoMap (CC-BY-SA); OSM coordinates ODbL"
+  "cell_size_arcsec": 0.3333333333333333,
+  "observer_lat": 36.30840796229331,
+  "observer_lon": -118.28786524952068,
+  "epqs_elevation_m": 3501.244628906,
+  "crop_min_m": 1925.40576171875,
+  "crop_max_m": 2862.3271484375,
+  "crop_nodata_count": 0,
+  "retrieved_at": "2026-08-23T15:47:22Z",
+  "retrieval_method": "USGS 3DEP ImageServer exportImage (PNG32, F32, WGS84)",
+  "coordinate_source": "USGS National Map Gazetteer gaz_id=244274",
+  "license": "USGS 3DEP (public domain)"
 }

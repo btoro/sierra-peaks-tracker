@@ -17,7 +17,6 @@ import reconciledJson from '../../data/reconciled.json' with { type: 'json' };
 import type { CanonicalPeak } from './reconcile.ts';
 import { SPS_ACTIVE, SPS_SUSPENDED, SPS_TOTAL_ROWS } from '../constants.ts';
 import silhouetteManifest from '../../data/silhouettes/manifest.json' with { type: 'json' };
-import silhouettePreferred from '../../data/silhouettes/preferred.json' with { type: 'json' };
 
 export type Cardinal = 'N' | 'E' | 'S' | 'W';
 
@@ -25,7 +24,9 @@ export type Cardinal = 'N' | 'E' | 'S' | 'W';
 export interface SilhouetteEntry {
   peak_id: string;
   sample: { file: string; width: number; height: number };
-  svg: Record<Cardinal, { path: string; sha256: string }>;
+  /** The manifest-selected outline direction for this peak. */
+  selected_direction: Cardinal;
+  svg: { path: string; sha256: string };
   elevations: { min_m: number; max_m: number };
 }
 
@@ -33,40 +34,32 @@ export interface SilhouetteEntry {
 export const silhouetteManifestDoc: { manifest_version: number; peaks: SilhouetteEntry[] } =
   silhouetteManifest as { manifest_version: number; peaks: SilhouetteEntry[] };
 
-/** The curated preferred tile direction per pilot peak (Pilot 09 rec 5). */
-export const silhouettePreferredMap: Record<string, Cardinal> =
-  (silhouettePreferred as { peak_id_map: Record<string, Cardinal> }).peak_id_map;
-
 /**
- * Map from canonical spk id -> { svg path per cardinal direction, preferred
- * direction } for the peaks that HAVE committed silhouette assets.
+ * Map from canonical spk id -> { svg path, selected direction } for the
+ * peaks that HAVE committed silhouette assets.
  *
- * This is the single source of truth the UI uses to decide "show silhouette
- * vs. neutral placeholder" (frozen §6 / silhouettes.md: no fake ridges).
- * The test suite re-asserts this against the `public/silhouettes/` tree.
+ * Each entry exposes exactly the ONE manifest-selected outline (the
+ * `selected_direction` svg asset the generator committed). This is the single
+ * source of truth the UI uses to decide "show silhouette vs. neutral
+ * placeholder" (frozen §6 / silhouettes.md: no fake ridges). The test suite
+ * re-asserts this against the `public/silhouettes/` tree.
  */
-export const silhouettesById: Map<string, { svg: Record<Cardinal, string>; preferred: Cardinal }> =
-  (() => {
-    const m = new Map<string, { svg: Record<Cardinal, string>; preferred: Cardinal }>();
-    for (const entry of silhouetteManifestDoc.peaks) {
-      const preferred = silhouettePreferredMap[entry.peak_id];
-      if (!preferred) {
-        // The generator embeds preferred.json and fails if a direction is
-        // missing or non-cardinal, so this is a hard invariant.
-        throw new Error(`silhouette manifest entry ${entry.peak_id} has no preferred direction`);
-      }
-      m.set(entry.peak_id, {
-        svg: {
-          N: entry.svg.N.path,
-          E: entry.svg.E.path,
-          S: entry.svg.S.path,
-          W: entry.svg.W.path,
-        },
-        preferred,
-      });
-    }
-    return m;
-  })();
+export interface SilhouetteOutline {
+  /** Relative path of the committed svg asset for the selected direction. */
+  path: string;
+  /** The manifest-selected direction this outline was rendered from. */
+  direction: Cardinal;
+}
+export const silhouettesById: Map<string, SilhouetteOutline> = (() => {
+  const m = new Map<string, SilhouetteOutline>();
+  for (const entry of silhouetteManifestDoc.peaks) {
+    m.set(entry.peak_id, {
+      path: entry.svg.path,
+      direction: entry.selected_direction,
+    });
+  }
+  return m;
+})();
 
 /**
  * The canonical pilot-peak ids that carry silhouette assets. Derived from
@@ -255,11 +248,11 @@ export function classLabel(raw: string): string {
  * Compass view labels for the peak detail page. The SPS 29th Edition source
  * and the Peakbagger lid=5051 snapshot expose NO per-face view geometry (the
  * contract preserves "coordinates where the snapshot exposes them" — it does
- * not). So these are placeholder orientation labels with a single honest
- * description and NO invented angles, coordinates, or ridge geometry
- * (frozen §6 / silhouettes.md: no fake silhouettes). The labels are the
- * interactive N/E/S/W selection surface; a real geometry source is a future
- * data milestone, not a fabricated value here.
+ * not). These are neutral placeholder labels only; the committed silhouette
+ * path for a peak is the single manifest-selected outline in
+ * `silhouettesById`, not a per-face N/E/S/W set (frozen §6 /
+ * silhouettes.md: no fake silhouettes). No invented angles, coordinates, or
+ * ridge geometry appear here.
  */
 export interface CompassView {
   key: 'N' | 'E' | 'S' | 'W';

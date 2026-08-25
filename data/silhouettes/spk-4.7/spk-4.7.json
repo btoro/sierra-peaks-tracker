@@ -1,28 +1,36 @@
 {
   "peak_id": "spk-4.7",
+  "gaz_id": 269051,
+  "gaz_name": "Mount Whitney",
   "width": 64,
   "height": 64,
-  "nodata": -9999,
-  "sample_sha256": "3015f310ad7279bc808dd31ee098dfc134067e712f051cf1eaf51b0615a353b7",
-  "source": "USGS 3DEP (OpenTopoMap hillshade tile, 3DEP-derived relief)",
-  "source_sha256": "03481ab2c019a90558762224da3f364cf9237cff884b733f67673895678afb6d",
-  "tile": {
-    "provider": "OpenTopoMap",
-    "z": 13,
-    "x": 1404,
-    "y": 3200,
-    "zoom_arcsec": "1/3"
+  "nodata": -9999.0,
+  "sample_sha256": "eda9c13236dbc761d4a9208c5670fdab914423913806be67a293263f589e45d0",
+  "source": "USGS 3DEP 1/3 arc-second (official ImageServer, F32)",
+  "source_product": {
+    "service": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer",
+    "raster_id": 120039,
+    "resolution_arcsec": 1,
+    "acquisition_date": "8/5/2022"
   },
-  "tile_bbox": null,
-  "crop_bbox": {
-    "center_lat": 36.5785905,
-    "center_lon": -118.2921377
+  "source_sha256": "62759f9c381d2929b379ec7951c348236366448369992d8e90fb53d3d1adf897",
+  "source_path": "data/terrain/3dep-40d61e66a0e6c198.tiff",
+  "crs": "EPSG:4326 (WGS84)",
+  "bounds_wgs84": {
+    "top": 37.0,
+    "left": -118.5,
+    "bottom": 36.5,
+    "right": -118.0
   },
-  "observer_lat": 36.5785905,
-  "observer_lon": -118.2921377,
-  "observer_elevation": null,
-  "retrieved_at": "2026-08-23T00:00:00Z",
-  "retrieval_method": "manual OpenTopoMap 3DEP hillshade tile download (public USGS 3DEP relief, ODbL coordinates)",
-  "coordinate_source": "OpenStreetMap Nominatim (ODbL)",
-  "license": "USGS 3DEP relief (public domain) via OpenTopoMap (CC-BY-SA); OSM coordinates ODbL"
+  "cell_size_arcsec": 0.3333333333333333,
+  "observer_lat": 36.578575123095334,
+  "observer_lon": -118.29243422748108,
+  "epqs_elevation_m": 4415.415527344,
+  "crop_min_m": 2228.890380859375,
+  "crop_max_m": 2989.831298828125,
+  "crop_nodata_count": 0,
+  "retrieved_at": "2026-08-23T15:45:18Z",
+  "retrieval_method": "USGS 3DEP ImageServer exportImage (PNG32, F32, WGS84)",
+  "coordinate_source": "USGS National Map Gazetteer gaz_id=269051",
+  "license": "USGS 3DEP (public domain)"
 }

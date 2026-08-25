@@ -1,28 +1,36 @@
 {
   "peak_id": "spk-18.6",
+  "gaz_id": 263831,
+  "gaz_name": "Mount Morgan",
   "width": 64,
   "height": 64,
-  "nodata": -9999,
-  "sample_sha256": "f0592ff4586e4d41f46400180395e87f9ecb947c42560d495f62db29cec81322",
-  "source": "USGS 3DEP (OpenTopoMap hillshade tile, 3DEP-derived relief)",
-  "source_sha256": "677613135975d871dcf5198289e673f161d35ab95c4fc6a5e3ae8f4744703429",
-  "tile": {
-    "provider": "OpenTopoMap",
-    "z": 13,
-    "x": 1393,
-    "y": 3173,
-    "zoom_arcsec": "1/3"
+  "nodata": -9999.0,
+  "sample_sha256": "00a72a1376e7434fe63572320a30edca00dc636a76e6cf2ecfe1714c1fc45b1d",
+  "source": "USGS 3DEP 1/3 arc-second (official ImageServer, F32)",
+  "source_product": {
+    "service": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer",
+    "raster_id": 136112,
+    "resolution_arcsec": 1,
+    "acquisition_date": "8/5/2022"
   },
-  "tile_bbox": null,
-  "crop_bbox": {
-    "center_lat": 37.5113223,
-    "center_lon": -118.779848
+  "source_sha256": "14089ce6712cf730dd8c404189513498dca078e1fdddccba5beeb37db491e9da",
+  "source_path": "data/terrain/3dep-8f1a3f7562c1b11f.tiff",
+  "crs": "EPSG:4326 (WGS84)",
+  "bounds_wgs84": {
+    "top": 38.0,
+    "left": -119.0,
+    "bottom": 37.5,
+    "right": -118.5
   },
-  "observer_lat": 37.5113223,
-  "observer_lon": -118.779848,
-  "observer_elevation": null,
-  "retrieved_at": "2026-08-23T00:00:00Z",
-  "retrieval_method": "manual OpenTopoMap 3DEP hillshade tile download (public USGS 3DEP relief, ODbL coordinates)",
-  "coordinate_source": "OpenStreetMap Nominatim (ODbL)",
-  "license": "USGS 3DEP relief (public domain) via OpenTopoMap (CC-BY-SA); OSM coordinates ODbL"
+  "cell_size_arcsec": 0.3333333333333333,
+  "observer_lat": 37.51132230042837,
+  "observer_lon": -118.77984859951377,
+  "epqs_elevation_m": 3965.966308594,
+  "crop_min_m": 1949.3927001953125,
+  "crop_max_m": 3805.659912109375,
+  "crop_nodata_count": 0,
+  "retrieved_at": "2026-08-23T15:46:11Z",
+  "retrieval_method": "USGS 3DEP ImageServer exportImage (PNG32, F32, WGS84)",
+  "coordinate_source": "USGS National Map Gazetteer gaz_id=263831",
+  "license": "USGS 3DEP (public domain)"
 }
