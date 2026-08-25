@@ -11,9 +11,12 @@
  *     (width, height, source checksums, provenance, peak location).
  *
  * Outputs:
- *   - `public/silhouettes/<spk-id>/<D>.svg` for D in N, E, S, W
+ *   - `public/silhouettes/<spk-id>/<D>.svg` — exactly one outline SVG per
+ *     pilot peak, at the selected direction D chosen from the preferred
+ *     tile direction (data/silhouettes/preferred.json).
  *   - `data/silhouettes/manifest.json` — compact source manifest with
- *     checksums, renderer version, and per-peak geometry summaries.
+ *     checksums, renderer version, per-peak selected direction, and
+ *     per-peak geometry summaries.
  *
  * Usage:
  *   node scripts/silhouette/generate-silhouettes.mjs            # generate all
@@ -133,8 +136,9 @@ function loadPreferred(peakIds) {
   return map;
 }
 
-/** Generate all four SVGs for a single peak. Returns { meta, result, svgTexts }. */
-function generatePeak(peakId) {
+/** Generate one selected outline SVG for a single pilot peak.
+ *  Direction comes from preferred.json (selected tile direction). */
+function generatePeak(peakId, selectedDirection) {
   const meta = loadMeta(peakId);
   if (!meta) {
     fail(`no meta.json for ${peakId} at ${path.join(SAMPLES_DIR, peakId, `${peakId}.json`)}`);
@@ -142,17 +146,13 @@ function generatePeak(peakId) {
   const bytes = loadSample(peakId, meta);
   const grid = buildGrid(peakId, bytes, meta);
   const result = renderSilhouettes(grid, { rendererVersion: RENDERER_VERSION });
-
-  const svgTexts = {};
-  for (const d of result.directions) {
-    svgTexts[d.direction] = renderSvg(result, d.direction);
-  }
-  return { meta, result, svgTexts };
+  const svgText = renderSvg(result, selectedDirection);
+  return { meta, result, svgText, direction: selectedDirection };
 }
 
 function buildManifest(peakIds, peakData) {
   const entries = peakIds.map((id) => {
-    const { meta, result, svgTexts } = peakData[id];
+    const { meta, svgText } = peakData[id];
     // Per-peak elevation range: the actual min/max of the entire committed
     // .bin sample (all 4096 float32 cells), per the acceptance contract.
     // Read directly from the committed bytes so the manifest can only ever
@@ -167,16 +167,15 @@ function buildManifest(peakIds, peakData) {
       if (v > mx) mx = v;
     }
     const elevations = { min_m: mn, max_m: mx };
-    const svgs = {};
-    for (const d of result.directions) {
-      svgs[d.direction] = {
-        path: `public/silhouettes/${id}/${d.direction}.svg`,
-        sha256: sha256(Buffer.from(peakData[id].svgTexts[d.direction])),
-      };
-    }
+    const svg = {
+      path: `public/silhouettes/${id}/${peakData[id].direction}.svg`,
+      sha256: sha256(Buffer.from(peakData[id].svgText)),
+    };
     return {
       peak_id: id,
       peak_name: meta.peak_name ?? id,
+      selected_direction: peakData[id].direction,
+      algorithm_version: RENDERER_VERSION,
       sample: {
         file: `data/silhouettes/${id}/${id}.bin`,
         sha256: meta.sample_sha256 ?? null,
@@ -191,7 +190,7 @@ function buildManifest(peakIds, peakData) {
         observer_elevation: meta.observer_elevation ?? null,
       },
       renderer_version: RENDERER_VERSION,
-      svg: svgs,
+      svg,
       elevations,
     };
   });
@@ -224,10 +223,13 @@ function main() {
     return;
   }
 
+  // Selected (preferred) tile direction per pilot peak.
+  const selected = loadPreferred(peakIds);
+
   const peakData = {};
   for (const id of peakIds) {
-    console.log(`[silhouette-gen] generating ${id}…`);
-    peakData[id] = generatePeak(id);
+    console.log(`[silhouette-gen] generating ${id} (${selected[id]})…`);
+    peakData[id] = generatePeak(id, selected[id]);
   }
 
   const manifest = buildManifest(peakIds, peakData);
@@ -235,9 +237,7 @@ function main() {
 
   const outputs = [];
   for (const id of peakIds) {
-    for (const [dir, text] of Object.entries(peakData[id].svgTexts)) {
-      outputs.push([`public/silhouettes/${id}/${dir}.svg`, text]);
-    }
+    outputs.push([`public/silhouettes/${id}/${peakData[id].direction}.svg`, peakData[id].svgText]);
   }
   outputs.push([MANIFEST_REL, manifestText]);
 

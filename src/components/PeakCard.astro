@@ -31,7 +31,7 @@ const silhouette = hasSilhouette(peak.sps_id)
   ? silhouettesById.get(peak.sps_id)!
   : null;
 const silhouettePath = silhouette
-  ? silhouette.svg[silhouette.preferred].replace(/^public\//, '')
+  ? silhouette.path.replace(/^public\//, '')
   : null;
 
 const backCompleted = peak.completionDate ?? null;

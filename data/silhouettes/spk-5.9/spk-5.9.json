@@ -1,28 +1,36 @@
 {
   "peak_id": "spk-5.9",
+  "gaz_id": 1654980,
+  "gaz_name": "Mount Williamson",
   "width": 64,
   "height": 64,
-  "nodata": -9999,
-  "sample_sha256": "55fc79e0a94196a1dd966677cea1b9ebf1e0cb5a472c5feadd61bce9ed3f6612",
-  "source": "USGS 3DEP (OpenTopoMap hillshade tile, 3DEP-derived relief)",
-  "source_sha256": "9827098121aabca50b33de13a0130c2319f8966268be035d4f2dd37da6ff9800",
-  "tile": {
-    "provider": "OpenTopoMap",
-    "z": 13,
-    "x": 1403,
-    "y": 3198,
-    "zoom_arcsec": "1/3"
+  "nodata": -9999.0,
+  "sample_sha256": "091d019bb7d178dfcb2bc2cf0593432444839b6622c302de801a2566a7314dcc",
+  "source": "USGS 3DEP 1/3 arc-second (official ImageServer, F32)",
+  "source_product": {
+    "service": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer",
+    "raster_id": 35963,
+    "resolution_arcsec": 1,
+    "acquisition_date": "8/5/2022"
   },
-  "tile_bbox": null,
-  "crop_bbox": {
-    "center_lat": 36.6560456,
-    "center_lon": -118.311204
+  "source_sha256": "62759f9c381d2929b379ec7951c348236366448369992d8e90fb53d3d1adf897",
+  "source_path": "data/terrain/3dep-40d61e66a0e6c198.tiff",
+  "crs": "EPSG:4326 (WGS84)",
+  "bounds_wgs84": {
+    "top": 37.0,
+    "left": -118.5,
+    "bottom": 36.5,
+    "right": -118.0
   },
-  "observer_lat": 36.6560456,
-  "observer_lon": -118.311204,
-  "observer_elevation": null,
-  "retrieved_at": "2026-08-23T00:00:00Z",
-  "retrieval_method": "manual OpenTopoMap 3DEP hillshade tile download (public USGS 3DEP relief, ODbL coordinates)",
-  "coordinate_source": "OpenStreetMap Nominatim (ODbL)",
-  "license": "USGS 3DEP relief (public domain) via OpenTopoMap (CC-BY-SA); OSM coordinates ODbL"
+  "cell_size_arcsec": 0.3333333333333333,
+  "observer_lat": 36.65595952978726,
+  "observer_lon": -118.3110975117379,
+  "epqs_elevation_m": 4379.097167969,
+  "crop_min_m": 2532.322021484375,
+  "crop_max_m": 3335.807373046875,
+  "crop_nodata_count": 0,
+  "retrieved_at": "2026-08-23T15:45:39Z",
+  "retrieval_method": "USGS 3DEP ImageServer exportImage (PNG32, F32, WGS84)",
+  "coordinate_source": "USGS National Map Gazetteer gaz_id=1654980",
+  "license": "USGS 3DEP (public domain)"
 }

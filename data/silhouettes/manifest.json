@@ -6,321 +6,225 @@
     {
       "peak_id": "spk-1.8",
       "peak_name": "spk-1.8",
+      "selected_direction": "E",
+      "algorithm_version": "1.0.0",
       "sample": {
         "file": "data/silhouettes/spk-1.8/spk-1.8.bin",
-        "sha256": "c62a7226369e43dbeceb7075af1014dcb401b2719f714a98f9d732b10f17eda5",
+        "sha256": "c19645e296e3ef2f9a9b88c910d01b689e75e324a5c8c2ab33f0efe79302a2d5",
         "width": 64,
         "height": 64,
-        "source": "USGS 3DEP (OpenTopoMap hillshade tile, 3DEP-derived relief)",
-        "source_sha256": "8fe252eefcd74e45619beae524ec2dd6f04c57ec5a8552ffa434e19bf106066f",
-        "retrieved_at": "2026-08-23T00:00:00Z",
-        "retrieval_method": "manual OpenTopoMap 3DEP hillshade tile download (public USGS 3DEP relief, ODbL coordinates)",
-        "observer_lat": 35.9242992,
-        "observer_lon": -118.3331993,
+        "source": "USGS 3DEP 1/3 arc-second (official ImageServer, F32)",
+        "source_sha256": "5f0f039d6e1595698c1ad7f307697bc54a80788ab65d48d563855d403b267b41",
+        "retrieved_at": "2026-08-23T15:47:34Z",
+        "retrieval_method": "USGS 3DEP ImageServer exportImage (PNG32, F32, WGS84)",
+        "observer_lat": 35.924305761295585,
+        "observer_lon": -118.33319702443303,
         "observer_elevation": null
       },
       "renderer_version": "1.0.0",
       "svg": {
-        "N": {
-          "path": "public/silhouettes/spk-1.8/N.svg",
-          "sha256": "bf6cd7bc9272311fa0da54217685e8608221e8f63381b0861b5fc0f32f8e44f1"
-        },
-        "E": {
-          "path": "public/silhouettes/spk-1.8/E.svg",
-          "sha256": "222a25e92195be9a9658fd7b5ffa34e2119672308b830cff525427b73e55a2bc"
-        },
-        "S": {
-          "path": "public/silhouettes/spk-1.8/S.svg",
-          "sha256": "673c9ec5e7480fcef4ea553bc39931d51de52fc437bbcc3554b2906c44bfa554"
-        },
-        "W": {
-          "path": "public/silhouettes/spk-1.8/W.svg",
-          "sha256": "cc1ec6459c224b208ae1c7391d1812ba6049f1d7ec0b4373d53ebfbc0377cb6f"
-        }
+        "path": "public/silhouettes/spk-1.8/E.svg",
+        "sha256": "0c1e1544f68733f29847df4dffe41218c065e237cca36d1773020bb5d13941ea"
       },
       "elevations": {
-        "min_m": 917.6470336914062,
-        "max_m": 2000
+        "min_m": 1375.6307373046875,
+        "max_m": 2406.862060546875
       }
     },
     {
       "peak_id": "spk-18.6",
       "peak_name": "spk-18.6",
+      "selected_direction": "E",
+      "algorithm_version": "1.0.0",
       "sample": {
         "file": "data/silhouettes/spk-18.6/spk-18.6.bin",
-        "sha256": "f0592ff4586e4d41f46400180395e87f9ecb947c42560d495f62db29cec81322",
+        "sha256": "00a72a1376e7434fe63572320a30edca00dc636a76e6cf2ecfe1714c1fc45b1d",
         "width": 64,
         "height": 64,
-        "source": "USGS 3DEP (OpenTopoMap hillshade tile, 3DEP-derived relief)",
-        "source_sha256": "677613135975d871dcf5198289e673f161d35ab95c4fc6a5e3ae8f4744703429",
-        "retrieved_at": "2026-08-23T00:00:00Z",
-        "retrieval_method": "manual OpenTopoMap 3DEP hillshade tile download (public USGS 3DEP relief, ODbL coordinates)",
-        "observer_lat": 37.5113223,
-        "observer_lon": -118.779848,
+        "source": "USGS 3DEP 1/3 arc-second (official ImageServer, F32)",
+        "source_sha256": "14089ce6712cf730dd8c404189513498dca078e1fdddccba5beeb37db491e9da",
+        "retrieved_at": "2026-08-23T15:46:11Z",
+        "retrieval_method": "USGS 3DEP ImageServer exportImage (PNG32, F32, WGS84)",
+        "observer_lat": 37.51132230042837,
+        "observer_lon": -118.77984859951377,
         "observer_elevation": null
       },
       "renderer_version": "1.0.0",
       "svg": {
-        "N": {
-          "path": "public/silhouettes/spk-18.6/N.svg",
-          "sha256": "ca171788d80f4f95055c0eb7f1a9dfde0c41404a0849ead6d8e03cd1f7da87ab"
-        },
-        "E": {
-          "path": "public/silhouettes/spk-18.6/E.svg",
-          "sha256": "2211ae92721f40061bd7b92a7333c0cd8a44da3a8a47b3e6a76693881fe8fa0f"
-        },
-        "S": {
-          "path": "public/silhouettes/spk-18.6/S.svg",
-          "sha256": "2048503b2eaf43157f735c268baea475972f549dde6c971077b5bbcb3f407031"
-        },
-        "W": {
-          "path": "public/silhouettes/spk-18.6/W.svg",
-          "sha256": "802373f39a2ed06cae8b368f5980be243eccabc044527c69b1983a2e0ad02840"
-        }
+        "path": "public/silhouettes/spk-18.6/E.svg",
+        "sha256": "850afdc7a65e1ea9ac674b3895198e28c6cc1dcc66fc7d26b58c3c82c4777b39"
       },
       "elevations": {
-        "min_m": 854.9019775390625,
-        "max_m": 2000
+        "min_m": 1949.3927001953125,
+        "max_m": 3805.659912109375
       }
     },
     {
       "peak_id": "spk-2.1",
       "peak_name": "spk-2.1",
+      "selected_direction": "N",
+      "algorithm_version": "1.0.0",
       "sample": {
         "file": "data/silhouettes/spk-2.1/spk-2.1.bin",
-        "sha256": "c0fc758abc94e188037924605f0a27b41911d985053b5514f5350f0f3652f425",
+        "sha256": "522884a3b7c8873cec6f8d22fc992f3005592aeab7bd41387a58155953bdf686",
         "width": 64,
         "height": 64,
-        "source": "USGS 3DEP (OpenTopoMap hillshade tile, 3DEP-derived relief)",
-        "source_sha256": "99f7a97cdd7c47c8aa14511b3279c3bf7762309eca0fe029d873b67c48d1ca05",
-        "retrieved_at": "2026-08-23T00:00:00Z",
-        "retrieval_method": "manual OpenTopoMap 3DEP hillshade tile download (public USGS 3DEP relief, ODbL coordinates)",
-        "observer_lat": 36.3084512,
-        "observer_lon": -118.287779,
+        "source": "USGS 3DEP 1/3 arc-second (official ImageServer, F32)",
+        "source_sha256": "44cf958ea8aece1fd3a91f5d98ade24bb8e36c25cc8a7da0183a55ad4fec61b4",
+        "retrieved_at": "2026-08-23T15:47:22Z",
+        "retrieval_method": "USGS 3DEP ImageServer exportImage (PNG32, F32, WGS84)",
+        "observer_lat": 36.30840796229331,
+        "observer_lon": -118.28786524952068,
         "observer_elevation": null
       },
       "renderer_version": "1.0.0",
       "svg": {
-        "N": {
-          "path": "public/silhouettes/spk-2.1/N.svg",
-          "sha256": "e322896eceda45a319d5ba327748858de23f404cd9e7e4244263920130e082be"
-        },
-        "E": {
-          "path": "public/silhouettes/spk-2.1/E.svg",
-          "sha256": "1b4b470dfb0a22ead1b0c29e8870f7656cd04e515538146f448e78f6ce4be096"
-        },
-        "S": {
-          "path": "public/silhouettes/spk-2.1/S.svg",
-          "sha256": "8b18a131551c4db6ece4b2251be2506ed829c9c9dd40f5a6251e25e8790943b8"
-        },
-        "W": {
-          "path": "public/silhouettes/spk-2.1/W.svg",
-          "sha256": "f3aa57bddee9ac19fd35880fb8f196ad8ee615d41ef5a83f3ffaaefc2018b11c"
-        }
+        "path": "public/silhouettes/spk-2.1/N.svg",
+        "sha256": "00f01cb77c317ca22618373e74f50dde448a85c9a7d21e45228c244e3eefd1c3"
       },
       "elevations": {
-        "min_m": 611.7647094726562,
-        "max_m": 2000
+        "min_m": 1925.40576171875,
+        "max_m": 2862.3271484375
       }
     },
     {
       "peak_id": "spk-21.1",
       "peak_name": "spk-21.1",
+      "selected_direction": "N",
+      "algorithm_version": "1.0.0",
       "sample": {
         "file": "data/silhouettes/spk-21.1/spk-21.1.bin",
-        "sha256": "79e85b9aff1fad671f669278663f5047f10474e5cc4271426d013234fdb3c8ee",
+        "sha256": "8768be9ab15397efae6eb86e2947dfb3418fa209c83e2608c6255e7d3cee9464",
         "width": 64,
         "height": 64,
-        "source": "USGS 3DEP (OpenTopoMap hillshade tile, 3DEP-derived relief)",
-        "source_sha256": "e5a4a17b19457fb07221613e1bb9bf1b2f6d15691e295a4e9f548d0efebd71c7",
-        "retrieved_at": "2026-08-23T00:00:00Z",
-        "retrieval_method": "manual OpenTopoMap 3DEP hillshade tile download (public USGS 3DEP relief, ODbL coordinates)",
-        "observer_lat": 37.8478275,
-        "observer_lon": -119.4055286,
+        "source": "USGS 3DEP 1/3 arc-second (official ImageServer, F32)",
+        "source_sha256": "feddfc3092fa01ec8bb0d6dc82f7e041c221f166dbe3398cb1d71ddcdaf6c62a",
+        "retrieved_at": "2026-08-23T15:46:50Z",
+        "retrieval_method": "USGS 3DEP ImageServer exportImage (PNG32, F32, WGS84)",
+        "observer_lat": 37.84783411454863,
+        "observer_lon": -119.40563418390315,
         "observer_elevation": null
       },
       "renderer_version": "1.0.0",
       "svg": {
-        "N": {
-          "path": "public/silhouettes/spk-21.1/N.svg",
-          "sha256": "da46d959ad3d682d9b3be1b77d6e8239718e0681cbbc2c02be2b36f5cf2390fb"
-        },
-        "E": {
-          "path": "public/silhouettes/spk-21.1/E.svg",
-          "sha256": "c1fd6c25139223802755788e56502a665618301e8f824f0fceec99adcb5172f4"
-        },
-        "S": {
-          "path": "public/silhouettes/spk-21.1/S.svg",
-          "sha256": "219a804895102a36d26f1a12ef612fc5b146382fc81a5c4dea703a747e643180"
-        },
-        "W": {
-          "path": "public/silhouettes/spk-21.1/W.svg",
-          "sha256": "7db09140666477c2d808e45d971ff93fcc4d541cb1bc647b583deea5a33d8fa1"
-        }
+        "path": "public/silhouettes/spk-21.1/N.svg",
+        "sha256": "0a5a3021836578499b4658bc987c9a1eaae0da956f99b2cfb3a031241c72e3cf"
       },
       "elevations": {
-        "min_m": 854.9019775390625,
-        "max_m": 1984.313720703125
+        "min_m": 2226.228271484375,
+        "max_m": 3510.377197265625
       }
     },
     {
       "peak_id": "spk-23.9",
       "peak_name": "spk-23.9",
+      "selected_direction": "N",
+      "algorithm_version": "1.0.0",
       "sample": {
         "file": "data/silhouettes/spk-23.9/spk-23.9.bin",
-        "sha256": "f9652fb68e2eba73cdb4d2c10d5867e6f069ada376dce797df14829dfcf6665f",
+        "sha256": "43359fe45cfe7b4addf585b4c9425cec1697dcb767d040e47b58c4991c97a69c",
         "width": 64,
         "height": 64,
-        "source": "USGS 3DEP (OpenTopoMap hillshade tile, 3DEP-derived relief)",
-        "source_sha256": "1a6389e42848e0b470e605b0ee203002e77c7dc4f7614af983f3601d139e7261",
-        "retrieved_at": "2026-08-23T00:00:00Z",
-        "retrieval_method": "manual OpenTopoMap 3DEP hillshade tile download (public USGS 3DEP relief, ODbL coordinates)",
-        "observer_lat": 38.845009,
-        "observer_lon": -120.1578443,
+        "source": "USGS 3DEP 1/3 arc-second (official ImageServer, F32)",
+        "source_sha256": "7cbd7af731483e03dac717bfe6c20d41531c443096497f0b82c97dbfa1a3e1ba",
+        "retrieved_at": "2026-08-23T15:47:06Z",
+        "retrieval_method": "USGS 3DEP ImageServer exportImage (PNG32, F32, WGS84)",
+        "observer_lat": 38.84487437562047,
+        "observer_lon": -120.15779498883795,
         "observer_elevation": null
       },
       "renderer_version": "1.0.0",
       "svg": {
-        "N": {
-          "path": "public/silhouettes/spk-23.9/N.svg",
-          "sha256": "1a33c70670244e8090136907ea8f164756c515ee6f7197730423d334baaa3b68"
-        },
-        "E": {
-          "path": "public/silhouettes/spk-23.9/E.svg",
-          "sha256": "c3735358c1703d5d529916802fb0e89a055d52611a8dca8668d935eb9f2f3345"
-        },
-        "S": {
-          "path": "public/silhouettes/spk-23.9/S.svg",
-          "sha256": "4614faec247ecd5fa8b1fed53ed6904533770322df63b9b38f800f809122b2fb"
-        },
-        "W": {
-          "path": "public/silhouettes/spk-23.9/W.svg",
-          "sha256": "cef78c45616ceb5fd87371bd3d399894c54bc1415c73ba0ae48c9b2a031b3a8c"
-        }
+        "path": "public/silhouettes/spk-23.9/N.svg",
+        "sha256": "eef987e7cf40068e0b1cdb1b97b846d56b89e09f221c9ca5ffd2477aa874fc05"
       },
       "elevations": {
-        "min_m": 925.4901733398438,
-        "max_m": 2000
+        "min_m": 1640.184326171875,
+        "max_m": 2342.46142578125
       }
     },
     {
       "peak_id": "spk-4.7",
       "peak_name": "spk-4.7",
+      "selected_direction": "N",
+      "algorithm_version": "1.0.0",
       "sample": {
         "file": "data/silhouettes/spk-4.7/spk-4.7.bin",
-        "sha256": "3015f310ad7279bc808dd31ee098dfc134067e712f051cf1eaf51b0615a353b7",
+        "sha256": "eda9c13236dbc761d4a9208c5670fdab914423913806be67a293263f589e45d0",
         "width": 64,
         "height": 64,
-        "source": "USGS 3DEP (OpenTopoMap hillshade tile, 3DEP-derived relief)",
-        "source_sha256": "03481ab2c019a90558762224da3f364cf9237cff884b733f67673895678afb6d",
-        "retrieved_at": "2026-08-23T00:00:00Z",
-        "retrieval_method": "manual OpenTopoMap 3DEP hillshade tile download (public USGS 3DEP relief, ODbL coordinates)",
-        "observer_lat": 36.5785905,
-        "observer_lon": -118.2921377,
+        "source": "USGS 3DEP 1/3 arc-second (official ImageServer, F32)",
+        "source_sha256": "62759f9c381d2929b379ec7951c348236366448369992d8e90fb53d3d1adf897",
+        "retrieved_at": "2026-08-23T15:45:18Z",
+        "retrieval_method": "USGS 3DEP ImageServer exportImage (PNG32, F32, WGS84)",
+        "observer_lat": 36.578575123095334,
+        "observer_lon": -118.29243422748108,
         "observer_elevation": null
       },
       "renderer_version": "1.0.0",
       "svg": {
-        "N": {
-          "path": "public/silhouettes/spk-4.7/N.svg",
-          "sha256": "658946f56a167df7cd69b12f399d3a6f56ece14df7b3cb97da57533977522e8c"
-        },
-        "E": {
-          "path": "public/silhouettes/spk-4.7/E.svg",
-          "sha256": "cb4835c46d9ebaaa0400470320c4237aaf1f60c601dcf5fe619a8835f9bbaba3"
-        },
-        "S": {
-          "path": "public/silhouettes/spk-4.7/S.svg",
-          "sha256": "b6bade098f03ba7c8bcfd816992a39134dd89685f51af6865ef972c756847746"
-        },
-        "W": {
-          "path": "public/silhouettes/spk-4.7/W.svg",
-          "sha256": "137eb0f7863c6dda6b52d4f1e8797b7f4dce26f98e4420b8e4e2d674e7d493fd"
-        }
+        "path": "public/silhouettes/spk-4.7/N.svg",
+        "sha256": "d58989741e06ee732f5a4a81848ade60118039527297b35c718e3969c881a9ec"
       },
       "elevations": {
-        "min_m": 156.8627471923828,
-        "max_m": 1819.60791015625
+        "min_m": 2228.890380859375,
+        "max_m": 2989.831298828125
       }
     },
     {
       "peak_id": "spk-5.9",
       "peak_name": "spk-5.9",
+      "selected_direction": "E",
+      "algorithm_version": "1.0.0",
       "sample": {
         "file": "data/silhouettes/spk-5.9/spk-5.9.bin",
-        "sha256": "55fc79e0a94196a1dd966677cea1b9ebf1e0cb5a472c5feadd61bce9ed3f6612",
+        "sha256": "091d019bb7d178dfcb2bc2cf0593432444839b6622c302de801a2566a7314dcc",
         "width": 64,
         "height": 64,
-        "source": "USGS 3DEP (OpenTopoMap hillshade tile, 3DEP-derived relief)",
-        "source_sha256": "9827098121aabca50b33de13a0130c2319f8966268be035d4f2dd37da6ff9800",
-        "retrieved_at": "2026-08-23T00:00:00Z",
-        "retrieval_method": "manual OpenTopoMap 3DEP hillshade tile download (public USGS 3DEP relief, ODbL coordinates)",
-        "observer_lat": 36.6560456,
-        "observer_lon": -118.311204,
+        "source": "USGS 3DEP 1/3 arc-second (official ImageServer, F32)",
+        "source_sha256": "62759f9c381d2929b379ec7951c348236366448369992d8e90fb53d3d1adf897",
+        "retrieved_at": "2026-08-23T15:45:39Z",
+        "retrieval_method": "USGS 3DEP ImageServer exportImage (PNG32, F32, WGS84)",
+        "observer_lat": 36.65595952978726,
+        "observer_lon": -118.3110975117379,
         "observer_elevation": null
       },
       "renderer_version": "1.0.0",
       "svg": {
-        "N": {
-          "path": "public/silhouettes/spk-5.9/N.svg",
-          "sha256": "461c61f7063718bb960716ae1433dd3bff9c9665a8621c87084afdedddd0cc5c"
-        },
-        "E": {
-          "path": "public/silhouettes/spk-5.9/E.svg",
-          "sha256": "c9c489abc78c75e5203c9c1b425ef42f1b786bd3c3f70624997a55c6a0fa9aff"
-        },
-        "S": {
-          "path": "public/silhouettes/spk-5.9/S.svg",
-          "sha256": "74d012ed4e88da47d674d4673b66864d75e11af79cf0735cc20806ba1bbef97b"
-        },
-        "W": {
-          "path": "public/silhouettes/spk-5.9/W.svg",
-          "sha256": "2c5e9db5a44ada59ad5a35763ff588bf398c133b36822d7f47172e48aa7c36e4"
-        }
+        "path": "public/silhouettes/spk-5.9/E.svg",
+        "sha256": "be8e7284043dae48eb048c45aab5a46157b9db6afd585cc428c7184929ecac26"
       },
       "elevations": {
-        "min_m": 556.86279296875,
-        "max_m": 2000
+        "min_m": 2532.322021484375,
+        "max_m": 3335.807373046875
       }
     },
     {
       "peak_id": "spk-6.8",
       "peak_name": "spk-6.8",
+      "selected_direction": "E",
+      "algorithm_version": "1.0.0",
       "sample": {
         "file": "data/silhouettes/spk-6.8/spk-6.8.bin",
-        "sha256": "b4a22b83cd007a217048735fa6eb3b103a40c141fed6b9a8d4dd98a09ead84ca",
+        "sha256": "85efb72089d349ec539d29488744c1a6888bb1b78b2ce7ce7841a08a7f55ee3e",
         "width": 64,
         "height": 64,
-        "source": "USGS 3DEP (OpenTopoMap hillshade tile, 3DEP-derived relief)",
-        "source_sha256": "8c4361b932fcfa2643208d0edcfd8261cb69a7ccb4f9cb01afa5cc22ce72f3e8",
-        "retrieved_at": "2026-08-23T00:00:00Z",
-        "retrieval_method": "manual OpenTopoMap 3DEP hillshade tile download (public USGS 3DEP relief, ODbL coordinates)",
-        "observer_lat": 36.526108,
-        "observer_lon": -118.478516,
+        "source": "USGS 3DEP 1/3 arc-second (official ImageServer, F32)",
+        "source_sha256": "62759f9c381d2929b379ec7951c348236366448369992d8e90fb53d3d1adf897",
+        "retrieved_at": "2026-08-23T15:45:45Z",
+        "retrieval_method": "USGS 3DEP ImageServer exportImage (PNG32, F32, WGS84)",
+        "observer_lat": 36.52601461323106,
+        "observer_lon": -118.4785650752989,
         "observer_elevation": null
       },
       "renderer_version": "1.0.0",
       "svg": {
-        "N": {
-          "path": "public/silhouettes/spk-6.8/N.svg",
-          "sha256": "5d21708b8851d644fa5d1db891c8d1980b404fec6763ede4e40622aca301a5c5"
-        },
-        "E": {
-          "path": "public/silhouettes/spk-6.8/E.svg",
-          "sha256": "3408525bccc563f4c006dee325fc0976de21533c112eb182ecb75f169854cd70"
-        },
-        "S": {
-          "path": "public/silhouettes/spk-6.8/S.svg",
-          "sha256": "e6bcd552a01e6c5912ced9f1cf893b04bbd0215e7d54d3db23bf1cad86939ed6"
-        },
-        "W": {
-          "path": "public/silhouettes/spk-6.8/W.svg",
-          "sha256": "cca1a11840c1b28168af24c229b0f441cdf8bc7e2f0e0d96e61dfd0202f9d894"
-        }
+        "path": "public/silhouettes/spk-6.8/E.svg",
+        "sha256": "146dd24b1dab3f5d9f162255f8aacb53be1ce3a9a42c68fd7fba0ac72e74d9a7"
       },
       "elevations": {
-        "min_m": 792.1568603515625,
-        "max_m": 2000
+        "min_m": 1576.501953125,
+        "max_m": 2823.91162109375
       }
     }
   ]

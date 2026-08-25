@@ -1,0 +1,88 @@
+{
+  "source": "USGS National Map Gazetteer (carto.nationalmap.gov/arcgis/rest/services/geonames/MapServer/5, layer 5 = Landforms)",
+  "reviewed_at": "2026-08-23",
+  "reviewed_by": "codework profile, task t_2adab223",
+  "method": "Exact gaz_name match against the USGS gazetteer; duplicates disambiguated by haversine distance to the SPS-derived prior coordinate (SPS 29th Edition UTM/lat-lon prior) and expected county. All eight selected entries sit within 0.02 deg of the prior coordinate and are the only candidate within 50 km.",
+  "peaks": {
+    "spk-4.7": {
+      "gaz_id": 269051,
+      "gaz_name": "Mount Whitney",
+      "gaz_featureclass": "Summit",
+      "state": "CA",
+      "county": "Inyo/Tulare",
+      "lat": 36.578575123095334,
+      "lon": -118.29243422748108,
+      "note": "Duplicated name in NY Essex (gaz 971195) and CA San Diego (gaz 251507); both >380 km away."
+    },
+    "spk-5.9": {
+      "gaz_id": 1654980,
+      "gaz_name": "Mount Williamson",
+      "gaz_featureclass": "Summit",
+      "state": "CA",
+      "county": "Inyo",
+      "lat": 36.65595952978726,
+      "lon": -118.3110975117379,
+      "note": "Second candidate in Los Angeles Co. (gaz 251607) is 257 km away."
+    },
+    "spk-6.8": {
+      "gaz_id": 254846,
+      "gaz_name": "Mount Kaweah",
+      "gaz_featureclass": "Summit",
+      "state": "CA",
+      "county": "Tulare",
+      "lat": 36.52601461323106,
+      "lon": -118.4785650752989,
+      "note": "Unique name."
+    },
+    "spk-18.6": {
+      "gaz_id": 263831,
+      "gaz_name": "Mount Morgan",
+      "gaz_featureclass": "Summit",
+      "state": "CA",
+      "county": "Mono",
+      "lat": 37.51132230042837,
+      "lon": -118.77984859951377,
+      "note": "Inyo Co. candidate (gaz 263830) is 12.5 km away; SPS prior location and county both confirm the Mono Co. entry."
+    },
+    "spk-21.1": {
+      "gaz_id": 254724,
+      "gaz_name": "Cathedral Peak",
+      "gaz_featureclass": "Summit",
+      "state": "CA",
+      "county": "Mariposa/Tuolumne",
+      "lat": 37.84783411454863,
+      "lon": -119.40563418390315,
+      "note": "18 candidates with this name nationwide; only one within 50 km (Yosemite). All others >=130 km away."
+    },
+    "spk-23.9": {
+      "gaz_id": 265078,
+      "gaz_name": "Pyramid Peak",
+      "gaz_featureclass": "Summit",
+      "state": "CA",
+      "county": "El Dorado",
+      "lat": 38.84487437562047,
+      "lon": -120.15779498883795,
+      "note": "44 candidates nationwide; El Dorado Co. entry is 0.0 km from the prior (the Desolation/Crystal pyramid). Next-closest candidate is 82 km away."
+    },
+    "spk-2.1": {
+      "gaz_id": 244274,
+      "gaz_name": "Kern Peak",
+      "gaz_featureclass": "Summit",
+      "state": "CA",
+      "county": "Tulare",
+      "lat": 36.30840796229331,
+      "lon": -118.28786524952068,
+      "note": "Unique name."
+    },
+    "spk-1.8": {
+      "gaz_id": 249522,
+      "gaz_name": "Sirretta Peak",
+      "gaz_featureclass": "Summit",
+      "state": "CA",
+      "county": "Tulare",
+      "lat": 35.924305761295585,
+      "lon": -118.33319702443303,
+      "note": "Unique name (gazetteer spells it 'Sirretta'; SPS prints 'Sirretta Peak')."
+    }
+  }
+}
