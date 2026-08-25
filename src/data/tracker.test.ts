@@ -131,12 +131,13 @@ test('non-pilot peaks never have silhouettes (frozen §6)', () => {
   }
 });
 
-test('every silhouette peak has a preferred direction that is cardinal', () => {
+test('every silhouette peak exposes the ONE manifest-selected outline', () => {
   for (const [id, entry] of silhouettesById) {
-    assert.ok(['N', 'E', 'S', 'W'].includes(entry.preferred), `non-cardinal preferred for ${id}`);
-    for (const dir of ['N', 'E', 'S', 'W'] as const) {
-      assert.ok(entry.svg[dir].startsWith('public/silhouettes/'), `bad svg path for ${id} ${dir}`);
-    }
+    assert.ok(['N', 'E', 'S', 'W'].includes(entry.direction), `non-cardinal direction for ${id}`);
+    assert.equal(typeof entry.path, 'string');
+    assert.ok(entry.path.startsWith('public/silhouettes/'), `bad svg path for ${id} (${entry.direction})`);
+    // Exactly one outline per peak — no per-face N/E/S/W set.
+    assert.deepEqual(Object.keys(entry).sort(), ['direction', 'path']);
   }
 });
 

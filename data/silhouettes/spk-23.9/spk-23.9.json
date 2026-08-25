@@ -1,28 +1,36 @@
 {
   "peak_id": "spk-23.9",
+  "gaz_id": 265078,
+  "gaz_name": "Pyramid Peak",
   "width": 64,
   "height": 64,
-  "nodata": -9999,
-  "sample_sha256": "f9652fb68e2eba73cdb4d2c10d5867e6f069ada376dce797df14829dfcf6665f",
-  "source": "USGS 3DEP (OpenTopoMap hillshade tile, 3DEP-derived relief)",
-  "source_sha256": "1a6389e42848e0b470e605b0ee203002e77c7dc4f7614af983f3601d139e7261",
-  "tile": {
-    "provider": "OpenTopoMap",
-    "z": 13,
-    "x": 1361,
-    "y": 3135,
-    "zoom_arcsec": "1/3"
+  "nodata": -9999.0,
+  "sample_sha256": "43359fe45cfe7b4addf585b4c9425cec1697dcb767d040e47b58c4991c97a69c",
+  "source": "USGS 3DEP 1/3 arc-second (official ImageServer, F32)",
+  "source_product": {
+    "service": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer",
+    "raster_id": 34759,
+    "resolution_arcsec": 1,
+    "acquisition_date": "8/5/2022"
   },
-  "tile_bbox": null,
-  "crop_bbox": {
-    "center_lat": 38.845009,
-    "center_lon": -120.1578443
+  "source_sha256": "7cbd7af731483e03dac717bfe6c20d41531c443096497f0b82c97dbfa1a3e1ba",
+  "source_path": "data/terrain/3dep-0f60291ef5109985.tiff",
+  "crs": "EPSG:4326 (WGS84)",
+  "bounds_wgs84": {
+    "top": 39.0,
+    "left": -120.5,
+    "bottom": 38.5,
+    "right": -120.0
   },
-  "observer_lat": 38.845009,
-  "observer_lon": -120.1578443,
-  "observer_elevation": null,
-  "retrieved_at": "2026-08-23T00:00:00Z",
-  "retrieval_method": "manual OpenTopoMap 3DEP hillshade tile download (public USGS 3DEP relief, ODbL coordinates)",
-  "coordinate_source": "OpenStreetMap Nominatim (ODbL)",
-  "license": "USGS 3DEP relief (public domain) via OpenTopoMap (CC-BY-SA); OSM coordinates ODbL"
+  "cell_size_arcsec": 0.3333333333333333,
+  "observer_lat": 38.84487437562047,
+  "observer_lon": -120.15779498883795,
+  "epqs_elevation_m": 3039.707275391,
+  "crop_min_m": 1640.184326171875,
+  "crop_max_m": 2342.46142578125,
+  "crop_nodata_count": 0,
+  "retrieved_at": "2026-08-23T15:47:06Z",
+  "retrieval_method": "USGS 3DEP ImageServer exportImage (PNG32, F32, WGS84)",
+  "coordinate_source": "USGS National Map Gazetteer gaz_id=265078",
+  "license": "USGS 3DEP (public domain)"
 }

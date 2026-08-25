@@ -49,7 +49,7 @@ const viewParam = Astro.url.searchParams.get('view')?.toUpperCase();
 const viewKey: Cardinal =
   ['N', 'E', 'S', 'W'].includes(viewParam ?? '')
     ? (viewParam as Cardinal)
-    : (silhouette?.preferred ?? 'N');
+    : (silhouette?.direction ?? 'N');
 const activeView = COMPASS_VIEWS.find((v) => v.key === viewKey)!;
 
 const done = peak.completion !== null;
@@ -150,7 +150,7 @@ const completionSuffix = done && peak.completion!.day_suffix ? peak.completion!.
           <label class="view-label" for={`view-${v.key}`}>
             <span class="view-letter" aria-hidden="true">{v.key}</span>
             <span class="view-name">{v.label}</span>
-            {silhouette && v.key === silhouette.preferred ? (
+            {silhouette && v.key === silhouette.direction ? (
               <span class="view-preferred" aria-label="preferred view">★</span>
             ) : null}
           </label>
@@ -168,14 +168,14 @@ const completionSuffix = done && peak.completion!.day_suffix ? peak.completion!.
       {silhouette ? (
         <figure class="silhouette">
           <img
-            src={`/silhouettes/${id}/${viewKey}.svg`}
+            src={silhouette.path}
             alt={`Terrain-derived silhouette of ${dp.sps_name} viewed from the ${activeView.label.toLowerCase()}`}
             loading="lazy"
           />
           <figcaption class="silhouette-note">
             {<>
               Terrain-derived (USGS 3DEP) · {viewKey} view
-              {viewKey === silhouette.preferred ? <> · <em>preferred</em></> : null}
+              {viewKey === silhouette.direction ? <> · <em>preferred</em></> : null}
             </>}
           </figcaption>
         </figure>
@@ -187,7 +187,7 @@ const completionSuffix = done && peak.completion!.day_suffix ? peak.completion!.
     </div>
   </div>
 
-  <script define:vars={{ silhouetteSvg: silhouette ? silhouette.svg : null, silhouettePreferred: silhouette ? silhouette.preferred : null, peakName: dp.sps_name }}>
+  <script define:vars={{ silhouettePath: silhouette ? silhouette.path : null, silhouetteDirection: silhouette ? silhouette.direction : null, peakName: dp.sps_name }}>
     // Progressive enhancement: switch compass views without a reload.
     // Without JS the radios submit the native GET form (?view=N|E|S|W).
     (() => {
@@ -205,12 +205,12 @@ const completionSuffix = done && peak.completion!.day_suffix ? peak.completion!.
       function renderPanel(key) {
         if (!views[key]) return;
         panel.dataset.view = key;
-        if (silhouetteSvg && silhouetteSvg[key]) {
+        if (silhouettePath) {
           panel.innerHTML =
             '<figure class="silhouette">' +
-            '<img src="' + silhouetteSvg[key] + '" alt="Terrain-derived silhouette of ' + peakName + ' viewed from the ' + views[key].toLowerCase() + '" loading="lazy">' +
+            '<img src="' + silhouettePath + '" alt="Terrain-derived silhouette of ' + peakName + ' viewed from the ' + views[key].toLowerCase() + '" loading="lazy">' +
             '<figcaption class="silhouette-note">Terrain-derived (USGS 3DEP) · ' + key + ' view' +
-            (key === silhouettePreferred ? ' · <em>preferred</em>' : '') + '</figcaption>' +
+            (key === silhouetteDirection ? ' · <em>preferred</em>' : '') + '</figcaption>' +
             '</figure>';
         } else {
           panel.innerHTML = '<p id="view-panel-desc">' + note + '</p>';
