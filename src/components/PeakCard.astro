@@ -1,17 +1,25 @@
 ---
 /**
- * Pilot 06 — PeakCard: one peak rendered as a split-flap "departure board" tile.
+ * Pilot 12 — PeakCard: a non-link 3:4 flip card, one per peak.
  *
- * The tile is an <a> element (keyboard-focusable, screen-reader friendly).
- * The visible text is the SPS name (the source of truth for display); the
- * Peakbagger spelling is exposed in an aria-label so both spellings are
- * reachable. Completion state changes the flap color and shows the public
- * completion date in the foot (real data only — no invented dates).
+ * Front (3:4) shows the three-digit order, class, name and elevation, plus
+ * either the one real silhouette.path (repo-backed) when current data
+ * supplies one, or an accessible neutral pending-profile visual. Completed
+ * fronts use the existing repo-backed photo only if current data already
+ * supplies one, otherwise a deliberate neutral completed placeholder.
  *
- * No JS required: the tile links to /peaks/{sps_id}/.
+ * Back shows only that peak's stats cleanly: name, height, class, completed
+ * date, or NOT YET CLIMBED.
+ *
+ * Flip on hover/focus-within via a button + data attributes for keyboard/tap
+ * client enhancement — no navigation.
  */
 import type { DisplayPeak } from '../data/tracker.ts';
-import { classLabel } from '../data/tracker.ts';
+import {
+  classLabel,
+  hasSilhouette,
+  silhouettesById,
+} from '../data/tracker.ts';
 
 interface Props {
   peak: DisplayPeak;
@@ -19,33 +27,57 @@ interface Props {
 
 const { peak } = Astro.props;
 
-const foot = peak.done
-  ? peak.completionDaySuffix
-    ? `${peak.completionDate} ${peak.completionDaySuffix}`
-    : peak.completionDate ?? ''
-  : `—${peak.sps_elevation_raw}`;
-const ariaName = peak.done
-  ? `${peak.sps_name}, class ${classLabel(peak.sps_class_raw)}, elevation ${peak.sps_elevation_raw} feet, completed ${peak.completionDate}${peak.completionDaySuffix ? ` day ${peak.completionDaySuffix}` : ''}`
-  : `${peak.sps_name}, class ${classLabel(peak.sps_class_raw)}, elevation ${peak.sps_elevation_raw} feet, not completed`;
+const silhouette = hasSilhouette(peak.sps_id)
+  ? silhouettesById.get(peak.sps_id)!
+  : null;
+const silhouettePath = silhouette
+  ? silhouette.svg[silhouette.preferred].replace(/^public\//, '')
+  : null;
+
+const backCompleted = peak.completionDate ?? null;
 ---
 
-<a
-  class={`flap${peak.done ? ' is-done' : ''}`}
+<button
+  type="button"
+  class={`card flip-card${peak.done ? ' is-done' : ''}`}
   id={peak.sps_id}
-  href={`/peaks/${peak.sps_id}/`}
   data-sps-id={peak.sps_id}
   data-slug={peak.slug}
   data-section={peak.section}
   data-done={peak.done ? '1' : '0'}
-  data-search={`${peak.sps_name} ${peak.pb_name} ${peak.area} ${peak.sps_id} ${peak.pb_range}`.toLowerCase()}
-  aria-label={ariaName}
+  data-flip="front"
+  aria-pressed="false"
+  aria-label={`${peak.sps_name}, class ${classLabel(peak.sps_class_raw)}, elevation ${peak.sps_elevation_raw} feet${peak.done ? `, completed ${peak.completionDate}` : ', not completed'}`}
 >
-  <span class="flap-inner">
-    <span class="flap-top">
-      <span class="flap-num" aria-hidden="true">{peak.displayOrder}</span>
-      <span class="flap-class" aria-hidden="true">{classLabel(peak.sps_class_raw)}</span>
+  <span class="card-inner" aria-hidden="false">
+    <span class="card-face card-front">
+      <span class="card-order" aria-hidden="true">{String(peak.displayOrder).padStart(3, '0')}</span>
+      <span class="card-class" aria-hidden="true">{classLabel(peak.sps_class_raw)}</span>
+      {silhouettePath
+        ? <img class="card-visual is-silhouette" src={silhouettePath} alt="" loading="lazy" />
+        : <span class="card-visual pending-profile" role="img" aria-hidden="true">Pending profile</span>}
+      <span class="card-name">{peak.sps_name}</span>
+      <span class="card-elevation" aria-hidden="true">{peak.sps_elevation_raw} ft</span>
     </span>
-    <span class="flap-name">{peak.sps_name}</span>
-    <span class="flap-foot" aria-hidden="true">{foot}</span>
+    <span class="card-face card-back">
+      <dl class="card-stats">
+        <div class="stat">
+          <dt>Name</dt>
+          <dd>{peak.sps_name}</dd>
+        </div>
+        <div class="stat">
+          <dt>Height</dt>
+          <dd>{peak.sps_elevation_raw} ft</dd>
+        </div>
+        <div class="stat">
+          <dt>Class</dt>
+          <dd>{classLabel(peak.sps_class_raw)}</dd>
+        </div>
+        <div class="stat">
+          <dt>Status</dt>
+          <dd>{backCompleted ?? 'NOT YET CLIMBED'}</dd>
+        </div>
+      </dl>
+    </span>
   </span>
-</a>
+</button>

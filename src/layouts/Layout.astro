@@ -1,16 +1,5 @@
 ---
-/**
- * Pilot 06 — shared site layout (dark split-flap departure board).
- *
- * Every page reuses this. The 247 denominator, progress, and station sign are
- * all derived from the committed dataset in one place (src/data/tracker.ts),
- * so the numbers can never drift.
- *
- * Pure static markup + one stylesheet: no JS required for any page. The
- * optional client enhancement (live search/filter on the board, compass-view
- * switching on detail pages) is progressive.
- */
-import { summary, reconciledDoc } from '../data/tracker.ts';
+import { summary } from '../data/tracker.ts';
 
 interface Props {
   title?: string;
@@ -35,73 +24,25 @@ const {
     <link rel="icon" href="/favicon.ico" />
     <title>{title}</title>
     <link rel="stylesheet" href="/styles/global.css" />
+    <script src="/client/board.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="board-shell">
       <header class="site-header">
-        <div class="station-row">
-          <h1 class="site-title">
-            Sierra <span class="accent">Peaks</span> Tracker
-          </h1>
-          <span class="station-meta">
-            SPS 29th Edition · Peakbagger lid 5051 · {summary.total} peaks
-          </span>
-        </div>
-        <div class="progress-summary" role="group" aria-label="Overall completion progress">
-          <div class="progress-cell is-done">
-            <span class="label">Completed</span>
-            <span class="value" id="progress-done" aria-label={`${summary.done} of ${summary.total} peaks completed`}>
-              {summary.done}
-            </span>
-          </div>
-          <div class="progress-cell">
-            <span class="label">Remaining</span>
-            <span class="value" aria-label={`${summary.remaining} peaks remaining`}>
-              {summary.remaining}
-            </span>
-          </div>
-          <div class="progress-cell">
-            <span class="label">Total</span>
-            <span class="value" aria-label={`${summary.total} active peaks total`}>
-              {summary.total}
-            </span>
-          </div>
-          <div class="progress-cell progress-bar-cell">
-            <span class="label">Progress</span>
-            <span class="value" aria-hidden="true">{summary.percent}%</span>
-            <div
-              class="progress-track"
-              role="progressbar"
-              aria-valuenow={summary.done}
-              aria-valuemin={0}
-              aria-valuemax={summary.total}
-              aria-valuetext={`${summary.done} of ${summary.total} peaks completed (${summary.percent}%)`}
-            >
-              <div class="progress-fill" style={`width: ${summary.percent}%`} aria-hidden="true"></div>
-            </div>
-          </div>
+        <span class="station-meta">Departures · High Sierra</span>
+        <h1 class="site-title">
+          Sierra <span class="accent">Peaks</span> Section
+        </h1>
+        <div class="station-row summited-meta">
+          <strong class="accent">{summary.done}</strong>
+          <span> / {summary.total} SUMMITED</span>
         </div>
       </header>
 
       <main id="main">
         <slot />
       </main>
-
-      <footer class="site-footer">
-        <span>
-          Data: Sierra Club <em>Sierra Peaks &amp; Sums</em> 29th Edition (Jan 2025) ×
-          Peakbagger lid 5051, reconciled v{reconciledDoc.parser_version}.
-        </span>
-        <span>
-          Completion dates are the owner's public ascents from cid 30050 —
-          no private data is published.
-        </span>
-        <span>
-          <a href="/">The board</a> ·
-          <a href="/peaks/">Peak list</a>
-        </span>
-      </footer>
     </div>
   </body>
 </html>

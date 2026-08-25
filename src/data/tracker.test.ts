@@ -5,7 +5,6 @@ import {
   summary,
   groups,
   assertInvariants,
-  applyFilters,
   toDisplayPeaks,
   slugify,
   classLabel,
@@ -78,28 +77,6 @@ test('classLabel preserves raw notation', () => {
   assert.equal(classLabel('2s3'), '2s3');
   assert.equal(classLabel('5.4'), '5.4');
   assert.equal(classLabel(''), '—');
-});
-
-test('applyFilters: query is case-insensitive across both name spellings', () => {
-  const dp = toDisplayPeaks();
-  const found = applyFilters(dp, { section: null, status: 'all', query: 'whitney' });
-  assert.ok(found.length > 0);
-  assert.ok(found.some((p) => p.sps_name === 'MT WHITNEY'));
-  // peakbagger-spelling hit that differs from the SPS name
-  const smith = applyFilters(dp, { section: null, status: 'all', query: 'smith mtn' });
-  assert.ok(smith.length >= 1);
-});
-
-test('applyFilters: section and status filters', () => {
-  const dp = toDisplayPeaks();
-  const sec1 = applyFilters(dp, { section: 1, status: 'all' });
-  assert.ok(sec1.length >= 1);
-  for (const p of sec1) assert.equal(p.section, 1);
-  const done = applyFilters(dp, { section: null, status: 'done' });
-  assert.equal(done.length, 30);
-  for (const p of done) assert.equal(p.done, true);
-  const todo = applyFilters(dp, { section: null, status: 'todo' });
-  assert.equal(todo.length, 217);
 });
 
 test('compass views are N/E/S/W placeholders with no invented geometry', () => {

@@ -112,17 +112,9 @@ export interface PeakGroup {
   peaks: CanonicalPeak[];
 }
 
-/** Filter state for the board. */
-export interface BoardFilters {
-  /** Substring match against SPS and Peakbagger names (case-insensitive). */
-  query?: string;
-  /** SPS section id to restrict to, or null for all. */
-  section: number | null;
-  /** Which completion state to show. */
-  status: 'all' | 'done' | 'todo';
-}
-
-/** A peak enriched with UI-facing labels and computed state. */
+/**
+ * A peak enriched with UI-facing labels and computed state.
+ */
 export interface DisplayPeak {
   sps_id: string;
   section: number;
@@ -229,20 +221,6 @@ export function toDisplayPeaks(data: CanonicalPeak[] = peaks): DisplayPeak[] {
     completionDate: p.completion ? p.completion.date : null,
     completionDaySuffix: p.completion ? p.completion.day_suffix : null,
   }));
-}
-
-export function applyFilters(peaks: DisplayPeak[], f: BoardFilters): DisplayPeak[] {
-  const q = (f.query ?? '').trim().toLowerCase();
-  return peaks.filter((p) => {
-    if (f.section !== null && p.section !== f.section) return false;
-    if (f.status === 'done' && !p.done) return false;
-    if (f.status === 'todo' && p.done) return false;
-    if (q) {
-      const hay = `${p.sps_name} ${p.pb_name} ${p.area} ${p.sps_id} ${p.pb_range}`.toLowerCase();
-      if (!hay.includes(q)) return false;
-    }
-    return true;
-  });
 }
 
 /** Human-readable climbing-class label without altering the raw notation. */
